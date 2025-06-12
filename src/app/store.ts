@@ -1,17 +1,26 @@
+// src/app/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-// Per ora partiamo con uno store vuoto, aggiungeremo i reducer man mano
+import uiReducer from "../features/settings/uiSlice";
 
+// Configura lo store Redux
 export const store = configureStore({
   reducer: {
-    // Aggiungeremo i reducer qui quando li creiamo
+    ui: uiReducer,
+    // Aggiungi qui altri reducers future
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["persist/PERSIST"],
+        // Ignora queste action types per serializability check
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
     }),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
+// Tipi per TypeScript
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+// Export store come default
+export default store;

@@ -9,4 +9,4 @@ export type { RouteKeys, RouteValues } from "./routes.config";
 
 // Navigation configuration
 export { NAVIGATION_ITEMS } from "./navigation.config";
-export type { NavigationItem } from "./navigation.config";
+export type { NavigationItem, NavigationIconType, NavigationItemId } from "./navigation.config";

@@ -15,20 +15,24 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     label: "Dashboard",
     href: ROUTES.DASHBOARD,
     icon: "home",
-    description: "Panoramica e stato del progetto",
+    description: "Panoramica e dashboard principale",
   },
   {
     id: "showcase",
-    label: "Showcase",
+    label: "Esempi",
     href: ROUTES.SHOWCASE,
     icon: "components",
-    description: "Galleria componenti UI e esempi",
+    description: "Showcase dei componenti UI disponibili",
   },
   {
     id: "settings",
     label: "Impostazioni",
     href: ROUTES.SETTINGS,
     icon: "settings",
-    description: "Configurazioni applicazione",
+    description: "Configurazioni e impostazioni applicazione",
   },
-] as const;
+];
+
+// Type exports
+export type NavigationIconType = NavigationItem["icon"];
+export type NavigationItemId = NavigationItem["id"];

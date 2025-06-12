@@ -1,5 +1,7 @@
 // src/layouts/MainLayout.tsx
 import React from "react";
+import { useAppSelector } from "../app/hooks";
+import { selectFooterVisible } from "../features/settings/uiSlice";
 import { APP_CONFIG } from "../config";
 import { Header, Footer } from "../core/components/layout";
 
@@ -9,7 +11,8 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children, theme = APP_CONFIG.DEFAULT_THEME as "light" | "dark" }) => {
-  const showFooter = APP_CONFIG.APP_FOOTER;
+  // Usa il footerVisible dal Redux store invece del config statico
+  const footerVisible = useAppSelector(selectFooterVisible);
 
   // Classi per i temi
   const themeClasses = {
@@ -31,16 +34,16 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, theme = APP_CONFIG.DE
 
   return (
     <div className={`min-h-screen flex flex-col ${currentTheme.container}`}>
-      {/* Header */}
+      {/* Header - rimane uguale ma ora può contenere il UserMenuTrigger */}
       <Header theme={theme} />
 
-      {/* Main Content */}
+      {/* Main Content - rimane uguale */}
       <main className={`flex-1 ${currentTheme.content}`}>
         <div className="w-full px-2 sm:px-4 py-8">{children}</div>
       </main>
 
-      {/* Footer - condizionale */}
-      {showFooter && <Footer theme={theme} />}
+      {/* Footer - condizionale basato su Redux state */}
+      {footerVisible && <Footer theme={theme} />}
     </div>
   );
 };

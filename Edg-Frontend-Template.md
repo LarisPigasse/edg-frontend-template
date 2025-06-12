@@ -41,6 +41,8 @@ edg-frontend-template/
 |   │   │   |   └── index.ts                        # Barrel file dei componenti layout
 |   │   │   ├── layout/                             # Componenti base del layout
 |   │   │   │   ├── Logo.tsx                        # Logo dell'applicazione
+|   │   │   │   ├── CenteredPage.tsx                # Container per centrare in verticale in una pagina
+|   │   │   │   ├── CenteredSection.tsx             # Container per centrare in verticale in una sezione
 |   │   │   │   ├── Footer.tsx                      # Footer dell'applicazione
 |   │   │   │   ├── Header.tsx                      # Header dell'applicazione
 |   │   │   |   ├── index.ts                        # Barrel file dei componenti layout
@@ -62,6 +64,7 @@ edg-frontend-template/
 |   │   │       └── Tooltip.tsx                     # Componente per tooltip, richiede headless
 |   │   ├── hooks/                                  # Hook personalizzati condivisi
 |   │   │   ├── index.ts                            # Barrel file degli Hooks
+|   │   │   ├── useLocalStorage.ts                  # Hook per la gestione del local storage
 |   │   │   └── useModal.ts                         # Hook per gestione modal
 |   │   ├── services/                               # Servizi di base condivisi
 |   │   │   ├── apiService.ts                       # Servizio base per le richieste API
@@ -84,6 +87,7 @@ edg-frontend-template/
 │   │   │   ├── SettingsPanel.tsx               # Panel delle impostazioni
 │   │   │   ├── settingsSlice.ts                # Redux slice impostazioni
 │   │   │   ├── types.ts                        # TypeScript types
+│   │   │   ├── uiSlice.ts                      # Redux slice per impostazioni ui
 │   │   │   └── index.ts                        # Export settings feature
 │   │   │
 │   │   └── shared/
