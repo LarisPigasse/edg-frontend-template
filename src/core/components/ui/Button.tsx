@@ -1,5 +1,6 @@
 // src/core/components/ui/Button.tsx
 import { ButtonHTMLAttributes, ReactNode, forwardRef } from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 
 export type ButtonVariant = "primary" | "secondary" | "outline" | "danger" | "success" | "ghost" | "link" | "info" | "warning";
 export type ButtonSize = "xs" | "sm" | "md" | "lg";
@@ -30,8 +31,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseClasses =
-      "inline-flex items-center justify-center rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200";
+    const { tokens, utils } = useThemeStyles();
+
+    const baseClasses = `inline-flex items-center justify-center rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 ${utils.transition.fast}`;
 
     const sizeClasses = {
       xs: "px-2 py-1 text-xs",
@@ -40,23 +42,28 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-6 py-3 text-base",
     };
 
+    // 🎨 Varianti unificate con design tokens
     const variantClasses = {
-      primary:
-        "border border-transparent bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500 disabled:bg-violet-300 disabled:cursor-not-allowed",
-      secondary:
-        "border border-transparent bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600",
-      outline:
-        "border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-violet-500 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed dark:border-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700",
+      primary: `border border-transparent bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500 disabled:bg-violet-300 disabled:cursor-not-allowed`,
+
+      secondary: `border border-transparent bg-[${tokens.surface.border}] text-[${tokens.surface.text}] hover:bg-[${tokens.interactive.hover.bg}] focus:ring-violet-500 disabled:opacity-50 disabled:cursor-not-allowed`,
+
+      outline: `border border-[${tokens.surface.border}] text-[${tokens.surface.text}] bg-[${tokens.surface.bgElevated}] hover:bg-[${tokens.interactive.hover.bg}] focus:ring-violet-500 disabled:opacity-50 disabled:cursor-not-allowed`,
+
       danger:
         "border border-transparent bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 disabled:bg-red-300 disabled:cursor-not-allowed",
+
       success:
         "border border-transparent bg-green-500 text-white hover:bg-green-600 focus:ring-green-500 disabled:bg-green-300 disabled:cursor-not-allowed",
+
       warning:
         "border border-transparent bg-amber-400 text-amber-900 hover:bg-amber-500 focus:ring-amber-400 disabled:bg-amber-200 disabled:text-amber-600 disabled:cursor-not-allowed",
+
       info: "border border-transparent bg-sky-500 text-white hover:bg-sky-600 focus:ring-sky-500 disabled:bg-sky-300 disabled:cursor-not-allowed",
-      ghost:
-        "border border-transparent bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500 disabled:bg-transparent disabled:text-gray-400 disabled:cursor-not-allowed dark:text-gray-300 dark:hover:bg-gray-800",
-      link: "border border-transparent bg-transparent p-0 text-violet-600 hover:text-violet-700 hover:underline focus:ring-0 disabled:text-violet-300 disabled:cursor-not-allowed dark:text-violet-400 dark:hover:text-violet-300",
+
+      ghost: `border border-transparent bg-transparent text-[${tokens.surface.text}] hover:bg-[${tokens.interactive.hover.bg}] focus:ring-violet-500 disabled:opacity-50 disabled:cursor-not-allowed`,
+
+      link: "border border-transparent bg-transparent p-0 text-violet-600 hover:text-violet-700 hover:underline focus:ring-0 disabled:text-violet-300 disabled:cursor-not-allowed",
     };
 
     const widthClass = fullWidth ? "w-full" : "";

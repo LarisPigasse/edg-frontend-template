@@ -1,5 +1,6 @@
 // src/core/components/ui/Input.tsx
 import React, { InputHTMLAttributes, forwardRef } from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 
 export type InputVariant = "default" | "error" | "success";
 export type InputSize = "sm" | "md" | "lg";
@@ -35,11 +36,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    const { tokens, utils } = useThemeStyles();
+
     const inputId = id || (entity && fieldName ? `${entity}_${fieldName}` : undefined);
     const inputName = name || (entity && fieldName ? `${entity}_${fieldName}` : undefined);
     const resolvedVariant = error ? "error" : variant;
 
-    const baseClasses = "block w-full rounded-md border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0";
+    const baseClasses = `block w-full rounded-md border focus:outline-none focus:ring-2 focus:ring-offset-0 ${utils.transition.fast}`;
 
     const sizeClasses = {
       sm: "px-3 py-1.5 text-sm",
@@ -47,13 +50,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       lg: "px-4 py-3 text-base",
     };
 
+    // 🎨 Varianti unificate con design tokens
     const variantClasses = {
-      default:
-        "border-gray-300 text-gray-900 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-violet-400",
-      error:
-        "border-red-300 text-gray-900 focus:border-red-500 focus:ring-red-500 dark:border-red-600 dark:bg-gray-800 dark:text-gray-100",
-      success:
-        "border-green-300 text-gray-900 focus:border-green-500 focus:ring-green-500 dark:border-green-600 dark:bg-gray-800 dark:text-gray-100",
+      default: `border-[${tokens.surface.border}] text-[${tokens.surface.text}] bg-[${tokens.surface.bgElevated}] focus:border-violet-500 focus:ring-violet-500`,
+
+      error: `border-red-300 text-[${tokens.surface.text}] bg-[${tokens.surface.bgElevated}] focus:border-red-500 focus:ring-red-500`,
+
+      success: `border-green-300 text-[${tokens.surface.text}] bg-[${tokens.surface.bgElevated}] focus:border-green-500 focus:ring-green-500`,
     };
 
     const iconClasses = leftIcon || rightIcon ? "relative" : "";
@@ -68,7 +71,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="w-full">
         {/* Label */}
         {label && (
-          <label htmlFor={inputId} className="text-label block mb-2">
+          <label htmlFor={inputId} className={`block mb-2 text-sm font-medium ${utils.text.primary}`}>
             {label}
           </label>
         )}
@@ -78,7 +81,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {/* Left Icon */}
           {leftIcon && (
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <div className="text-gray-400 dark:text-gray-500">{leftIcon}</div>
+              <div className={utils.text.secondary}>{leftIcon}</div>
             </div>
           )}
 
@@ -88,16 +91,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {/* Right Icon */}
           {rightIcon && (
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-              <div className="text-gray-400 dark:text-gray-500">{rightIcon}</div>
+              <div className={utils.text.secondary}>{rightIcon}</div>
             </div>
           )}
         </div>
 
         {/* Error Message */}
-        {error && <p className="text-danger text-helper mt-1">{error}</p>}
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
 
         {/* Helper Text */}
-        {helperText && !error && <p className="text-helper mt-1">{helperText}</p>}
+        {helperText && !error && <p className={`${utils.text.secondary} text-sm mt-1`}>{helperText}</p>}
       </div>
     );
   }

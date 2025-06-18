@@ -1,18 +1,25 @@
 // src/layouts/MainLayout.tsx
 import React from "react";
 import { useAppSelector } from "../app/hooks";
-import { selectFooterVisible } from "../features/settings/uiSlice";
-import { APP_CONFIG } from "../config";
-import { Header, Footer } from "../core/components/layout";
+import { selectFooterVisible, selectDarkMode, selectSidebarVisible, selectSidebarExpanded } from "../features/settings/uiSlice";
+import { Header, Footer, Sidebar } from "../core/components/layout";
 
 interface MainLayoutProps {
   children: React.ReactNode;
-  theme?: "light" | "dark";
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children, theme = APP_CONFIG.DEFAULT_THEME as "light" | "dark" }) => {
-  // Usa il footerVisible dal Redux store invece del config statico
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  // Usa gli stati dal Redux store
   const footerVisible = useAppSelector(selectFooterVisible);
+  const darkMode = useAppSelector(selectDarkMode);
+  const sidebarVisible = useAppSelector(selectSidebarVisible);
+  const sidebarExpanded = useAppSelector(selectSidebarExpanded);
+
+  // Determina il tema basato sullo stato Redux
+  const theme = darkMode ? "dark" : "light";
+
+  // Determina la larghezza della sidebar
+  const sidebarWidth = sidebarVisible ? (sidebarExpanded ? "ml-64" : "ml-12") : "ml-0";
 
   // Classi per i temi
   const themeClasses = {
@@ -32,20 +39,45 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, theme = APP_CONFIG.DE
 
   const currentTheme = themeClasses[theme];
 
-  return (
-    <div className={`min-h-screen flex flex-col ${currentTheme.container}`}>
-      {/* Header - rimane uguale ma ora può contenere il UserMenuTrigger */}
-      <Header theme={theme} />
+  if (sidebarVisible) {
+    // Layout con sidebar
+    return (
+      <div className={`min-h-screen flex ${currentTheme.container}`}>
+        {/* Sidebar - occupa tutta l'altezza a sinistra */}
+        <Sidebar theme={theme} />
 
-      {/* Main Content - rimane uguale */}
-      <main className={`flex-1 ${currentTheme.content}`}>
-        <div className="w-full px-2 sm:px-4 py-8">{children}</div>
-      </main>
+        {/* Contenuto principale - larghezza dinamica basata su sidebar */}
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarWidth}`}>
+          {/* Header - ridotto, senza logo e navigation */}
+          <Header theme={theme} showLogo={false} showNavigation={false} />
 
-      {/* Footer - condizionale basato su Redux state */}
-      {footerVisible && <Footer theme={theme} />}
-    </div>
-  );
+          {/* Main Content */}
+          <main className={`flex-1 ${currentTheme.content}`}>
+            <div className="w-full px-2 sm:px-4 py-8">{children}</div>
+          </main>
+
+          {/* Footer (se visibile) */}
+          {footerVisible && <Footer theme={theme} />}
+        </div>
+      </div>
+    );
+  } else {
+    // Layout senza sidebar (normale)
+    return (
+      <div className={`min-h-screen flex flex-col ${currentTheme.container}`}>
+        {/* Header - completo con logo e navigation */}
+        <Header theme={theme} showLogo={true} showNavigation={true} />
+
+        {/* Main Content */}
+        <main className={`flex-1 ${currentTheme.content}`}>
+          <div className="w-full px-2 sm:px-4 py-8">{children}</div>
+        </main>
+
+        {/* Footer (se visibile) */}
+        {footerVisible && <Footer theme={theme} />}
+      </div>
+    );
+  }
 };
 
 export default MainLayout;

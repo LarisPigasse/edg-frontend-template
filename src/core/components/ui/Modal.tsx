@@ -1,5 +1,6 @@
 // src/core/components/ui/Modal.tsx
 import React, { ReactNode, useEffect } from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 
 export type ModalSize = "xs" | "sm" | "md" | "lg" | "xl" | "full";
 
@@ -13,7 +14,6 @@ interface ModalProps {
   footer?: ReactNode;
   className?: string;
 }
-
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
@@ -24,6 +24,8 @@ const Modal: React.FC<ModalProps> = ({
   footer,
   className = "",
 }) => {
+  const { tokens, surface, utils } = useThemeStyles();
+
   const sizeClasses = {
     xs: "max-w-xs",
     sm: "max-w-sm",
@@ -70,18 +72,18 @@ const Modal: React.FC<ModalProps> = ({
         <div
           className={`
             relative w-full ${sizeClasses[size]} transform overflow-hidden rounded-lg 
-            bg-white dark:bg-gray-800 shadow-xl transition-all
+            ${surface.elevated} shadow-xl ${utils.transition.normal}
             ${className}
           `}
         >
           {/* Header */}
           {(title || closable) && (
-            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-              {title && <h3 className="text-section-title">{title}</h3>}
+            <div className={`flex items-center justify-between p-6 ${surface.border}`}>
+              {title && <h3 className={`text-lg font-semibold ${utils.text.primary}`}>{title}</h3>}
               {closable && (
                 <button
                   type="button"
-                  className="rounded-md bg-transparent text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 p-1"
+                  className={`rounded-md bg-transparent ${utils.text.secondary} hover:${utils.text.interactive} focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 p-1 ${utils.transition.fast}`}
                   onClick={onClose}
                 >
                   <span className="sr-only">Chiudi</span>
@@ -98,9 +100,7 @@ const Modal: React.FC<ModalProps> = ({
 
           {/* Footer */}
           {footer && (
-            <div className="flex justify-end space-x-3 p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-              {footer}
-            </div>
+            <div className={`flex justify-end space-x-3 p-6 ${surface.border} bg-[${tokens.surface.bg}]/50`}>{footer}</div>
           )}
         </div>
       </div>

@@ -1,5 +1,6 @@
 // src/core/components/ui/Tooltip.tsx
 import React, { ReactNode, useState, useRef, useEffect } from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 
 export type TooltipPosition = "top" | "bottom" | "left" | "right";
 export type TooltipVariant = "default" | "dark" | "light";
@@ -23,6 +24,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   delay = 300,
   disabled = false,
 }) => {
+  const { tokens, surface } = useThemeStyles();
   const [isVisible, setIsVisible] = useState(false);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -73,16 +75,17 @@ const Tooltip: React.FC<TooltipProps> = ({
     right: "right-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-l-transparent",
   };
 
+  // 🎨 Varianti unificate con design tokens
   const variantClasses = {
-    default: "bg-gray-900 text-white dark:bg-gray-700",
+    default: `bg-[${tokens.surface.text}] text-[${tokens.surface.bgElevated}]`,
     dark: "bg-gray-900 text-white",
-    light: "bg-white text-gray-900 border border-gray-200 shadow-lg",
+    light: `bg-[${tokens.surface.bgElevated}] text-[${tokens.surface.text}] ${surface.border} shadow-lg`,
   };
 
   const arrowVariantClasses = {
-    default: "border-gray-900 dark:border-gray-700",
+    default: `border-[${tokens.surface.text}]`,
     dark: "border-gray-900",
-    light: "border-gray-200",
+    light: `border-[${tokens.surface.border}]`,
   };
 
   const arrowBorderWidth = {

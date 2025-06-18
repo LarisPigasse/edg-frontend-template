@@ -1,32 +1,28 @@
 // src/core/components/layout/Footer.tsx
 import React from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 import { APP_CONFIG } from "../../../config";
 
 interface FooterProps {
-  theme?: "light" | "dark";
   className?: string;
   showVersionInfo?: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ theme = "light", className = "", showVersionInfo = true }) => {
-  // Classi per i temi
-  const themeClasses = {
-    light: "bg-gray-50 border-gray-200 text-gray-600",
-    dark: "bg-gray-800 border-gray-700 text-gray-300",
-  };
-
-  const currentTheme = themeClasses[theme];
+const Footer: React.FC<FooterProps> = ({ className = "", showVersionInfo = true }) => {
+  const { components, utils } = useThemeStyles();
 
   return (
-    <footer className={`border-t ${currentTheme} ${className}`}>
+    <footer className={`${components.footer.container} ${className}`}>
       <div className="w-full px-2 sm:px-4 py-1">
         <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
           {/* Copyright e Info Versione */}
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <div className="text-sm">{APP_CONFIG.COPYRIGHT}</div>
+            <div className={`text-sm ${utils.text.secondary}`}>{APP_CONFIG.COPYRIGHT}</div>
 
             {showVersionInfo && (
-              <div className="flex items-center text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md">
+              <div
+                className={`flex items-center text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md ${utils.text.primary}`}
+              >
                 <span className="font-medium">v{APP_CONFIG.VERSION}</span>
                 {/* Indicatore ambiente di sviluppo */}
                 {APP_CONFIG.VERSION.includes("dev") && (
@@ -37,14 +33,16 @@ const Footer: React.FC<FooterProps> = ({ theme = "light", className = "", showVe
           </div>
 
           {/* Links Footer */}
-          <div className="flex flex-wrap justify-center sm:justify-end items-center space-x-6 text-sm">
-            <a href="/privacy" className="hover:text-violet-500 transition-colors duration-200">
+          <div
+            className={`flex flex-wrap justify-center sm:justify-end items-center space-x-6 text-sm ${utils.text.secondary}`}
+          >
+            <a href="/privacy" className={`hover:text-violet-500 ${utils.transition.fast}`}>
               Privacy
             </a>
-            <a href="/terms" className="hover:text-violet-500 transition-colors duration-200">
+            <a href="/terms" className={`hover:text-violet-500 ${utils.transition.fast}`}>
               Termini di utilizzo
             </a>
-            <a href="/support" className="hover:text-violet-500 transition-colors duration-200">
+            <a href="/support" className={`hover:text-violet-500 ${utils.transition.fast}`}>
               Supporto
             </a>
 
@@ -52,7 +50,7 @@ const Footer: React.FC<FooterProps> = ({ theme = "light", className = "", showVe
             <div className="flex items-center space-x-3">
               <a
                 href="https://github.com"
-                className="hover:text-violet-500 transition-colors duration-200"
+                className={`hover:text-violet-500 ${utils.transition.fast}`}
                 title="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"

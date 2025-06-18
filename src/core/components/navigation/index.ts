@@ -8,5 +8,8 @@
 export { default as UserMenu } from "./UserMenu";
 export { default as UserMenuTrigger } from "./UserMenuTrigger";
 
+// Sidebar components
+export { default as SidebarToggle } from "./SidebarToggle";
+
 // Type exports (if any)
 // export type { ... } from './UserMenu';

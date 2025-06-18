@@ -1,5 +1,6 @@
 // src/core/components/ui/Badge.tsx
 import React from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 
 export type BadgeVariant = "success" | "warning" | "danger" | "info" | "default";
 export type BadgeSize = "xs" | "sm" | "md";
@@ -25,6 +26,8 @@ interface BadgeProps {
 }
 
 const Badge: React.FC<BadgeProps> = ({ children, text, variant, size = "xs", status, className = "" }) => {
+  const { tokens } = useThemeStyles();
+
   const content = children || text;
   const resolvedVariant = status ? statusVariantMap[status.toLowerCase()] || "default" : variant || "default";
 
@@ -36,12 +39,13 @@ const Badge: React.FC<BadgeProps> = ({ children, text, variant, size = "xs", sta
     md: "px-3 py-1 text-sm",
   };
 
+  // 🎨 Design tokens-based variants (unificati per light/dark)
   const variantClasses = {
     success: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
     warning: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
     danger: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
     info: "bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300",
-    default: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200",
+    default: `bg-gray-100 ${tokens.surface.textSecondary} dark:bg-gray-700 dark:text-gray-200`,
   };
 
   const badgeClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[resolvedVariant]} ${className}`;

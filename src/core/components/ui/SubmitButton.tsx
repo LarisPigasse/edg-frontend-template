@@ -19,7 +19,7 @@ const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
   (
     {
       children,
-      variant = "info",
+      variant = "primary", // Cambiato da "info" a "primary" per coerenza
       size = "md",
       isLoading = false,
       leftIcon,
@@ -31,6 +31,7 @@ const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
     },
     ref
   ) => {
+    // 🎯 SubmitButton ora eredita automaticamente il theming unificato da Button
     return (
       <Button
         ref={ref}

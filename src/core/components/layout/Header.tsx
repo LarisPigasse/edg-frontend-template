@@ -1,62 +1,66 @@
-// src/core/components/layout/Header.tsx - Esempio integrazione
+// src/core/components/layout/Header.tsx
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Logo } from "./"; // Import del componente Logo esistente
-import { UserMenuTrigger } from "../navigation";
-import { ROUTES, NAVIGATION_ITEMS } from "../../../config";
+import { useAppSelector } from "../../../app/hooks";
+import { selectSidebarVisible } from "../../../features/settings/uiSlice";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
+import { Logo } from "./";
+import { UserMenuTrigger, SidebarToggle } from "../navigation";
+import { Menu } from "lucide-react";
 
 interface HeaderProps {
-  theme?: "light" | "dark";
+  className?: string;
+  showLogo?: boolean;
+  showNavigation?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ theme = "light" }) => {
-  const location = useLocation();
-
-  // Determina se un link è attivo
-  const isActiveLink = (href: string) => {
-    if (href === ROUTES.HOME || href === ROUTES.DASHBOARD) {
-      return location.pathname === ROUTES.HOME || location.pathname === ROUTES.DASHBOARD;
-    }
-    return location.pathname === href;
-  };
-
-  // Classi per il tema (esistenti)
-  const themeClasses = {
-    light: "bg-white border-gray-200 text-gray-900",
-    dark: "bg-gray-800 border-gray-700 text-gray-100",
-  };
+const Header: React.FC<HeaderProps> = ({ className = "", showLogo = true, showNavigation = true }) => {
+  const sidebarVisible = useAppSelector(selectSidebarVisible);
+  const { components, utils } = useThemeStyles();
 
   return (
-    <header className={`w-full border-b sticky top-0 z-40 ${themeClasses[theme]}`}>
-      <div className="w-full px-2 sm:px-4 lg:px-4">
+    <header className={`${components.header.container} ${className}`}>
+      <div className="w-full px-1 sm:px-2">
         <div className="flex justify-between items-center h-10">
-          {/* Sezione Sinistra - Logo (invariata) */}
-          <div className="flex items-center">
-            <Logo />
+          {/* Sezione Sinistra - Sidebar Toggle (se sidebar visibile) + Logo (condizionale) */}
+          <div className="flex items-center space-x-2">
+            {/* Sidebar Toggle - solo se sidebar è visibile */}
+            {sidebarVisible && <SidebarToggle />}
+
+            {/* Logo - solo se showLogo è true */}
+            {showLogo && <Logo />}
           </div>
 
-          {/* Sezione Centro - Navigation (se esiste) */}
-          <nav className="hidden md:flex space-x-4">
-            {NAVIGATION_ITEMS.map((item) => {
-              const isActive = isActiveLink(item.href);
-              return (
-                <Link
-                  key={item.id}
-                  to={item.href}
-                  className={`
-                    px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                    ${isActive ? "bg-violet-100 text-violet-700" : "text-gray-600 hover:text-violet-600 hover:bg-gray-100"}
-                  `}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          {/* Navigation - Desktop (condizionale) */}
+          {showNavigation && (
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="/dashboard" className={`text-sm font-medium hover:text-violet-500 ${utils.transition.fast}`}>
+                Dashboard
+              </a>
+              <a href="/settings" className={`text-sm font-medium hover:text-violet-500 ${utils.transition.fast}`}>
+                Impostazioni
+              </a>
+              <a href="/showcase" className={`text-sm font-medium hover:text-violet-500 ${utils.transition.fast}`}>
+                Showcase
+              </a>
+            </nav>
+          )}
 
-          {/* Sezione Destra - User Menu Trigger (NUOVO) */}
-          <div className="flex items-center">
-            <UserMenuTrigger variant="icon" size="md" />
+          {/* User Section */}
+          <div className="flex items-center space-x-4">
+            {/* User Avatar */}
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-violet-500 rounded-full flex items-center justify-center text-white text-sm font-medium shadow-sm">
+                U
+              </div>
+
+              {/* User Menu Trigger */}
+              <UserMenuTrigger variant="icon" size="sm" className="hidden sm:flex" />
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button className={`md:hidden p-2 rounded-lg ${components.header.button}`} title="Menu mobile">
+              <Menu />
+            </button>
           </div>
         </div>
       </div>

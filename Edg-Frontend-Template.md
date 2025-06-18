@@ -18,44 +18,48 @@ edg-frontend-template/
 │   └── icon.png
 ├── src/
 │   ├── app/                                        # Elementi principali dell'app
+|   |   ├── index.ts                                # barrel file
 |   |   ├── constants.ts                            # Parametri e costanti globali
 │   │   ├── hooks.ts                                # Redux hooks tipizzati
 │   │   └── store.ts                                # Redux store
 │   ├── config/                                     # Configurazioni
-|   |   ├── app.config.ts                           # Parametri e configurazioni dell'app
-│   │   ├── index.ts                                # Barrel file
+|   |   ├── index.ts                                # barrel file
+│   │   ├── app.config.ts                           # Parametri e configurazioni dell'app
 │   │   ├── navigation.config.ts                    # Navigazione di default
 │   │   └── routes.config.ts                        # Configurazione del routing
 |   ├── core/                                       # Componenti e utility condivisi
 |   |   ├── components/                             # Componenti riutilizzabili
 |   │   │   ├── actions                             # Componenti base del layout
+|   │   │   │   ├── index.ts                        # barrel file dei componenti layout
 |   │   │   │   ├── ActionMenu.tsx                  # Menu a tendina delle actions
 |   │   │   │   ├── CreateAction.tsx                # Creare un nuovo elemento dell'identità
 |   │   │   │   ├── DeleteAction.tsx                # Eliminare l'elemento selezionato
-|   │   │   │   ├── EditAction.tsx                  # Modificare l'elemento selezionato
-|   │   │   |   └── index.ts                        # Barrel file dei componenti layout
+|   │   │   │   └── EditAction.tsx                  # Modificare l'elemento selezionato
 |   │   │   ├── info                                # Componenti utili secondari e informativi
-|   │   │   │   ├── VersionInfo.tsx                 # Componente info versione
-|   │   │   │   ├── ConnectionStatus.tsx            # Indicatore connessione backend
-|   │   │   │   ├── QuickLink.tsx                   # Link rapidi
-|   │   │   |   └── index.ts                        # Barrel file dei componenti layout
+|   │   │   │   ├── index.ts                        # Barrel file
+|   │   │   │   ├── VersionInfo.tsx                 # Componente info versione (da definire)
+|   │   │   │   ├── ConnectionStatus.tsx            # Indicatore connessione backend (da definire)
+|   │   │   │   └── QuickLink.tsx                   # Link rapidi (da definire)
 |   │   │   ├── layout/                             # Componenti base del layout
-|   │   │   │   ├── Logo.tsx                        # Logo dell'applicazione
+|   │   │   |   ├── index.ts                        # Barrel file dei componenti layout
 |   │   │   │   ├── CenteredPage.tsx                # Container per centrare in verticale in una pagina
 |   │   │   │   ├── CenteredSection.tsx             # Container per centrare in verticale in una sezione
 |   │   │   │   ├── Footer.tsx                      # Footer dell'applicazione
 |   │   │   │   ├── Header.tsx                      # Header dell'applicazione
-|   │   │   |   ├── index.ts                        # Barrel file dei componenti layout
+|   │   │   │   ├── Logo.tsx                        # Logo dell'applicazione
 |   │   │   |   └── Sidebar.ts                      # Sidebar dell'applicazione
 |   │   │   ├── navigation/                         # Componenti navigazione
 |   │   │   |   ├── index.ts                        # Barrel file dei componenti navigation
-|   │   │   │   ├── MainMenu.tsx                    # Menu principale
-|   │   │   │   ├── FooterMenu.tsx                  # Menu nel footer
-|   │   │   │   └── UserProfileMenu.tsx             # Menu utente con dropdown
+|   │   │   │   ├── FooterMenu.tsx                  # Menu nel footer (da definire)
+|   │   │   │   ├── MainMenu.tsx                    # Menu principale (da definire)
+|   │   │   │   ├── SidebarToggle.tsx               # Toggle per allargare o stingere la sidebar
+|   │   │   │   ├── UserMenu.tsx                    # Menu utente per configurazione app
+|   │   │   │   ├── UserMenuTrigger.tsx             # Trigger per menu utente
+|   │   │   │   └── UserProfileMenu.tsx             # Menu utente con dropdown (da definire)
 |   │   │   └── ui/                                 # Componenti base dell'interfaccia utente
+|   │   │       ├── index.ts                        # Barrel file dei componenti ui
 |   |   |       ├── Badge.tsx                       # Componente badge con varianti
 |   │   │       ├── Button.tsx                      # Componente button con varianti
-|   │   │       ├── index.ts                        # Barrel file dei componenti ui
 |   │   │       ├── Input.tsx                       # Componente input con varianti
 |   │   │       ├── Modal.tsx                       # Componente modale base
 |   │   │       ├── SubmitButton.tsx                # Componente button per submit
@@ -65,44 +69,45 @@ edg-frontend-template/
 |   │   ├── hooks/                                  # Hook personalizzati condivisi
 |   │   │   ├── index.ts                            # Barrel file degli Hooks
 |   │   │   ├── useLocalStorage.ts                  # Hook per la gestione del local storage
-|   │   │   └── useModal.ts                         # Hook per gestione modal
+|   │   │   ├── useModal.ts                         # Hook per gestione modal (da definire)
+|   │   │   └── useThemeStyles.ts                   # Hook per gestione stili e temi
 |   │   ├── services/                               # Servizi di base condivisi
-|   │   │   ├── apiService.ts                       # Servizio base per le richieste API
-|   │   │   └── index.ts                            # Barrel file dei services
+|   │   │   ├── index.ts                            # barrel file
+|   │   │   └── apiService.ts                       # Servizio base per le richieste API (da definire)
 |   │   ├── styles/                                 # Stile personalizzati
+|   │   │   ├── tokens.ts                           # Design tokens centralizzati
 |   │   │   └── typography.css                      # Classi per stili tipografici
 |   │   └── utils/                                  # Utility condivise
+|   │   │   ├── index.ts                            # Barrel file delle utils
+|   │   │   └── iconMap.ts                          # Import delle icons condivise
 │   ├── features/
-│   │   ├── auth/
-│   │   |   ├── AuthInitializer.tsx             # Componente per verifica autenticazione
-│   │   |   ├── authService.ts                  # Servizio autenticazione
-│   │   |   ├── authSlice.ts                    # Slice Redux per auth
-│   │   |   ├── ChangePasswordModal.tsx         # Modal cambio password
-│   │   |   ├── index.ts                        # Barrel file exports
-│   │   |   ├── Login.tsx                       # Pagina login
-│   │   |   ├── ResetPasswordConfirm.tsx        # Pagina conferma reset password
-│   │   |   └── ResetPasswordRequest.tsx        # Pagina richiesta reset password
+│   │   ├── auth/                                   # Tutto ancora da deinire
+│   │   |   ├── index.ts                            # Barrel file exports
+│   │   |   ├── AuthInitializer.tsx                 # Componente per verifica autenticazione
+│   │   |   ├── authService.ts                      # Servizio autenticazione
+│   │   |   ├── authSlice.ts                        # Slice Redux per auth
+│   │   |   ├── ChangePasswordModal.tsx             # Modal cambio password
+│   │   |   ├── Login.tsx                           # Pagina login
+│   │   |   ├── ResetPasswordConfirm.tsx            # Pagina conferma reset password
+│   │   |   └── ResetPasswordRequest.tsx            # Pagina richiesta reset password
 │   │   │
 │   │   ├── settings/
-│   │   │   ├── SettingsPanel.tsx               # Panel delle impostazioni
-│   │   │   ├── settingsSlice.ts                # Redux slice impostazioni
-│   │   │   ├── types.ts                        # TypeScript types
-│   │   │   ├── uiSlice.ts                      # Redux slice per impostazioni ui
-│   │   │   └── index.ts                        # Export settings feature
+│   │   │   ├── index.ts.ts                         # Barrel file
+│   │   │   └── uiSlice.ts                          # Redux slice per impostazioni ui
 │   │   │
 │   │   └── shared/
 |   |       ├── components/                     # Componenti per le pagine shared
+│   |       |   ├── index.ts                    # Barrel file
 │   |       |   ├── ShowButtons.tsx             # Showcase del Button component
 |   |       |   ├── ShowForms.tsx               # Showcase per Input, label e form validation
 │   |       |   ├── ShowDataDisplay.tsx         # Showcase per Table, TableLinl e Badge
 │   |       |   ├── ShowFeedback.tsx            # Showcase Modal, Tooltip e notification/alert
-|   |       |   ├── ShowActions.tsx             # Showcase per azioni e crud
-│   |       |   └── index.ts                    # Barrel file
+|   |       |   └── ShowActions.tsx             # Showcase per azioni e crud
 |   |       |
+│   │       ├── index.ts                        # Barrel file
 │   │       ├── Dashboard.tsx                   # Pagina principale
 │   │       ├── NotFound.tsx                    # Pagina 404
-|   |       ├── Showcase.tsx                    # Pagina di esempio per i componenti
-│   │       └── index.ts                        # Export shared pages
+|   |       └── Showcase.tsx                    # Pagina di esempio per i componenti
 │   ├── layouts/
 │   │   └── MainLayout.tsx                      # Layout principale con dual-mode
 │   │
@@ -110,6 +115,8 @@ edg-frontend-template/
 │   ├── index.css                               # Stili globali Tailwind
 │   ├── main.tsx                                # Entry point React
 │   └── vite-env.d.ts                           # Garantisce che TypeSscript validi il codice che interagisce con Vite
+├── .env.development                            # variabili d'ambiente per lo sviluppo
+├── .env.production                             # variabili d'ambiente per la produzione
 ├── .gitignore                                  # ignore per git
 ├── .prettierignore                             # ignore per estensione Prettier
 ├── eslint.config.js                            # Configurazione di esLint per il controllo del codice

@@ -1,5 +1,6 @@
 // src/core/components/ui/Table.tsx
 import React, { ReactNode } from "react";
+import { useThemeStyles } from "../../hooks/useThemeStyles";
 
 export interface TableColumn<T> {
   header: string;
@@ -33,6 +34,8 @@ function Table<T>({
   striped = false,
   hoverable = true,
 }: TableProps<T>) {
+  const { tokens, utils } = useThemeStyles();
+
   const sizeClasses = {
     sm: "text-sm",
     md: "text-sm",
@@ -56,7 +59,7 @@ function Table<T>({
       <div className="p-8 text-center">
         <div className="flex items-center justify-center space-x-2">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-violet-500"></div>
-          <span className="text-muted">Caricamento in corso...</span>
+          <span className={utils.text.secondary}>Caricamento in corso...</span>
         </div>
       </div>
     );
@@ -66,29 +69,27 @@ function Table<T>({
     return (
       <div className="p-8 text-center">
         <div className="text-4xl mb-4">📋</div>
-        <p className="text-muted">{emptyMessage}</p>
+        <p className={utils.text.secondary}>{emptyMessage}</p>
       </div>
     );
   }
 
   return (
     <div className={`overflow-x-auto ${className}`}>
-      <table className={`min-w-full divide-y divide-gray-200 dark:divide-gray-700 ${sizeClasses[size]}`}>
-        <thead className="bg-gray-50 dark:bg-gray-800">
+      <table className={`min-w-full divide-y divide-[${tokens.surface.border}] ${sizeClasses[size]}`}>
+        <thead className={`bg-[${tokens.surface.bg}]`}>
           <tr>
             {columns.map((column, index) => (
               <th
                 key={index}
-                className={`${
-                  headerPaddingClasses[size]
-                } text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider ${
-                  column.className || ""
-                }`}
+                className={`${headerPaddingClasses[size]} text-left text-xs font-medium ${
+                  utils.text.secondary
+                } uppercase tracking-wider ${column.className || ""}`}
               >
                 <div className="flex items-center space-x-1">
                   <span>{column.header}</span>
                   {column.sortable && (
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-4 h-4 ${utils.text.secondary}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -103,15 +104,17 @@ function Table<T>({
           </tr>
         </thead>
         <tbody
-          className={`bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700 ${striped ? "divide-y-0" : ""}`}
+          className={`bg-[${tokens.surface.bgElevated}] divide-y divide-[${tokens.surface.border}] ${
+            striped ? "divide-y-0" : ""
+          }`}
         >
           {data.map((item, rowIndex) => (
             <tr
               key={keyExtractor(item)}
               className={`
-                ${hoverable ? "hover:bg-gray-50 dark:hover:bg-gray-800" : ""}
-                ${striped && rowIndex % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/50" : ""}
-                transition-colors duration-150
+                ${hoverable ? `hover:bg-[${tokens.interactive.hover.bg}]` : ""}
+                ${striped && rowIndex % 2 === 1 ? `bg-[${tokens.surface.bg}]/50` : ""}
+                ${utils.transition.fast}
               `}
             >
               {columns.map((column, colIndex) => {
@@ -120,9 +123,7 @@ function Table<T>({
                 return (
                   <td
                     key={colIndex}
-                    className={`${cellPaddingClasses[size]} whitespace-nowrap text-gray-900 dark:text-gray-100 ${
-                      column.className || ""
-                    }`}
+                    className={`${cellPaddingClasses[size]} whitespace-nowrap ${utils.text.primary} ${column.className || ""}`}
                   >
                     {cellContent}
                   </td>
