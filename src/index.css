@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import "./globals.css";
+
+@theme {
+  /* Font personalizzato */
+  --font-sans: "Inter", "ui-sans-serif", "system-ui", "sans-serif";
+
+  /* Sfondi - mapping diretto da globals.css */
+  --color-bg-base: var(--bg-base);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-modal: var(--bg-modal);
+  --color-bg-info: var(--bg-info);
+  --color-bg-contrast: var(--bg-contrast);
+  --color-bg-hover: var(--bg-hover);
+  --color-bg-selected: var(--bg-selected);
+
+  /* Testi - mapping diretto da globals.css */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-placeholder: var(--text-placeholder);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-label: var(--text-label);
+  --color-text-contrast: var(--text-contrast);
+  --color-text-link: var(--text-link);
+  --color-text-link-hover: var(--text-link-hover);
+
+  /* Bordi - mapping diretto da globals.css */
+  --color-border-default: var(--border-default);
+  --color-border-thin: var(--border-thin);
+  --color-border-strong: var(--border-strong);
+
+  /* Ombre - mapping diretto da globals.css */
+  --shadow-themed-none: var(--shadow-none);
+  --shadow-themed-sm: var(--shadow-sm);
+  --shadow-themed-default: var(--shadow-default);
+  --shadow-themed-md: var(--shadow-md);
+  --shadow-themed-lg: var(--shadow-lg);
+  --shadow-themed-xl: var(--shadow-xl);
+  --shadow-themed-inner: var(--shadow-inner);
+}
