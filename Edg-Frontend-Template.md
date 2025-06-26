@@ -834,5 +834,222 @@ export function cn(...inputs: (string | undefined | null | false | 0)[]): string
 - **State persistence** - localStorage validation
 - **Asset loading** - Immagini tematiche
 
+------------------------------------------------------------------------------
+
+# Appendice - Stato Sviluppo Layout System
+
+**Data**: 26 Giugno 2025  
+**Sessione**: Layout System Implementation  
+**Obiettivo**: Memoria progetto per continuità sviluppo
+
+## 🏗️ Layout System Implementato
+
+### ✅ MainLayout Completato
+
+#### Grid Structure
+```css
+grid-template-rows: auto 1fr auto
+grid-template-areas: 
+  "header"
+  "content" 
+  "footer"
+```
+
+- **Sticky header e sidebar** - Navigazione sempre accessibile
+- **Content area responsive** - Flex container per sidebar + main
+- **Footer compatto** - Altezza ridotta per design più elegante
+- **Gestione altezze corretta** - Chain completa: Grid → Content → Main → Children
+
+#### Responsive Behavior
+- **Mobile** (< sm): Sidebar nascosta, header compatto
+- **Desktop** (≥ sm): Sidebar visibile, layout completo
+- **Transizioni smooth** - `transition-all duration-300 ease-in-out`
+
+### 🎨 Componenti Atomic Ottimizzati
+
+#### ThemedSurface
+```typescript
+interface ThemedSurfaceProps {
+  variant?: "base" | "primary" | "secondary" | "modal" | "info" | "contrast" | "hover" | "selected"
+  textVariant?: "primary" | "secondary" | "contrast" | "label" | "placeholder" | "disabled" | "link" | "linkHover"
+  borderVariant?: "none" | "thin" | "default" | "strong"
+  as?: keyof JSX.IntrinsicElements
+}
+```
+
+**Pattern CSS Custom Properties**:
+- `bg-bg-*` per backgrounds
+- `text-text-*` per testi  
+- `border-border-*` per bordi
+
+#### Sidebar
+- **Stati**: Espansa (w-64) vs Compressa (w-12)
+- **Hook**: `useUISettings()` per gestione toggle
+- **Navigation**: `NAVIGATION_ITEMS` da config
+- **Icons**: `iconMap` utility per Lucide components
+- **Visual feedback**: Stati attivi/hover gestiti dinamicamente
+
+#### Header & Footer
+- **Header**: Logo, sidebar toggle, area breadcrumb
+- **Footer**: Design minimalista, solo copyright
+- **Sticky positioning**: Sempre visibili durante scroll
+
+### 🔧 Fix Tecnici Risolti
+
+#### Problema Bordi Sidebar
+```typescript
+// ❌ PRIMA (Errato)
+<ThemedSurface borderVariant="default" className="border-r">
+// Risultato: bordi su tutti i lati + bordo destro duplicato
+
+// ✅ DOPO (Corretto)  
+<ThemedSurface borderVariant="none" className="border-r border-border-default">
+// Risultato: solo bordo destro
+```
+
+#### Problema Altezze Pagine
+```typescript
+// ❌ PRIMA (Overflow)
+className="min-h-screen" // Ignora header/footer
+
+// ✅ DOPO (Corretto)
+className="min-h-full"   // Usa altezza contenitore
+```
+
+**Soluzione MainLayout**:
+```typescript
+// Main content con altezza definita
+<main className="flex-1 min-w-0 overflow-y-auto flex flex-col">
+  <div className="w-full px-4 sm:px-6 py-8 flex-1">{children}</div>
+</main>
+```
+
+#### Button Consistency NotFound
+```typescript
+// Pattern responsive uniforme per Link e Button
+className="w-full sm:w-auto justify-center flex-shrink-0"
+// Mobile: full width, Desktop: auto width
+```
+
+### 📱 Responsive Design Patterns
+
+#### Breakpoints Utilizzati
+- **sm (640px)**: Sidebar visibility toggle
+- **md (768px)**: Layout adjustments  
+- **lg (1024px)**: Full desktop experience
+
+#### Mobile-First Approach
+```css
+/* Base (Mobile) */
+flex-col gap-3
+
+/* Desktop */
+sm:flex-row sm:gap-4
+```
+
+#### Touch-Friendly Design
+- **Button heights**: py-3 (48px+ touch target)
+- **Click areas**: Padding generoso per touch
+- **Icon sizes**: w-5 h-5 (20px) per leggibilità
+
+### 🎯 Pattern e Convenzioni Stabiliti
+
+#### Pagine Speciali
+```typescript
+// Template per pagine 404, Login, etc.
+<ThemedSurface variant="base" className="min-h-full flex items-center justify-center p-4">
+  <div className="max-w-lg w-full">
+    {/* Contenuto centrato */}
+  </div>
+</ThemedSurface>
+```
+
+#### Gestione Stati UI
+```typescript
+// Hook pattern per UI state
+const { sidebarExpanded, toggleSidebarExpanded } = useUISettings();
+
+// Classi dinamiche per stati
+const getMenuItemClasses = (isActive: boolean) => {
+  const baseClasses = "flex items-center rounded-lg text-sm font-medium transition-colors duration-200";
+  const paddingClasses = sidebarExpanded ? "px-3 py-3" : "px-2 py-2 justify-center";
+  return isActive ? `${baseClasses} ${paddingClasses} bg-bg-selected` : `${baseClasses} ${paddingClasses} hover:bg-bg-hover`;
+};
+```
+
+#### Icon System
+```typescript
+// Mapping centralizzato per icone
+const iconMap = { /* Lucide components */ };
+const getMenuIcon = (iconType: IconName) => {
+  const IconComponent = iconMap[iconType];
+  return <IconComponent className="w-5 h-5 flex-shrink-0" />;
+};
+```
+
+### 🗂️ Struttura Files Consolidata
+
+```
+src/
+├── core/
+│   └── components/
+│       ├── atomic/           # ThemedSurface, ThemedText
+│       ├── layout/           # MainLayout, Header, Sidebar, Footer  
+│       └── ui/               # Componenti specifici applicazione
+├── features/
+│   └── shared/              # NotFound, componenti cross-feature
+├── config/
+│   ├── index.ts            # ROUTES, NAVIGATION_ITEMS
+│   └── constants.ts        # Costanti applicazione
+└── utils/
+    └── iconMap.ts          # Mapping icone Lucide
+```
+
+### 🚀 Stato Repository
+
+#### Git Setup Completato
+- **Repository**: `https://github.com/LarisPigasse/edg-frontend-template`
+- **Strategia**: Delete/Recreate (Opzione 2)
+- **`.gitignore`**: Ottimizzato per React/TypeScript/Vite stack
+
+#### Files Protetti
+```gitignore
+# Environment specifici
+.env.development
+.env.production
+
+# Build e cache
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+```
+
+### 💡 Note Metodologiche
+
+#### Approccio Sviluppo
+- **Step-by-step incrementale** - Un problema alla volta
+- **Feedback bidirezionale** - Analisi e verifica continua  
+- **Soluzioni semplici** - Fix eleganti vs over-engineering
+- **Componenti on-demand** - Solo quando realmente necessari
+
+#### Principi Architetturali
+- **Modularità** - Separazione logica/presentazione
+- **Consistenza** - Pattern uniformi per ThemedSurface
+- **Flessibilità** - Props per customizzazione
+- **Performance** - CSS transitions, lazy loading ready
+
+### 🔮 Prossimi Sviluppi Suggeriti
+
+1. **Tema System** - Dark/light mode toggle
+2. **Form Components** - Input, Select, Button variants  
+3. **Modal System** - Overlay management
+4. **Table Components** - Data display
+5. **Loading States** - Skeleton, spinners
+6. **Error Boundaries** - Gestione errori React
+
 ---
 
+**Stato Attuale**: Layout system completo, robusto e testato. Pronto per sviluppo features applicative specifiche.
+
+**Memoria Tecnica**: Tutti i pattern e fix documentati per continuità sviluppo collaborativo.
