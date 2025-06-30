@@ -14,17 +14,21 @@ import {
   toggleUserMenu,
   setUserMenuOpen,
   closeUserMenu,
-  toggleMobileMenu, // ⭐ NUOVO
-  setMobileMenuOpen, // ⭐ NUOVO
-  closeMobileMenu, // ⭐ NUOVO
-  closeAllMenus, // ⭐ NUOVO
+  toggleSettingsMenu,
+  setSettingsMenuOpen,
+  closeSettingsMenu,
+  toggleMobileMenu,
+  setMobileMenuOpen,
+  closeMobileMenu,
+  closeAllMenus,
   resetUISettings,
   selectDarkMode,
   selectSidebarVisible,
   selectSidebarExpanded,
   selectFooterVisible,
   selectUserMenuOpen,
-  selectMobileMenuOpen, // ⭐ NUOVO
+  selectSettingsMenuOpen,
+  selectMobileMenuOpen,
 } from "../features/settings/uiSlice";
 
 // Hooks tipizzati per Redux
@@ -41,7 +45,8 @@ export const useUISettings = () => {
   const sidebarExpanded = useAppSelector(selectSidebarExpanded);
   const footerVisible = useAppSelector(selectFooterVisible);
   const userMenuOpen = useAppSelector(selectUserMenuOpen);
-  const mobileMenuOpen = useAppSelector(selectMobileMenuOpen); // ⭐ NUOVO
+  const settingsMenuOpen = useAppSelector(selectSettingsMenuOpen);
+  const mobileMenuOpen = useAppSelector(selectMobileMenuOpen);
 
   return {
     // State
@@ -50,7 +55,8 @@ export const useUISettings = () => {
     sidebarExpanded,
     footerVisible,
     userMenuOpen,
-    mobileMenuOpen, // ⭐ NUOVO
+    settingsMenuOpen,
+    mobileMenuOpen,
 
     // Dark Mode Actions
     toggleDarkMode: () => dispatch(toggleDarkMode()),
@@ -71,7 +77,12 @@ export const useUISettings = () => {
     setUserMenuOpen: (value: boolean) => dispatch(setUserMenuOpen(value)),
     closeUserMenu: () => dispatch(closeUserMenu()),
 
-    // ⭐ NUOVE Mobile Menu Actions
+    // Settings Menu Actions
+    toggleSettingsMenu: () => dispatch(toggleSettingsMenu()),
+    setSettingsMenuOpen: (value: boolean) => dispatch(setSettingsMenuOpen(value)),
+    closeSettingsMenu: () => dispatch(closeSettingsMenu()),
+
+    // Mobile Menu Actions
     toggleMobileMenu: () => dispatch(toggleMobileMenu()),
     setMobileMenuOpen: (value: boolean) => dispatch(setMobileMenuOpen(value)),
     closeMobileMenu: () => dispatch(closeMobileMenu()),

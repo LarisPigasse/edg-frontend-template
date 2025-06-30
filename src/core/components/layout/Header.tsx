@@ -1,28 +1,31 @@
+// src/core/components/layout/Header.tsx
 import React from "react";
 import { ThemedSurface, ThemedText } from "../atomic";
-import { Logo } from "./";
-import { ThemedImage } from "../atomic";
-import { Menu, Settings } from "lucide-react";
+import { UserAvatar, Logo } from "../info";
+import { Menu, Settings, Bell } from "lucide-react";
 import { useUISettings } from "../../../app/hooks";
 import { useIsMobile } from "../../hooks";
 
 interface HeaderProps {
   showLogo?: boolean;
   showNavigation?: boolean;
+  userInitials?: string;
+  userName?: string;
+  userEmail?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
-  const { toggleUserMenu, toggleMobileMenu } = useUISettings();
+const Header: React.FC<HeaderProps> = ({ showNavigation = true, userInitials = "AD" }) => {
+  const { toggleSettingsMenu, toggleUserMenu, toggleMobileMenu } = useUISettings();
   const isMobile = useIsMobile();
 
   return (
     <ThemedSurface variant="primary" borderVariant="default" as="header" className="border-b">
       <div className="w-full px-2 sm:px-4">
         <div className="flex justify-between items-center h-12">
-          {/* Sezione Sinistra - Logo */}
+          {/* LEFT AREA - Logo + Mobile Menu */}
           <div className="flex items-center space-x-4">
             <Logo />
-            {/* Mobile Hamburger Menu - Solo su mobile */}
+            {/* Mobile Hamburger Menu */}
             {isMobile && (
               <button
                 onClick={toggleMobileMenu}
@@ -35,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
             )}
           </div>
 
-          {/* Navigation - Desktop Solo quando non mobile */}
+          {/* CENTER AREA - Navigation Menu (Desktop Only) */}
           {showNavigation && !isMobile && (
             <nav className="hidden md:flex items-center space-x-8">
               <ThemedText
@@ -65,20 +68,31 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
             </nav>
           )}
 
-          {/* User Section */}
-          <div className="flex items-center space-x-4">
-            {/* User Avatar - Solo su desktop o quando non c'è hamburger */}
+          {/* RIGHT AREA - User Actions */}
+          <div className="flex items-center space-x-2">
+            {/* Notifications (Future) - Solo Desktop */}
             {!isMobile && (
-              <div className="flex items-center space-x-3">
-                <ThemedImage imageKey="icon" alt="User Avatar" className="w-8 h-8 rounded-full" />
-              </div>
+              <button
+                className="p-2 rounded-lg hover:bg-bg-hover transition-colors relative"
+                title="Notifiche"
+                aria-label="Notifiche"
+              >
+                <Bell className="w-5 h-5" />
+                {/* Badge per notifiche non lette */}
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-xs flex items-center justify-center opacity-0">
+                  {/* Count quando ci saranno notifiche */}
+                </span>
+              </button>
             )}
+
+            {/* User Avatar + Menu */}
+            <UserAvatar initials={userInitials} size="md" onClick={toggleUserMenu} className="ml-2" />
 
             {/* Settings Menu Toggle */}
             <button
-              onClick={toggleUserMenu}
+              onClick={toggleSettingsMenu}
               className="p-2 rounded-lg hover:bg-bg-hover transition-colors"
-              title="Apri menu impostazioni"
+              title="Impostazioni app"
               aria-label="Menu impostazioni"
             >
               <Settings className="w-5 h-5" />

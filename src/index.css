@@ -29,6 +29,7 @@
   --color-border-default: var(--border-default);
   --color-border-thin: var(--border-thin);
   --color-border-strong: var(--border-strong);
+  --color-border-contrast: var(--border-contrast);
 
   /* Ombre - mapping diretto da globals.css */
   --shadow-themed-none: var(--shadow-none);

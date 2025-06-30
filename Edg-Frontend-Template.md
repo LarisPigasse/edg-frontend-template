@@ -33,9 +33,11 @@ edg-frontend-template/
 |   |   ├── constants.ts                        # 🟢 Parametri e costanti globali
 │   │   ├── hooks.ts                            # 🟢 Redux hooks tipizzati
 │   │   └── store.ts                            # 🟢 Redux store
-|   ├── assets/                             
+|   ├── assets/
+│   |   ├── icon.png
+│   |   ├── icon-reverse.png                             
 │   |   ├── logo.png
-│   |   └── icon.png
+│   |   └── icon-reverse.png
 │   ├── config/                                 # Configurazione
 |   |   ├── index.ts                            # 🟢 Configurazioni unificate 
 │   │   ├── navigation.config.ts                # 🟢 Navigazione di default 
@@ -56,9 +58,11 @@ edg-frontend-template/
 |   │   │   │   ├── ThemedImage.tsx             # 🟢 Gestisce le immagini che si modificano con tema
 |   │   │   │   └── ThemedBorder.tsx            # 🟢 Wrapper per elementi che hanno solo bordi tematici 
 |   │   │   ├── info                            # Componenti utili secondari e informativi
-|   │   │   │   ├── index.ts                    # 🟡 Barrel file
+|   │   │   │   ├── index.ts                    # 🟢 Barrel file
+|   │   │   │   ├── Logo.tsx                    # 🟢 Logo dell'applicazione
+|   │   │   │   ├── UserAvatar.tsx              # 🟢 Avatar dell'utente
 |   │   │   │   ├── VersionInfo.tsx             # 🟡 Componente info versione (da definire)
-|   │   │   │   ├── ConnectionStatus.tsx        # 🟡Indicatore connessione backend (da definire)
+|   │   │   │   ├── ConnectionStatus.tsx        # 🟡 Indicatore connessione backend (da definire)
 |   │   │   │   └── QuickLink.tsx               # 🟡 Link rapidi (da definire)
 |   │   │   ├── layout/                         # Componenti base del layout
 |   │   │   |   ├── index.ts                    # 🟢 Barrel file dei componenti layout
@@ -66,20 +70,22 @@ edg-frontend-template/
 |   │   │   │   ├── CenteredSection.tsx         # 🟡 Container di sezione per centrare in verticale
 |   │   │   │   ├── Footer.tsx                  # 🟢 Footer dell'applicazione
 |   │   │   │   ├── Header.tsx                  # 🟢 Header dell'applicazione
-|   │   │   │   ├── Logo.tsx                    # 🟢 Logo dell'applicazione
+|   │   │   │   ├── HeaderGroup.tsx             # 🟢 Titolo e sottotitolo di un gruppo di elementi
 |   │   │   │   ├── MainLayout.tsx              # 🟢 Gestione del layout dell'app
-|   │   │   |   └── Sidebar.ts                  # 🟢 Sidebar dell'applicazione
+|   │   │   |   ├── Sidebar.ts                  # 🟢 Sidebar dell'applicazione
+|   │   │   |   └── TitlesSurface.ts            # 🟢 Surface con titolo nel bordo superiore (fieldset-style)
 |   │   │   ├── navigation/                     # Componenti navigazione
 |   │   │   |   ├── index.ts                    # 🟢 Barrel file dei componenti navigation
 |   │   │   │   ├── FooterMenu.tsx              # 🟡 Menu nel footer
 |   │   │   │   ├── MainMenu.tsx                # 🟡 Menu principale
-|   │   │   │   ├── UserMenu.tsx                # 🟢 Menu utente per configurazione app
+|   │   │   │   ├── Settings.tsx                # 🟢 Menu per configurazione app
+|   │   │   │   ├── UserMenu.tsx                # 🟢 Menu del profilo utente
 |   │   │   │   ├── MobileMenu.tsx              # 🟢 Mobile menu
 |   │   │   │   └── ProfileMenu.tsx             # 🟡 Menu utente con dropdown
 |   │   │   └── ui/                             # Componenti base dell'interfaccia utente
-|   │   │       ├── index.ts                    # 🟡 Barrel file dei componenti ui
+|   │   │       ├── index.ts                    # 🟢 Barrel file dei componenti ui
 |   |   |       ├── Badge.tsx                   # 🟡 Componente badge con varianti
-|   │   │       ├── Button.tsx                  # 🟡 Componente button con varianti
+|   │   │       ├── Button.tsx                  # 🟢 Componente button con varianti
 |   │   │       ├── Input.tsx                   # 🟡 Componente input con varianti
 |   │   │       ├── Modal.tsx                   # 🟡 Componente modale base
 |   │   │       ├── SubmitButton.tsx            # 🟡 Componente button per submit
@@ -112,13 +118,14 @@ edg-frontend-template/
 │   │   |   └── ResetPasswordRequest.tsx        # 🟡 Pagina richiesta reset password
 │   │   │
 │   │   ├── settings/
-│   │   │   ├── index.ts.ts                     # 🟡 Barrel file
+│   │   │   ├── index.ts                        # 🟡 Barrel file
 │   │   │   └── uiSlice.ts                      # 🟢 Redux slice per impostazioni ui
 │   │   │
 │   │   └── shared/
 |   |       ├── components/                     # Componenti per le pagine shared
 │   |       |   ├── index.ts                    # 🟡 Barrel file
-│   |       |   ├── ShowButtons.tsx             # 🟡 Showcase del Button component
+|   |       |   ├── ShowTheme.tsx               # 🟢 Showcase del theme system
+│   |       |   ├── ShowButtons.tsx             # 🟢 Showcase del Button component
 |   |       |   ├── ShowForms.tsx               # 🟡 Showcase per Input, label e form validation
 │   |       |   ├── ShowDataDisplay.tsx         # 🟡 Showcase per Table, TableLinl e Badge
 │   |       |   ├── ShowFeedback.tsx            # 🟡 Showcase Modal, Tooltip e notification/alert
@@ -1050,6 +1057,231 @@ dist/
 
 ---
 
-**Stato Attuale**: Layout system completo, robusto e testato. Pronto per sviluppo features applicative specifiche.
+Appendice - Header System e Menu Implementation
+Data: 30 Giugno 2025
 
-**Memoria Tecnica**: Tutti i pattern e fix documentati per continuità sviluppo collaborativo.
+Sessione: Header Restructuring e Menu System
+Obiettivo: Documentazione implementazione dual menu system e componenti layout
+🏗️ Header System Ristrutturato
+✅ Architettura a 3 Zone
+Layout Header Finale
+┌─────────────────────────────────────────────┐
+│ [Logo] [≡]     [Nav Menu]     [🔔] [AD] [⚙️] │
+└─────────────────────────────────────────────┘
+   LEFT          CENTER           RIGHT
+Zone Responsabilità
+
+LEFT: Logo + Mobile hamburger menu
+CENTER: Navigation menu desktop (nascosto su mobile)
+RIGHT: Notifications + User Avatar + Settings icon
+
+🎯 Componenti Creati
+UserAvatar.tsx ✨
+typescript// Location: src/core/components/info/UserAvatar.tsx
+interface UserAvatarProps {
+  initials: string;
+  size?: "sm" | "md" | "lg";
+  variant?: "primary" | "secondary" | "success" | "warning" | "error";
+  onClick?: () => void;
+}
+Features:
+
+Cerchio con iniziali stile Trello
+Hover effects e scale animations
+Accessibility completa (focus, keyboard nav)
+Color variants per diversi utenti/stati
+Size responsive per diversi contesti
+
+🔄 Dual Menu System
+✅ Redux State Esteso
+UISlice Aggiornato
+typescriptinterface UIState {
+  // ... existing state
+  userMenuOpen: boolean;        // Menu profilo utente
+  settingsMenuOpen: boolean;    // Menu impostazioni app
+  mobileMenuOpen: boolean;      // Menu mobile navigation
+}
+Smart Menu Logic
+
+Esclusività: Solo un menu aperto alla volta
+Auto-close: Apertura di un menu chiude gli altri automaticamente
+Persistence: Solo UI settings salvati, non stati menu temporanei
+
+🎨 SettingsMenu (App Settings)
+Design Evolution
+Da: Panel laterale full-height → A: Modal ancorata sotto icona
+typescript// Posizionamento sotto Settings icon
+<div className="flex justify-end pt-16 pr-4 sm:pr-6">
+  <ThemedSurface className="w-80 max-w-[90vw] rounded-xl">
+Features:
+
+Ancorato: Top-right sotto Settings icon
+Transform origin: top right per animazioni naturali
+Responsive: max-w-[90vw] su mobile
+Stagger animations: Contenuti con delay progressivo
+
+Settings Available
+
+Dark Mode: Toggle tema con descrizione
+Sidebar: Show/hide barra laterale
+Footer: Show/hide footer
+Auto-save: Info salvaggio automatico
+
+🧑‍💼 UserMenu (Profile Menu)
+Design Pattern
+Dropdown ancorato sotto User Avatar con info complete utente
+typescript// User info completo
+interface UserMenuProps {
+  userInitials?: string;    // "AD"
+  userName?: string;        // "Admin Demo"  
+  userEmail?: string;       // "admin@demo.com"
+  userRole?: string;        // "Administrator"
+}
+Menu Structure:
+
+Header: Avatar + info utente complete
+Profile: Link al profilo utente
+Preferences: Impostazioni personali
+Logout: Uscita con styling red
+
+🔧 Redux Integration
+Hook Updates
+typescript// useUISettings return object
+{
+  // Dual menu states
+  settingsMenuOpen: boolean,
+  userMenuOpen: boolean,
+  
+  // Dual menu actions  
+  toggleSettingsMenu: () => void,
+  toggleUserMenu: () => void,
+  closeSettingsMenu: () => void,
+  closeUserMenu: () => void,
+}
+Actions Logic
+typescript// Smart exclusive behavior
+toggleUserMenu: () => {
+  if (!userMenuOpen) {
+    // Close other menus before opening
+    set({ settingsMenuOpen: false, mobileMenuOpen: false, userMenuOpen: true });
+  } else {
+    set({ userMenuOpen: false });
+  }
+}
+🎨 Layout Enhancement Components
+✅ HeaderGroup Component ✨
+Purpose
+Risolve problema interlinea tra title e subtitle
+typescript// Location: src/core/components/layout/HeaderGroup.tsx
+interface HeaderGroupProps {
+  title: string;
+  subtitle?: string;
+  titleSize?: "sm" | "md" | "lg" | "xl" | "2xl";
+  spacing?: "tight" | "normal" | "loose";
+  align?: "left" | "center" | "right";
+}
+Usage:
+typescript// Da questo (spacing eccessivo):
+<ThemedText className="text-2xl font-bold mb-2" block>Title</ThemedText>
+<ThemedText variant="secondary" className="text-sm">Subtitle</ThemedText>
+
+// A questo (spacing ottimale):
+<HeaderGroup title="Title" subtitle="Subtitle" spacing="tight" />
+✅ TitledSurface Component ✨
+Purpose
+Surface con titolo che interrompe il bordo superiore (fieldset-style)
+typescript// Location: src/core/components/layout/TitledSurface.tsx
+interface TitledSurfaceProps {
+  title: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary" | "modal" | "info";
+  borderVariant?: "none" | "thin" | "default" | "strong";
+  titleSize?: "sm" | "md" | "lg";
+  padding?: "sm" | "md" | "lg";
+}
+Visual Effect:
+    ┌─── Controlli Tema ────┐
+    │                       │
+    │   [Toggle] [Info]     │
+    │                       │
+    └───────────────────────┘
+Implementation:
+typescript<TitledSurface title="Controlli Tema" padding="md">
+  <div className="flex items-center gap-4">
+    {/* content */}
+  </div>
+</TitledSurface>
+🗂️ File Structure Updates
+Componenti Organizzati
+src/core/components/
+├── atomic/           # Base components (ThemedSurface, ThemedText)
+├── info/             # Info components
+│   ├── Logo.tsx      # Moved from atomic (semantically better)
+│   └── UserAvatar.tsx # ✨ New - Avatar con iniziali
+├── layout/           # Layout components  
+│   ├── HeaderGroup.tsx    # ✨ New - Title+subtitle con spacing
+│   ├── TitledSurface.tsx  # ✨ New - Surface con title nel bordo
+│   ├── Header.tsx         # ✨ Updated - 3-zone structure
+│   └── MainLayout.tsx     # ✨ Updated - Includes menus
+└── navigation/       # Menu components
+    ├── SettingsMenu.tsx   # ✨ Renamed from UserMenu
+    ├── UserMenu.tsx       # ✨ New - Profile menu
+    └── index.ts           # ✨ Barrel exports
+Import Pattern Updates
+typescript// Nuovi import centralizzati
+import { Logo, UserAvatar } from "../info";
+import { HeaderGroup, TitledSurface } from "../layout";  
+import { SettingsMenu, UserMenu } from "../navigation";
+🎯 UX Improvements
+Menu Behavior
+
+Click fuori: Chiude menu automaticamente
+ESC key: Chiude menu attivo
+Body scroll lock: Quando modali aperte
+Backdrop blur: Visual feedback apertura menu
+
+Responsive Behavior
+
+Mobile: Navigation hidden, hamburger menu visibile
+Desktop: Full navigation, user controls visibili
+Adaptive sizing: Menu si adattano a viewport
+
+Visual Consistency
+
+Stesso stile: SettingsMenu e UserMenu hanno design pattern uniforme
+Transform origins: Animazioni ancorate ai trigger
+Color system: Uso consistente CSS custom properties
+Typography: HeaderGroup risolve spacing issues
+
+📱 Mobile Considerations
+Header Adaptation
+
+Logo sempre visibile su mobile
+Hamburger menu per navigation
+User avatar nascosto su mobile (solo settings icon)
+Navigation collassata in mobile menu
+
+Menu Responsiveness
+
+Modal sizing: max-w-[90vw] per non overflow su mobile
+Touch targets: Button heights 48px+ per accessibility
+Scroll behavior: Menu con max-height e scroll interno
+
+🚀 Performance Optimizations
+Animation Performance
+
+CSS transforms: Uso di scale/translate invece di width/height
+GPU acceleration: Transform 3D per smooth animations
+Stagger delays: Contenuti animati in sequenza per fluidità
+Reduced motion: Rispetta preferenze sistema utente
+
+State Management
+
+Selective persistence: Solo settings persistiti, non menu states
+Optimistic updates: UI aggiornata immediatamente
+Batched actions: Multiple state changes in single dispatch
+
+
+Stato Attuale: Header system completo con dual menu, componenti layout avanzati e UX ottimizzata. Sistema scalabile per future feature.
+
+**Memoria Tecnica**: Tutti i pattern e fix documentati per continuità sviluppo collaborativo. 

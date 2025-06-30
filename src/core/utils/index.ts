@@ -1,4 +1,16 @@
-import { Home, Settings, Package, LayoutDashboard, Palette } from "lucide-react";
+import {
+  House,
+  Settings,
+  Package,
+  LayoutGrid,
+  Palette,
+  ArrowBigLeft,
+  ArrowBigRight,
+  Check,
+  Upload,
+  Download,
+  Timer,
+} from "lucide-react";
 
 /**
  * Utility per combinare classi CSS condizionalmente
@@ -12,11 +24,17 @@ export function cn(...inputs: (string | undefined | null | false | 0)[]): string
  * Mapping delle icone Lucide per la navigazione
  */
 export const iconMap = {
-  home: Home,
-  dashboard: LayoutDashboard,
+  home: House,
+  dashboard: LayoutGrid,
   settings: Settings,
   components: Package,
   showcase: Palette, // Icona più appropriata per showcase
+  back: ArrowBigLeft,
+  forward: ArrowBigRight,
+  check: Check,
+  upload: Upload,
+  download: Download,
+  timer: Timer,
 } as const;
 
 export type IconName = keyof typeof iconMap;

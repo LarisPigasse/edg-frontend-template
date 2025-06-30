@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ThemedSurface, ThemedText } from "../../core/components/atomic";
 import Button from "../../core/components/ui/Button";
 import { ShowButtons, ShowTheme } from "./components/";
+import { HeaderGroup } from "../../core/components/layout";
 
 type TabType = "theme" | "buttons" | "forms" | "data-display" | "feedback" | "actions";
 
@@ -84,21 +85,21 @@ const Showcase: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
       <div>
-        <ThemedText variant="primary" className="text-3xl font-bold mb-2">
-          Componenti UI - Showcase
-        </ThemedText>
-        <ThemedText variant="secondary" className="text-sm">
-          Esplora i componenti disponibili nel design system
-        </ThemedText>
+        <HeaderGroup
+          title="Componenti UI - Showcase"
+          titleSize="3xl"
+          subtitle="Esplora i componenti disponibili nel design system"
+          spacing="tight"
+        />
       </div>
 
       {/* Tab Navigation */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border">
+      <ThemedSurface variant="base">
         {/* Tab Headers */}
-        <div className="border-b border-border-default p-4">
+        <div className="border-b border-border-contrast p-2">
           <nav className="flex flex-wrap gap-2" aria-label="Showcase Tabs">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
@@ -112,23 +113,7 @@ const Showcase: React.FC = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="p-6">{renderTabContent()}</div>
-      </ThemedSurface>
-
-      {/* Info Card */}
-      <ThemedSurface variant="secondary" borderVariant="default" className="rounded-lg border p-4">
-        <div className="flex items-start gap-3">
-          <span className="text-xl">💡</span>
-          <div>
-            <ThemedText variant="primary" className="font-medium text-sm mb-1">
-              Testing Ground
-            </ThemedText>
-            <ThemedText variant="secondary" className="text-xs">
-              Utilizza questa pagina per testare i componenti durante lo sviluppo. Ogni componente mostra le diverse varianti e
-              stati disponibili.
-            </ThemedText>
-          </div>
-        </div>
+        <div className="py-4">{renderTabContent()}</div>
       </ThemedSurface>
     </div>
   );

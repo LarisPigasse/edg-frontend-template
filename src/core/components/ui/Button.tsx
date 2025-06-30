@@ -91,9 +91,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         .trim(),
 
       warning: `
-        border border-transparent bg-amber-500 text-amber-900
-        hover:bg-amber-600 focus:ring-amber-500
-        disabled:bg-amber-300 disabled:text-amber-700
+        border border-transparent bg-yellow-400 text-dark
+        hover:bg-yellow-500 focus:ring-yellow-400
+        disabled:bg-yellow-300 disabled:text-gray-700
       `
         .replace(/\s+/g, " ")
         .trim(),

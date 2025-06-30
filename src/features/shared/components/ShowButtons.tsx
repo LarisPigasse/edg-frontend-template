@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import { ThemedSurface, ThemedText } from "../../../core/components/atomic";
 import { Button, type ButtonVariant, type ButtonSize } from "../../../core/components/ui";
+import { HeaderGroup, TitledSurface } from "../../../core/components/layout";
+import { iconMap } from "../../../core/utils";
+import { Check, Timer } from "lucide-react";
 
 const ShowButtons: React.FC = () => {
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
@@ -28,62 +31,51 @@ const ShowButtons: React.FC = () => {
 
   const sizes: ButtonSize[] = ["xs", "sm", "md", "lg"];
 
+  // Get icons from iconMap
+  const BackIcon = iconMap.back; // ArrowBigLeft
+  const ForwardIcon = iconMap.forward; // ArrowBigRight
+  const DownloadIcon = iconMap.download; // Download
+  const UploadIcon = iconMap.upload; // Upload
+
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <ThemedText variant="primary" className="text-2xl font-bold mb-2">
-          Button Component
-        </ThemedText>
-        <ThemedText variant="secondary" className="text-sm">
-          Esempi di utilizzo del componente Button con tutte le varianti disponibili
-        </ThemedText>
+        <HeaderGroup
+          title="Button Component"
+          subtitle="Esempi di utilizzo del componente Button con tutte le varianti disponibili"
+          spacing="tight"
+        />
       </div>
 
       {/* 1. Varianti Base */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          🎨 Varianti
-        </ThemedText>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <TitledSurface title="Varianti" padding="md">
+        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-9 gap-4">
           {variants.map((variant) => (
             <div key={variant} className="space-y-2">
               <Button variant={variant} className="w-full">
                 {variant.charAt(0).toUpperCase() + variant.slice(1)}
               </Button>
-              <ThemedText variant="secondary" className="text-xs text-center">
-                {variant}
-              </ThemedText>
             </div>
           ))}
         </div>
-      </ThemedSurface>
-
+      </TitledSurface>
       {/* 2. Dimensioni */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          📏 Dimensioni
-        </ThemedText>
+      <TitledSurface title="Dimensioni" padding="md">
         <div className="flex flex-wrap items-end gap-4">
           {sizes.map((size) => (
             <div key={size} className="space-y-2">
               <Button variant="primary" size={size}>
                 Size {size.toUpperCase()}
               </Button>
-              <ThemedText variant="secondary" className="text-xs text-center">
-                {size}
-              </ThemedText>
             </div>
           ))}
         </div>
-      </ThemedSurface>
+      </TitledSurface>
 
       {/* 3. Stati Speciali */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          🔄 Stati Speciali
-        </ThemedText>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <TitledSurface title="Stati speciali" padding="md">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
           {/* Loading */}
           <div className="space-y-3">
             <ThemedText variant="secondary" className="text-sm font-medium">
@@ -93,7 +85,7 @@ const ShowButtons: React.FC = () => {
               <Button variant="primary" isLoading={loadingStates.demo1} onClick={() => handleLoadingDemo("demo1")}>
                 Click me
               </Button>
-              <Button variant="secondary" isLoading={true}>
+              <Button variant="secondary" isLoading={true} className="ms-2">
                 Loading...
               </Button>
             </div>
@@ -108,7 +100,7 @@ const ShowButtons: React.FC = () => {
               <Button variant="primary" disabled>
                 Disabled
               </Button>
-              <Button variant="outline" disabled>
+              <Button variant="outline" disabled className="ms-2">
                 Not available
               </Button>
             </div>
@@ -122,9 +114,6 @@ const ShowButtons: React.FC = () => {
             <div className="space-y-2">
               <Button variant="primary" fullWidth>
                 Full Width
-              </Button>
-              <Button variant="outline" fullWidth>
-                Stretch
               </Button>
             </div>
           </div>
@@ -144,45 +133,23 @@ const ShowButtons: React.FC = () => {
             </div>
           </div>
         </div>
-      </ThemedSurface>
+      </TitledSurface>
 
       {/* 4. Combinazioni Pratiche */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          💼 Casi d'Uso Pratici
-        </ThemedText>
-
-        <div className="space-y-6">
+      <TitledSurface title="Casi d'Uso Pratici" padding="md">
+        <div className="space-y-6 mt-4">
           {/* Action Group */}
           <div>
-            <ThemedText variant="secondary" className="text-sm font-medium mb-3">
-              Action Group
-            </ThemedText>
             <div className="flex flex-wrap gap-2">
-              <Button variant="primary" leftIcon={<span>💾</span>}>
-                Salva
-              </Button>
+              <Button variant="primary">Salva</Button>
               <Button variant="secondary">Annulla</Button>
-              <Button variant="outline" leftIcon={<span>👁️</span>}>
-                Anteprima
-              </Button>
-              <Button variant="danger" leftIcon={<span>🗑️</span>}>
-                Elimina
-              </Button>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div>
-            <ThemedText variant="secondary" className="text-sm font-medium mb-3">
-              Navigation
-            </ThemedText>
-            <div className="flex flex-wrap gap-2">
-              <Button variant="ghost" leftIcon={<span>⬅️</span>}>
+              <Button variant="outline">Anteprima</Button>
+              <Button variant="danger">Elimina</Button>
+              <Button variant="info">Info</Button>
+              <Button variant="ghost" leftIcon={<BackIcon />}>
                 Indietro
               </Button>
-              <Button variant="link">Vai alla dashboard</Button>
-              <Button variant="primary" rightIcon={<span>➡️</span>}>
+              <Button variant="primary" rightIcon={<ForwardIcon />}>
                 Continua
               </Button>
             </div>
@@ -190,59 +157,44 @@ const ShowButtons: React.FC = () => {
 
           {/* Status Actions */}
           <div>
-            <ThemedText variant="secondary" className="text-sm font-medium mb-3">
-              Status Actions
-            </ThemedText>
             <div className="flex flex-wrap gap-2">
-              <Button variant="success" leftIcon={<span>✅</span>}>
+              <Button variant="success" leftIcon={<Check />}>
                 Approva
               </Button>
-              <Button variant="warning" leftIcon={<span>⚠️</span>}>
+              <Button variant="warning" leftIcon={<Timer />}>
                 In Attesa
               </Button>
-              <Button variant="info" leftIcon={<span>ℹ️</span>}>
-                Info
-              </Button>
-              <Button variant="danger" leftIcon={<span>❌</span>}>
+              <Button variant="danger" leftIcon={<span>X</span>}>
                 Rifiuta
               </Button>
-            </div>
-          </div>
-
-          {/* Interactive Demo */}
-          <div>
-            <ThemedText variant="secondary" className="text-sm font-medium mb-3">
-              Interactive Demo
-            </ThemedText>
-            <div className="flex flex-wrap gap-2">
               <Button
                 variant="primary"
                 isLoading={loadingStates.save}
                 onClick={() => handleLoadingDemo("save")}
-                leftIcon={!loadingStates.save ? <span>💾</span> : undefined}
+                leftIcon={!loadingStates.save ? <DownloadIcon /> : undefined}
               >
-                {loadingStates.save ? "Salvando..." : "Salva Documento"}
+                {loadingStates.save ? "Download in corso..." : "Salva Documento"}
               </Button>
               <Button
                 variant="success"
                 isLoading={loadingStates.upload}
                 onClick={() => handleLoadingDemo("upload")}
-                leftIcon={!loadingStates.upload ? <span>📤</span> : undefined}
+                leftIcon={!loadingStates.upload ? <UploadIcon /> : undefined}
               >
-                {loadingStates.upload ? "Caricando..." : "Upload File"}
+                {loadingStates.upload ? "Upload in corso..." : "Upload File"}
               </Button>
             </div>
           </div>
         </div>
-      </ThemedSurface>
+      </TitledSurface>
 
       {/* 5. Code Examples */}
-      <ThemedSurface variant="secondary" borderVariant="default" className="rounded-lg border p-6">
+      <ThemedSurface variant="secondary" borderVariant="default" className="rounded-lg border p-4">
         <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          📝 Esempi di Codice
+          Esempi di Codice
         </ThemedText>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
           <div className="bg-bg-contrast text-text-contrast p-4 rounded text-sm font-mono overflow-x-auto">
             <div className="text-green-400 mb-2">// Button base</div>
             <div>{`<Button variant="primary">Click me</Button>`}</div>
@@ -259,6 +211,13 @@ const ShowButtons: React.FC = () => {
             <div className="text-green-400 mb-2">// Full width e dimensioni</div>
             <div>{`<Button variant="outline" size="lg" fullWidth>`}</div>
             <div className="ml-4">{`Bottone esteso`}</div>
+            <div>{`</Button>`}</div>
+          </div>
+
+          <div className="bg-bg-contrast text-text-contrast p-4 rounded text-sm font-mono overflow-x-auto">
+            <div className="text-green-400 mb-2">// IconMap invece che import diretto</div>
+            <div>{`<Button variant="outline" size="lg" fullWidth>`}</div>
+            <div className="ml-4">{`Indietro`}</div>
             <div>{`</Button>`}</div>
           </div>
         </div>

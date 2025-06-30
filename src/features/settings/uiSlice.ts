@@ -9,6 +9,7 @@ interface UIState {
   sidebarExpanded: boolean;
   footerVisible: boolean;
   userMenuOpen: boolean;
+  settingsMenuOpen: boolean;
   mobileMenuOpen: boolean; // ⭐ NUOVO - per mobile menu
 }
 
@@ -20,7 +21,8 @@ const createInitialState = (): UIState => {
     sidebarExpanded: true,
     footerVisible: true,
     userMenuOpen: false, // Sempre false all'avvio
-    mobileMenuOpen: false, // ⭐ Sempre false all'avvio
+    settingsMenuOpen: false, // Sempre false all'avvio
+    mobileMenuOpen: false, // Sempre false all'avvio
   };
 
   // Carica impostazioni salvate
@@ -31,7 +33,8 @@ const createInitialState = (): UIState => {
       ...defaultState,
       ...savedSettings,
       userMenuOpen: false, // Assicurati che i menu siano sempre chiusi all'avvio
-      mobileMenuOpen: false, // ⭐ Mobile menu sempre chiuso all'avvio
+      settingsMenuOpen: false, // Assicurati che i menu siano sempre chiusi all'avvio
+      mobileMenuOpen: false, // Mobile menu sempre chiuso all'avvio
     };
   }
 
@@ -44,6 +47,7 @@ const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
+    // azioni per Dark Mode
     toggleDarkMode: (state) => {
       state.darkMode = !state.darkMode;
       applyThemeToDocument(state.darkMode);
@@ -52,6 +56,7 @@ const uiSlice = createSlice({
       state.darkMode = action.payload;
       applyThemeToDocument(state.darkMode);
     },
+    // azioni per Sidebar
     toggleSidebar: (state) => {
       state.sidebarVisible = !state.sidebarVisible;
     },
@@ -64,12 +69,14 @@ const uiSlice = createSlice({
     setSidebarExpanded: (state, action: PayloadAction<boolean>) => {
       state.sidebarExpanded = action.payload;
     },
+    // azioni per Footer
     toggleFooter: (state) => {
       state.footerVisible = !state.footerVisible;
     },
     setFooterVisible: (state, action: PayloadAction<boolean>) => {
       state.footerVisible = action.payload;
     },
+    // azioni per User Menu
     toggleUserMenu: (state) => {
       state.userMenuOpen = !state.userMenuOpen;
       // Chiudi mobile menu se aperto
@@ -87,7 +94,25 @@ const uiSlice = createSlice({
     closeUserMenu: (state) => {
       state.userMenuOpen = false;
     },
-    // ⭐ NUOVE ACTIONS per mobile menu
+    // azioni per Settings Menu
+    toggleSettingsMenu: (state) => {
+      state.settingsMenuOpen = !state.settingsMenuOpen;
+      // Chiudi mobile menu se aperto
+      if (state.settingsMenuOpen && state.mobileMenuOpen) {
+        state.mobileMenuOpen = false;
+      }
+    },
+    setSettingsMenuOpen: (state, action: PayloadAction<boolean>) => {
+      state.settingsMenuOpen = action.payload;
+      // Chiudi mobile menu se si apre user menu
+      if (action.payload && state.mobileMenuOpen) {
+        state.mobileMenuOpen = false;
+      }
+    },
+    closeSettingsMenu: (state) => {
+      state.settingsMenuOpen = false;
+    },
+    // azioni per mobile menu
     toggleMobileMenu: (state) => {
       state.mobileMenuOpen = !state.mobileMenuOpen;
       // Chiudi user menu se aperto
@@ -118,6 +143,7 @@ const uiSlice = createSlice({
         sidebarExpanded: true,
         footerVisible: true,
         userMenuOpen: false,
+        settingsMenuOpen: false,
         mobileMenuOpen: false,
       };
 
@@ -178,10 +204,13 @@ export const {
   toggleUserMenu,
   setUserMenuOpen,
   closeUserMenu,
-  toggleMobileMenu, // ⭐ NUOVO
-  setMobileMenuOpen, // ⭐ NUOVO
-  closeMobileMenu, // ⭐ NUOVO
-  closeAllMenus, // ⭐ NUOVO
+  toggleSettingsMenu,
+  setSettingsMenuOpen,
+  closeSettingsMenu,
+  toggleMobileMenu,
+  setMobileMenuOpen,
+  closeMobileMenu,
+  closeAllMenus,
   resetUISettings,
   initializeFromStorage,
 } = uiSlice.actions;
@@ -192,6 +221,7 @@ export const selectSidebarVisible = (state: { ui: UIState }) => state.ui.sidebar
 export const selectSidebarExpanded = (state: { ui: UIState }) => state.ui.sidebarExpanded;
 export const selectFooterVisible = (state: { ui: UIState }) => state.ui.footerVisible;
 export const selectUserMenuOpen = (state: { ui: UIState }) => state.ui.userMenuOpen;
+export const selectSettingsMenuOpen = (state: { ui: UIState }) => state.ui.settingsMenuOpen;
 export const selectMobileMenuOpen = (state: { ui: UIState }) => state.ui.mobileMenuOpen; // ⭐ NUOVO
 export const selectUIState = (state: { ui: UIState }) => state.ui;
 

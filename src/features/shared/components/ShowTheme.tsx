@@ -3,6 +3,7 @@ import React from "react";
 import { ThemedSurface, ThemedText } from "../../../core/components/atomic";
 import { Button } from "../../../core/components/ui";
 import { useUISettings } from "../../../app/hooks";
+import { HeaderGroup, TitledSurface } from "../../../core/components/layout";
 
 const ShowTheme: React.FC = () => {
   const { darkMode, toggleDarkMode } = useUISettings();
@@ -11,37 +12,24 @@ const ShowTheme: React.FC = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <ThemedText variant="primary" className="text-2xl font-bold mb-2">
-          🎨 Theme System
-        </ThemedText>
-        <ThemedText variant="secondary" className="text-sm">
-          Esplora il sistema di theming e le CSS custom properties
-        </ThemedText>
+        <HeaderGroup title="Theme System" subtitle="Sistema di theming e CSS custom properties" spacing="tight" />
       </div>
 
       {/* Theme Controls */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          🎛️ Controlli Tema
-        </ThemedText>
 
+      <TitledSurface title="Controlli Tema" padding="md">
         <div className="flex items-center gap-4">
-          <Button variant={darkMode ? "secondary" : "primary"} leftIcon={<span>☀️</span>} onClick={toggleDarkMode}>
+          <Button variant={darkMode ? "secondary" : "primary"} onClick={toggleDarkMode}>
             {darkMode ? "Attiva Light Mode" : "Attiva Dark Mode"}
           </Button>
-
           <ThemedText variant="secondary" className="text-sm">
             Modalità attuale: <strong>{darkMode ? "Dark" : "Light"}</strong>
           </ThemedText>
         </div>
-      </ThemedSurface>
+      </TitledSurface>
 
       {/* Color Palette */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          🎨 Color Palette
-        </ThemedText>
-
+      <TitledSurface title="Color Palette" padding="md">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {/* Backgrounds */}
           <div className="space-y-3">
@@ -143,26 +131,22 @@ const ShowTheme: React.FC = () => {
             </div>
           </div>
         </div>
-      </ThemedSurface>
+      </TitledSurface>
 
       {/* Atomic Components Test */}
-      <ThemedSurface variant="primary" borderVariant="default" className="rounded-lg border p-6">
-        <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          🧩 Atomic Components
-        </ThemedText>
-
+      <TitledSurface title="Atomic Components" padding="md">
         <div className="space-y-6">
           {/* ThemedSurface variants */}
           <div>
-            <ThemedText variant="secondary" className="text-sm font-medium mb-3">
+            <ThemedText variant="secondary" className="text-sm font-medium mb-4">
               ThemedSurface Variants
             </ThemedText>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
               <ThemedSurface variant="primary" borderVariant="default" className="p-4 rounded border">
                 <ThemedText variant="primary" className="text-sm font-medium">
                   Primary Surface
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs mt-1">
+                <ThemedText variant="secondary" className="text-xs mt-1 ms-2">
                   variant="primary"
                 </ThemedText>
               </ThemedSurface>
@@ -170,7 +154,7 @@ const ShowTheme: React.FC = () => {
                 <ThemedText variant="primary" className="text-sm font-medium">
                   Secondary Surface
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs mt-1">
+                <ThemedText variant="secondary" className="text-xs mt-1 ms-2">
                   variant="secondary"
                 </ThemedText>
               </ThemedSurface>
@@ -178,7 +162,7 @@ const ShowTheme: React.FC = () => {
                 <ThemedText variant="primary" className="text-sm font-medium">
                   Elevated Surface
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs mt-1">
+                <ThemedText variant="secondary" className="text-xs mt-1 ms-2">
                   variant="elevated"
                 </ThemedText>
               </ThemedSurface>
@@ -190,26 +174,26 @@ const ShowTheme: React.FC = () => {
             <ThemedText variant="secondary" className="text-sm font-medium mb-3">
               ThemedText Variants
             </ThemedText>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
               <div className="p-3 bg-bg-secondary rounded">
                 <ThemedText variant="primary" className="text-lg">
                   Primary Text - Large
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs">
+                <ThemedText variant="secondary" className="text-xs ms-2">
                   variant="primary"
                 </ThemedText>
               </div>
               <div className="p-3 bg-bg-secondary rounded">
                 <ThemedText variant="secondary">Secondary Text - Normal</ThemedText>
-                <ThemedText variant="secondary" className="text-xs">
+                <ThemedText variant="secondary" className="text-xs ms-2">
                   variant="secondary"
                 </ThemedText>
               </div>
               <div className="p-3 bg-bg-secondary rounded">
-                <ThemedText variant="muted" className="text-sm">
+                <ThemedText variant="muted" className="text-sm ms-2">
                   Muted Text - Small
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs">
+                <ThemedText variant="secondary" className="text-xs ms-2">
                   variant="muted"
                 </ThemedText>
               </div>
@@ -226,7 +210,7 @@ const ShowTheme: React.FC = () => {
                 <ThemedText variant="primary" className="text-sm">
                   Thin Border
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs">
+                <ThemedText variant="secondary" className="text-xs ms-2">
                   borderVariant="thin"
                 </ThemedText>
               </ThemedSurface>
@@ -234,7 +218,7 @@ const ShowTheme: React.FC = () => {
                 <ThemedText variant="primary" className="text-sm">
                   Default Border
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs">
+                <ThemedText variant="secondary" className="text-xs ms-2">
                   borderVariant="default"
                 </ThemedText>
               </ThemedSurface>
@@ -242,19 +226,19 @@ const ShowTheme: React.FC = () => {
                 <ThemedText variant="primary" className="text-sm">
                   Strong Border
                 </ThemedText>
-                <ThemedText variant="secondary" className="text-xs">
+                <ThemedText variant="secondary" className="text-xs ms-2">
                   borderVariant="strong"
                 </ThemedText>
               </ThemedSurface>
             </div>
           </div>
         </div>
-      </ThemedSurface>
+      </TitledSurface>
 
       {/* CSS Custom Properties Reference */}
       <ThemedSurface variant="secondary" borderVariant="default" className="rounded-lg border p-6">
         <ThemedText variant="primary" className="text-lg font-semibold mb-4">
-          📝 CSS Custom Properties Reference
+          CSS Custom Properties Reference
         </ThemedText>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -262,7 +246,7 @@ const ShowTheme: React.FC = () => {
             <ThemedText variant="secondary" className="text-sm font-medium">
               Background Variables
             </ThemedText>
-            <div className="bg-bg-contrast text-text-contrast p-3 rounded text-xs font-mono space-y-1">
+            <div className="bg-bg-contrast text-text-contrast p-3 rounded text-xs font-mono space-y-1 mt-2">
               <div>--bg-base</div>
               <div>--bg-primary</div>
               <div>--bg-secondary</div>
@@ -276,7 +260,7 @@ const ShowTheme: React.FC = () => {
             <ThemedText variant="secondary" className="text-sm font-medium">
               Text & Border Variables
             </ThemedText>
-            <div className="bg-bg-contrast text-text-contrast p-3 rounded text-xs font-mono space-y-1">
+            <div className="bg-bg-contrast text-text-contrast p-3 rounded text-xs font-mono space-y-1 mt-2">
               <div>--text-primary</div>
               <div>--text-secondary</div>
               <div>--text-placeholder</div>

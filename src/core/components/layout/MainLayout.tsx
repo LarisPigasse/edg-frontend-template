@@ -1,6 +1,8 @@
 import React from "react";
 import { ThemedSurface } from "../atomic";
 import { Header, Footer, Sidebar } from "./";
+import { SettingsMenu } from "../navigation";
+import { UserMenu } from "../navigation";
 import { useUISettings } from "../../../app/hooks";
 import { useIsMobile } from "../../../core/hooks";
 
@@ -25,6 +27,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           <div className="w-full px-4 sm:px-6 py-8">{children}</div>
         </ThemedSurface>
         {footerVisible && <Footer showVersionInfo={true} />}
+        {/* ✨ MENU COMPONENTS - Renderizzati sempre */}
+        <SettingsMenu />
+        {/* <UserMenu /> */} {/* Uncomment quando UserMenu sarà pronto */}
       </ThemedSurface>
     );
   }
@@ -67,6 +72,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </footer>
         )}
       </div>
+      {/* MENU COMPONENTS - Renderizzati sempre alla fine */}
+      <SettingsMenu />
+      <UserMenu />
     </ThemedSurface>
   );
 };

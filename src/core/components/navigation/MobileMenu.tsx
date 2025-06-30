@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useUISettings } from "../../../app/hooks";
 import { useIsMobile } from "../../hooks";
 import { ThemedSurface, ThemedText } from "../atomic";
-import { Logo } from "../layout";
+import { Logo } from "../info";
 import { X } from "lucide-react";
 import { NAVIGATION_ITEMS } from "../../../config";
 import { iconMap } from "../../utils";

@@ -25,7 +25,8 @@
   /* Bordi */
   --border-default: #e5e7eb; /* Grigio chiaro */
   --border-thin: #e0e2e4; /* Grigio molto chiaro */
-  --border-strong: #d1d5db;
+  --border-strong: #d1d5db; /* Grigio */
+  --border-contrast: #bcb7f7; /* viola chiaro */
 
   /* Ombre */
   --shadow-none: none;
@@ -63,6 +64,7 @@
   --border-default: #374151; /* Grigio medio-scuro */
   --border-thin: #4b5563; /* Grigio leggermente più chiaro */
   --border-strong: #6b7280; /* Grigio più visibile per bordi importanti */
+  --border-contrast: #614cb5; /* viola */
 
   /* Ombre - In dark mode sono più sottili e spesso con toni più chiari */
   --shadow-none: none;
