@@ -14,14 +14,21 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     id: "dashboard",
     label: "Dashboard",
     href: ROUTES.DASHBOARD,
-    icon: "dashboard", // Ora usa LayoutDashboard
+    icon: "dashboard", // Usa LayoutDashboard
     description: "Panoramica e dashboard principale",
+  },
+  {
+    id: "explorer",
+    label: "Componenti",
+    href: ROUTES.EXPLORER,
+    icon: "components", // Usa Package/Components icon
+    description: "Esplora tutti i componenti del design system",
   },
   {
     id: "showcase",
     label: "Esempi",
     href: ROUTES.SHOWCASE,
-    icon: "showcase", // Ora usa Palette
+    icon: "showcase", // Usa Palette
     description: "Showcase dei componenti UI disponibili",
   },
   {

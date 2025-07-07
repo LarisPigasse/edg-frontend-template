@@ -1,7 +1,7 @@
 import {
   House,
   Settings,
-  Package,
+  Puzzle,
   LayoutGrid,
   Palette,
   ArrowBigLeft,
@@ -10,6 +10,7 @@ import {
   Upload,
   Download,
   Timer,
+  File,
 } from "lucide-react";
 
 /**
@@ -27,7 +28,7 @@ export const iconMap = {
   home: House,
   dashboard: LayoutGrid,
   settings: Settings,
-  components: Package,
+  components: Puzzle,
   showcase: Palette, // Icona più appropriata per showcase
   back: ArrowBigLeft,
   forward: ArrowBigRight,
@@ -35,6 +36,7 @@ export const iconMap = {
   upload: Upload,
   download: Download,
   timer: Timer,
+  file: File,
 } as const;
 
 export type IconName = keyof typeof iconMap;

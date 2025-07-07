@@ -45,11 +45,11 @@ edg-frontend-template/
 |   ├── core/                                   # Componenti e utility condivisi
 |   |   ├── components/                         # Componenti riutilizzabili
 |   │   │   ├── actions                         # Componenti per le azioni principali
-|   │   │   │   ├── index.ts                    # 🟡 barrel file dei componenti layout
-|   │   │   │   ├── ActionMenu.tsx              # 🟡 Menu a tendina delle actions
-|   │   │   │   ├── CreateAction.tsx            # 🟡 Creare un nuovo elemento dell'identità
-|   │   │   │   ├── DeleteAction.tsx            # 🟡 Eliminare l'elemento selezionato
-|   │   │   │   └── EditAction.tsx              # 🟡 Modificare l'elemento selezionato
+|   │   │   │   ├── index.ts                    # 🟢 barrel file dei componenti layout
+|   │   │   │   ├── ActionMenu.tsx              # 🟢 Menu a tendina delle actions
+|   │   │   │   ├── CreateAction.tsx            # 🟢 Creare un nuovo elemento dell'identità
+|   │   │   │   ├── DeleteAction.tsx            # 🟢 Eliminare l'elemento selezionato
+|   │   │   │   └── EditAction.tsx              # 🟢 Modificare l'elemento selezionato
 |   │   │   ├── atomic                          # Componenti atomici per la gestione del tema
 |   │   │   │   ├── index.ts                    # 🟢 barrel file dei componenti atomici
 |   │   │   │   ├── ThemesSurface.tsx           # 🟢 Gestisce sfondo + testo + bordi per superfici
@@ -84,13 +84,19 @@ edg-frontend-template/
 |   │   │   │   └── ProfileMenu.tsx             # 🟡 Menu utente con dropdown
 |   │   │   └── ui/                             # Componenti base dell'interfaccia utente
 |   │   │       ├── index.ts                    # 🟢 Barrel file dei componenti ui
-|   |   |       ├── Badge.tsx                   # 🟡 Componente badge con varianti
+|   |   |       ├── Badge.tsx                   # 🟢 Componente badge con varianti
 |   │   │       ├── Button.tsx                  # 🟢 Componente button con varianti
-|   │   │       ├── Input.tsx                   # 🟡 Componente input con varianti
+|   │   │       ├── Checkbox.tsx                # 🟢 Componente checkbox
+|   │   │       ├── FormField.tsx               # 🟢 Wrapper per eliminare codice ripetitivo
+|   │   │       ├── Input.tsx                   # 🟢 Componente input con varianti
+|   │   │       ├── Label.tsx                   # 🟢 Componente label per input complessi
 |   │   │       ├── Modal.tsx                   # 🟡 Componente modale base
-|   │   │       ├── SubmitButton.tsx            # 🟡 Componente button per submit
-|   │   │       ├── Table.tsx                   # 🟡 Componente per tabella semplice
-|   │   │       ├── TableLink.tsx               # 🟡 Componente per elementi cliccabile delle righe tabella
+|   │   │       ├── RadioGroup.tsx              # 🟢 Componente radio group
+|   │   │       ├── Select.tsx                  # 🟢 Componente select
+|   │   │       ├── Switch.tsx                  # 🟢 Componente button per submit
+|   │   │       ├── Table.tsx                   # 🟢 Componente per tabella semplice
+|   │   │       ├── TableLink.tsx               # 🟢 Componente per elementi cliccabile delle righe tabella
+|   │   │       ├── TextArea.tsx                # 🟢 Componente textarea per form
 |   │   │       └── Tooltip.tsx                 # 🟡 Componente per tooltip, richiede headless
 |   │   ├── hooks/                              # Hook personalizzati condivisi
 |   │   │   ├── index.ts                        # 🟢 Barrel file degli Hooks
@@ -106,6 +112,13 @@ edg-frontend-template/
 |   │   │   └── typography.css                  # 🟢 Classi per stili tipografici
 |   │   └── utils/                              # Utility condivise
 |   │   │   └── index.ts                        # 🟢 Utility unificate come iconMap oppure combinare classi CSS condizionalmente
+│   │   │
+│   ├── data/                                   # Contenuti informativi, documentazione, esempi
+│   │   ├── index.ts                            # 🟡 Barrel file
+│   │   ├── components.data.ts                  # 🟡 Dati per Component Explorer
+│   │   ├── examples.data.ts                    # 🟡 Future: Esempi di codice
+│   |   └── guidelines.data.ts.ts               # 🟡 Future: Design guidelines
+│   │   │
 │   ├── features/
 │   │   ├── auth/                               # Tutto ancora da deinire
 │   │   |   ├── index.ts                        # 🟡 Barrel file exports
@@ -126,8 +139,8 @@ edg-frontend-template/
 │   |       |   ├── index.ts                    # 🟡 Barrel file
 |   |       |   ├── ShowTheme.tsx               # 🟢 Showcase del theme system
 │   |       |   ├── ShowButtons.tsx             # 🟢 Showcase del Button component
-|   |       |   ├── ShowForms.tsx               # 🟡 Showcase per Input, label e form validation
-│   |       |   ├── ShowDataDisplay.tsx         # 🟡 Showcase per Table, TableLinl e Badge
+|   |       |   ├── ShowForms.tsx               # 🟢 Showcase per Input, label e form validation
+│   |       |   ├── ShowDataDisplay.tsx         # 🟢 Showcase per Table, TableLink e Badge
 │   |       |   ├── ShowFeedback.tsx            # 🟡 Showcase Modal, Tooltip e notification/alert
 |   |       |   └── ShowActions.tsx             # 🟡 Showcase per azioni e crud
 |   |       |
@@ -151,9 +164,8 @@ edg-frontend-template/
 ├── tsconfig.app.json                           # 🟢 Configurazione TypeScript specifico
 ├── tsconfig.json                               # 🟢 Configurazione TypeScript principale
 ├── vite.config.ts                              # 🟢 Configurazione Vite
-├── Development-progress.md                     # 🟢 Documenta lo stato di sviluppo del progetto
 ├── Edg-Frontend-Template.md                    # 🟢 Struttura e funzioni del progetto
-└── README.md                                   # 🟡
+└── README.md                                   # 🟢
 
 
 ## Metodologia di sviluppo
@@ -1282,6 +1294,706 @@ Optimistic updates: UI aggiornata immediatamente
 Batched actions: Multiple state changes in single dispatch
 
 
-Stato Attuale: Header system completo con dual menu, componenti layout avanzati e UX ottimizzata. Sistema scalabile per future feature.
+# Form Components Implementation Update
+
+**Data**: Primo Luglio 2025  
+**Versione**: Post layout-system implementation  
+**Obiettivo**: Documentazione aggiornamenti componenti form
+
+---
+
+## Componenti Form Implementati
+
+### Input Component con Floating Label ✅
+**Location**: `src/core/components/ui/Input.tsx`
+
+**Features implementate:**
+- **Floating label system** - Label che si sposta dinamicamente in alto
+- **Underline semantico** - 4 stati distinti usando variabili CSS underline
+- **Required support** - Asterisco rosso per campi obbligatori
+- **Validation integration** - Error states con colori tematici
+- **Autofill override** - CSS custom per eliminare sfondo browser autofill
+- **Forward ref** - Compatibilità con form libraries
+- **TypeScript completo** - Props tipizzate e controlled/uncontrolled support
+
+**Stati underline:**
+- `bg-underline-default` - Campo vuoto (grigio chiaro)
+- `bg-underline-primary` - Campo con valore valido (viola sottile)
+- `bg-underline-focus` - Campo in focus (grigio scuro spesso)
+- `bg-underline-error` - Campo con errore (rosso spesso)
+
+### Label Component Standalone ✅
+**Location**: `src/core/components/ui/Label.tsx`
+
+**Features implementate:**
+- **Varianti semantiche** - default, required, disabled, error, info
+- **Dimensioni** - xs, sm, md, lg
+- **Pesi font** - normal, medium, semibold, bold
+- **Indicatori automatici** - Asterisco rosso (required), badge "(opzionale)"
+- **Accessibility** - ARIA labels e cursor management
+
+### Button Component Enhanced ✅
+**Location**: `src/core/components/ui/Button.tsx`
+
+**Enhancement applicato:**
+- **loadingText prop** - Testo personalizzato durante loading
+- **Logica migliorata** - `{isLoading && loadingText ? loadingText : children}`
+
+**Utilizzo form-friendly:**
+```typescript
+<Button 
+  type="submit" 
+  variant="primary" 
+  isLoading={isSubmitting}
+  loadingText="Invio in corso..."
+>
+  Invia Form
+</Button>
+```
+
+### ShowForms Component Completo ✅
+**Location**: `src/features/shared/components/ShowForms.tsx`
+
+**Sezioni implementate:**
+1. **Input Components** - Stati base e speciali con validation
+2. **Form Demo** - Form funzionale con Button loading
+3. **Label Components** - Showcase varianti, dimensioni, pesi
+4. **Button Properties Info** - Box informativo con tutte le props disponibili
+5. **Debug Panel** - Visualizzazione stato form in tempo reale
+
+---
+
+## CSS System Updates
+
+### Variabili Underline Aggiunte ✅
+
+**In `globals.css`:**
+```css
+/* Light mode */
+--underline-default: #e4e6e8;
+--underline-primary: #6e56cf;
+--underline-focus: #a2a4a8;
+--underline-error: #ef4444;
+
+/* Dark mode */
+--underline-default: #4b5563;
+--underline-primary: #6e56cf;
+--underline-focus: #c2c4c8;
+--underline-error: #ef4444;
+```
+
+### Autofill Override CSS ✅
+
+**In `globals.css`:**
+```css
+/* Disable autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: inset 0 0 0px 1000px var(--bg-primary) !important;
+  box-shadow: inset 0 0 0px 1000px var(--bg-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+}
+```
+
+### Mapping CSS Variables ✅
+
+**In `index.css` aggiunte:**
+```css
+--color-underline-default: var(--underline-default);
+--color-underline-primary: var(--underline-primary);
+--color-underline-focus: var(--underline-focus);
+--color-underline-error: var(--underline-error);
+```
+
+---
+
+## Barrel Files Updates
+
+### ui/index.ts ✅
+```typescript
+// Existing exports
+export { default as Button } from "./Button";
+export type { ButtonVariant, ButtonSize } from "./Button";
+
+// New form components exports
+export { Input } from "./Input";
+export { Label } from "./Label";
+```
+
+### shared/components/index.ts ✅
+```typescript
+export { default as ShowButtons } from "./ShowButtons";
+export { default as ShowTheme } from "./ShowTheme";
+export { default as ShowForms } from "./ShowForms"; // ✨ Added
+```
+
+---
+
+## Stato Form System
+
+### ✅ Componenti Completati
+- **Input** - Floating label + underline states + validation
+- **Label** - Standalone con varianti complete  
+- **Button** - Enhanced con loadingText
+- **ShowForms** - Showcase completo e funzionale
+
+### 🟡 Prossimi Sviluppi Suggeriti
+- **TextArea** - Area di testo con auto-resize
+- **Select** - Dropdown con Radix UI
+- **Checkbox/Radio** - Stati e gruppi
+- **FormField** - Wrapper che combina componenti
+- **Validation hooks** - Sistema di validazione custom
+
+### 📊 Statistiche Implementazione
+- **4 componenti** form completati
+- **13 variabili CSS** aggiunte per underline system
+- **1 fix autofill** per UX ottimale
+- **Compatibilità** completa light/dark mode
+- **TypeScript** completo su tutti i componenti
+
+---
+
+## Design Decisions
+
+### Floating Label vs Traditional
+**Scelta**: Floating label per modernità e space efficiency  
+**Vantaggi**: Sempre visibile, animazioni smooth, UX intuitiva  
+**Implementazione**: CSS transitions + React state management
+
+### Underline vs Border
+**Scelta**: Underline per design minimale  
+**Vantaggi**: Meno invasivo, focus chiaro, stati semantici  
+**Implementazione**: 4 variabili CSS dedicate per ogni stato
+
+### Button Enhancement vs SubmitButton
+**Scelta**: Enhancement del Button esistente  
+**Vantaggi**: Meno componenti da mantenere, maggiore flessibilità  
+**Implementazione**: Prop `loadingText` opzionale
+
+### Validation Strategy
+**Scelta**: Custom validation semplice  
+**Vantaggi**: Controllo totale, zero dipendenze, lightweight  
+**Implementazione**: onBlur validation + error clearing
+
+---
+
+## Breaking Changes
+**Nessuno** - Tutti i cambiamenti sono backward compatible
+
+## Migration Notes
+**Non necessarie** - I nuovi componenti sono additivi al sistema esistente
+
+---
+
+# EDG Frontend Template - Complete Form System Documentation
+
+**Data Completamento**: Gennaio 2025  
+**Versione**: v2.0 - Sistema Form Completo  
+**Stack**: React + Vite + TypeScript + Tailwind + Radix UI
+
+---
+
+## 🎯 Sistema Form Completo Implementato
+
+### Panoramica Componenti
+Il template ora include un **sistema form professionale completo** con:
+- ✅ **8 componenti form** base + wrapper universale
+- ✅ **Consistenza design** con floating labels e underline semantici
+- ✅ **Accessibility completa** con Radix UI primitives
+- ✅ **Theming automatico** light/dark mode
+- ✅ **TypeScript rigoroso** senza `any`
+- ✅ **Validation pattern** integrati
+
+---
+
+## 🏗️ Componenti Form Implementati
+
+### 1. Input Component ✅
+**Location**: `src/core/components/ui/Input.tsx`
+
+**Features**:
+- **Floating label system** - Label dinamica che si sposta in alto
+- **Underline semantico** - 4 stati: default, primary, focus, error
+- **Required support** - Asterisco rosso automatico
+- **Autofill override** - CSS per eliminare colori browser
+- **Forward ref** - Compatibilità con form libraries
+
+**Props principali**:
+```typescript
+interface InputProps {
+  label: string;
+  error?: string;
+  helperText?: string;
+  required?: boolean;
+  variant?: 'default' | 'error';
+  fullWidth?: boolean;
+}
+```
+
+**Stati underline**:
+- `bg-underline-default` - Campo vuoto (grigio chiaro)
+- `bg-underline-primary` - Campo con valore (viola sottile) 
+- `bg-underline-focus` - Campo in focus (grigio scuro spesso)
+- `bg-underline-error` - Campo con errore (rosso spesso)
+
+### 2. TextArea Component ✅
+**Location**: `src/core/components/ui/TextArea.tsx`
+
+**Features**:
+- **Auto-resize intelligente** - Si espande con il contenuto
+- **Character counter** - Opzionale con warning states
+- **Min/Max rows** - Controllo altezza (default: 3-8)
+- **Floating label** - Consistente con Input
+
+**Props aggiuntive**:
+```typescript
+interface TextAreaProps extends InputProps {
+  autoResize?: boolean;        // Default: true
+  minRows?: number;           // Default: 3
+  maxRows?: number;           // Default: 8
+  showCharCount?: boolean;    // Default: false
+  maxLength?: number;
+}
+```
+
+### 3. Select Component ✅
+**Location**: `src/core/components/ui/Select.tsx`  
+**Dependency**: `@radix-ui/react-select`
+
+**Features**:
+- **Radix UI base** - Keyboard nav + accessibility completa
+- **Portal rendering** - Z-index automatico
+- **Opzioni disabilitabili** - Granular control
+- **Floating label fix** - Label flotta anche con placeholder
+
+**Interface**:
+```typescript
+interface SelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+interface SelectProps {
+  label: string;
+  options: SelectOption[];
+  placeholder?: string;
+  onValueChange?: (value: string) => void;
+}
+```
+
+### 4. Checkbox Component ✅
+**Location**: `src/core/components/ui/Checkbox.tsx`  
+**Dependency**: `@radix-ui/react-checkbox`
+
+**Features**:
+- **Stati avanzati** - Checked, unchecked, indeterminate, disabled
+- **Label + description** - Layout flessibile
+- **Dimensioni multiple** - sm, md, lg
+- **Error handling** - Label rimane nera, error sotto label
+
+**Fix applicati**:
+- ✅ Label non diventa rossa con errore
+- ✅ Error message posizionato sotto label (non sotto checkbox)
+
+### 5. Switch Component ✅
+**Location**: `src/core/components/ui/Switch.tsx`  
+**Dependency**: `@radix-ui/react-switch`
+
+**Features**:
+- **Design iOS-style** - Animazioni smooth native
+- **Touch-friendly** - Dimensioni ottimali
+- **Disabled state** - `opacity-50` + no hover effects
+
+### 6. RadioGroup Component ✅
+**Location**: `src/core/components/ui/RadioGroup.tsx`  
+**Dependency**: `@radix-ui/react-radio-group`
+
+**Features**:
+- **Orientazione** - Vertical (default) o horizontal
+- **Opzioni con descrizione** - Label + description per ogni radio
+- **Group management** - Mutually exclusive selection
+
+**Interface**:
+```typescript
+interface RadioOption {
+  value: string;
+  label: string;
+  description?: string;
+  disabled?: boolean;
+}
+
+interface RadioGroupProps {
+  label?: string;
+  options: RadioOption[];
+  orientation?: 'vertical' | 'horizontal';
+  size?: 'sm' | 'md' | 'lg';
+}
+```
+
+### 7. FormField Wrapper ✅
+**Location**: `src/core/components/ui/FormField.tsx`
+
+**Purpose**: Wrapper universale per eliminare codice ripetitivo e garantire layout consistente.
+
+**Features**:
+- **Universal wrapper** - Funziona con qualsiasi componente form
+- **Smart labeling** - `hideLabel` per componenti con label interna
+- **Accessibility automatica** - IDs e ARIA attributes
+- **Error hierarchy** - Error sovrascrive helper text
+
+**Pattern di utilizzo**:
+```typescript
+// Con componenti che hanno label interna (Input, Select, TextArea)
+<FormField error={errors.email} helperText="Formato email" hideLabel>
+  <Input label="Email" type="email" required />
+</FormField>
+
+// Con componenti che necessitano label esterna (RadioGroup, Checkbox groups)
+<FormField label="Genere" required description="Informazione demografica">
+  <RadioGroup options={genderOptions} />
+</FormField>
+```
+
+**TypeScript fix**:
+```typescript
+// Fix applicato per evitare 'any'
+} as React.HTMLAttributes<HTMLElement> & { [key: string]: unknown });
+```
+
+### 8. Label Component Standalone ✅
+**Location**: `src/core/components/ui/Label.tsx`
+
+**Features**:
+- **Varianti semantiche** - default, required, disabled, error, info
+- **Dimensioni** - xs, sm, md, lg
+- **Indicatori automatici** - Asterisco required, badge opzionale
+
+---
+
+## 🎨 CSS System Extensions
+
+### Nuove Variabili Underline
+**Aggiunte in `globals.css`**:
+```css
+/* Light mode */
+--underline-default: #e4e6e8;  /* Campo vuoto */
+--underline-primary: #6e56cf;  /* Campo valido */ 
+--underline-focus: #a2a4a8;    /* Campo in focus */
+--underline-error: #ef4444;    /* Campo con errore */
+
+/* Dark mode */
+--underline-default: #4b5563;
+--underline-primary: #6e56cf;
+--underline-focus: #c2c4c8;
+--underline-error: #ef4444;
+```
+
+**Mapping in `index.css`**:
+```css
+--color-underline-default: var(--underline-default);
+--color-underline-primary: var(--underline-primary);
+--color-underline-focus: var(--underline-focus);
+--color-underline-error: var(--underline-error);
+```
+
+### Autofill Override CSS
+**Aggiunto in `globals.css`**:
+```css
+/* Disable browser autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: inset 0 0 0px 1000px var(--bg-primary) !important;
+  box-shadow: inset 0 0 0px 1000px var(--bg-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+}
+```
+
+---
+
+## 📦 Dipendenze Radix UI Aggiunte
+
+```bash
+npm install @radix-ui/react-select @radix-ui/react-checkbox @radix-ui/react-switch @radix-ui/react-radio-group
+```
+
+**Motivazione uso Radix UI**:
+- ✅ **Select**: Keyboard navigation complessa, accessibility, portal rendering
+- ✅ **Checkbox**: Stati indeterminate, focus management avanzato
+- ✅ **Switch**: Animazioni smooth built-in, touch-friendly
+- ✅ **RadioGroup**: Group management, keyboard navigation
+
+**Componenti custom** (No Radix):
+- ✅ **Input/TextArea**: Maggiore controllo su floating labels e styling
+- ✅ **Label**: Troppo semplice per giustificare dipendenza
+- ✅ **FormField**: Wrapper specifico per le nostre esigenze
+
+---
+
+## 🗂️ File Structure Updates
+
+### Barrel File ui/index.ts ✅
+```typescript
+// Existing exports
+export { default as Button } from "./Button";
+export type { ButtonVariant, ButtonSize } from "./Button";
+
+// Form components exports
+export { Input } from "./Input";
+export { Label } from "./Label";
+export { TextArea } from "./TextArea";
+export { Select } from "./Select";
+export { Checkbox } from "./Checkbox";
+export { Switch } from "./Switch";
+export { RadioGroup } from "./RadioGroup";
+export { FormField } from "./FormField";
+```
+
+### ShowForms Component Completo ✅
+**Location**: `src/features/shared/components/ShowForms.tsx`
+
+**Sezioni implementate**:
+1. **Input Components** - Stati base e speciali + Form Demo funzionale
+2. **TextArea Components** - Auto-resize e character count
+3. **Select Components** - Base e speciali con placeholder fix
+4. **Checkbox & Switch Components** - Tutti gli stati e dimensioni
+5. **RadioGroup Components** - Vertical/horizontal + descrizioni
+6. **FormField Wrapper Examples** - Pattern hideLabel e label esterna
+7. **Label Components** - Showcase varianti standalone
+8. **Debug Panel** - Stati completi di tutti i componenti
+
+**Import pattern**:
+```typescript
+// Barrel file import (preferito)
+import { Label, Input, Button, TextArea, Select, Checkbox, Switch, RadioGroup, FormField } from "../../../core/components/ui";
+```
+
+---
+
+## 🎯 Design Patterns Stabiliti
+
+### Floating Label System
+**Logica uniforme** per Input, TextArea, Select:
+```typescript
+const isFloating = isFocused || hasValue || Boolean(placeholder);
+```
+
+**Fix importante per Select**: Label flotta anche con placeholder per evitare sovrapposizioni.
+
+### Underline States Pattern
+**4 stati semantici** per tutti i componenti con underline:
+1. **Empty** (`bg-underline-default`) - Campo vuoto
+2. **Valid** (`bg-underline-primary`) - Campo con valore
+3. **Focus** (`bg-underline-focus`) - Campo attivo
+4. **Error** (`bg-underline-error`) - Campo con errore
+
+### Error Handling Pattern
+**Hierarchy consistente**:
+1. **Error** sovrascrive sempre helper text
+2. **Label** rimane sempre del colore normale (non rossa)
+3. **Error positioning** sotto la label, non sotto il controllo
+
+### FormField Patterns
+**Due modalità principali**:
+1. **hideLabel** - Per Input, Select, TextArea (hanno floating label interna)
+2. **label esterna** - Per RadioGroup, Checkbox groups, Switch groups
+
+---
+
+## 🚀 Button Component Enhanced
+
+### loadingText Feature ✅
+**Enhancement applicato**:
+```typescript
+interface ButtonProps {
+  loadingText?: string; // ✨ Nuova prop
+}
+
+// Logica render:
+<span>{isLoading && loadingText ? loadingText : children}</span>
+```
+
+**Utilizzo nei form**:
+```typescript
+<Button 
+  type="submit" 
+  variant="primary" 
+  isLoading={isSubmitting}
+  loadingText="Invio in corso..."
+>
+  Invia Form
+</Button>
+```
+
+---
+
+## 🎨 TitledSurface Theming
+
+### Background Variants Supportate ✅
+Il componente `TitledSurface` supporta tutte le varianti del theme system:
+
+```typescript
+variant="primary"    → bg-bg-primary    (bianco/grigio scuro)
+variant="secondary"  → bg-bg-secondary  (grigio chiaro/grigio)  
+variant="modal"      → bg-bg-modal      (bianco sporco/grigio modale)
+variant="info"       → bg-bg-info       (azzurro chiaro/blu scuro)
+variant="contrast"   → bg-bg-contrast   (nero/bianco)
+variant="hover"      → bg-bg-hover      (grigio hover)
+variant="selected"   → bg-bg-selected   (azzurro/blu selezione)
+```
+
+**Utilizzo negli showcase**:
+```typescript
+<TitledSurface title="Form Demo" variant="modal" padding="md">
+<TitledSurface title="Debug Panel" variant="info" padding="lg">
+```
+
+---
+
+## 📊 Stato Completo Form System
+
+### ✅ Componenti Base (8/8)
+- **Input** - Floating label + validation + autofill fix
+- **TextArea** - Auto-resize + character count
+- **Select** - Radix + floating label fix
+- **Checkbox** - Stati avanzati + error positioning fix
+- **Switch** - iOS-style + disabled opacity
+- **RadioGroup** - Orientazioni + descriptions
+- **FormField** - Universal wrapper + TypeScript fix
+- **Label** - Standalone + semantic variants
+
+### ✅ Sistema CSS (4/4)
+- **Underline variables** - 4 stati semantici
+- **Autofill override** - Browser consistency
+- **Theme integration** - Light/dark automatic
+- **TitledSurface variants** - Background theming
+
+### ✅ Showcase Completo (7/7)
+- **Input showcase** - Stati base e speciali
+- **TextArea showcase** - Auto-resize e counter
+- **Select showcase** - Dropdown e placeholder
+- **Checkbox/Switch showcase** - Stati e dimensioni
+- **RadioGroup showcase** - Orientazioni e descriptions
+- **FormField showcase** - Pattern hideLabel e esterni
+- **Label showcase** - Varianti standalone
+
+### ✅ Dependencies & Architecture (4/4)
+- **Radix UI integration** - 4 componenti strategici
+- **Barrel file exports** - Import consistenti
+- **TypeScript rigoroso** - Zero `any` types
+- **Forward refs** - Form library compatibility
+
+---
+
+## 🔧 Fix Tecnici Applicati
+
+### Select Placeholder Fix
+**Problema**: Label si sovrapponeva al placeholder  
+**Soluzione**: `const isFloating = open || hasValue || Boolean(placeholder);`
+
+### Checkbox Error Positioning
+**Problema**: Error sotto checkbox, label rossa  
+**Soluzione**: Error dentro container label, label sempre primary
+
+### Switch Disabled Styling
+**Soluzione**: `opacity-50` + `cursor-not-allowed` + no hover effects
+
+### FormField TypeScript
+**Problema**: `any` type in cloneElement  
+**Soluzione**: `React.HTMLAttributes<HTMLElement> & { [key: string]: unknown }`
+
+### Autofill Browser Override
+**Problema**: Colori browser su autofill  
+**Soluzione**: CSS `box-shadow` trick con variabili tema
+
+---
+
+## 🎯 Metodologia Applicata
+
+### Sviluppo Iterativo
+- ✅ **Step-by-step** - Un componente alla volta
+- ✅ **Feedback bidirezionale** - Analisi e correzione continua
+- ✅ **Divide et impera** - Problemi scomposti e risolti
+- ✅ **Testing immediato** - Showcase per validazione visiva
+
+### Design Consistency
+- ✅ **Pattern uniformi** - Floating labels e underline per tutti
+- ✅ **CSS custom properties** - Theme system centralizzato
+- ✅ **TypeScript rigoroso** - Props tipizzate senza `any`
+- ✅ **Accessibility first** - ARIA e keyboard navigation
+
+### Code Quality
+- ✅ **Barrel exports** - Import puliti e centralizzati
+- ✅ **Forward refs** - Compatibilità con librerie esterne
+- ✅ **Error boundaries** - Gestione errori consistente
+- ✅ **Performance** - useMemo e ottimizazioni
+
+---
+
+## 🚀 Prossimi Sviluppi Potenziali
+
+### Componenti Aggiuntivi
+- **DatePicker** - Selezione date con calendario
+- **FileUpload** - Upload con drag & drop
+- **Slider/Range** - Input numerici con slider
+- **ColorPicker** - Selezione colori
+
+### Form Utilities
+- **useFormValidation** - Hook custom validation
+- **FormProvider** - Context per form complessi
+- **useFormPersistence** - Auto-save form data
+- **FormWizard** - Multi-step forms
+
+### Advanced Features
+- **Conditional fields** - Campi che appaiono/scompaiono
+- **Field arrays** - Liste dinamiche di campi
+- **Real-time validation** - Validation server-side
+- **Form analytics** - Tracking interazioni
+
+---
+
+## 📈 Risultato Finale
+
+### Sistema Form Professionale Completo
+- **8 componenti** base + wrapper universale
+- **100% TypeScript** tipizzato senza compromessi
+- **Accessibility completa** con Radix UI
+- **Theme system** integrato light/dark
+- **Performance ottimizzata** con best practices React
+- **Showcase completo** per testing e documentazione
+
+### Architettura Scalabile
+- **Modular design** - Ogni componente indipendente
+- **Consistent API** - Pattern uniformi tra componenti
+- **Easy maintenance** - CSS centralizzato, logic separata
+- **Future-proof** - Pronto per estensioni future
+
+### Developer Experience
+- **Import puliti** - Barrel file centralizzato
+- **Props intuitive** - API coerenti e prevedibili
+- **Error handling** - Feedback chiari e posizionati correttamente
+- **Documentation** - Showcase completo con esempi reali
+
+---
+
+
+## Ultimo componenti aggiunti ma non ancora documentati
+- Table.tsx
+- TableLink.tsx
+- InfoCard.tsx
+- ActionMenu.tsx
+- CreateAction.tsx
+- DeleteAction.tsx
+- EditActione.tsx
+
+### Modificato ShowCase.tsx per visualizzare esempi di Badge, Table e TableLink
+### Aggiunto ComponentExplorer per documentazione online sui componenti
+
+*Documentazione completata: 7 Luglio 2025*  
+
+*Sistema Form pronto per sviluppi futuri e utilizzo in produzione*
 
 **Memoria Tecnica**: Tutti i pattern e fix documentati per continuità sviluppo collaborativo. 
+**Repository**: `https://github.com/LarisPigasse/edg-frontend-template`

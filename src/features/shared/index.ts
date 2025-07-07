@@ -1,5 +1,6 @@
 // Barrel file per le pagine condivise
 export { default as Dashboard } from "./Dashboard";
+export { default as ComponentExplorer } from "./ComponentExplorer";
 export { default as NotFound } from "./NotFound";
 export { default as Showcase } from "./Showcase";
 

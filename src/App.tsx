@@ -6,6 +6,7 @@ import store from "./app/store";
 import { initializeFromStorage } from "./features/settings/uiSlice";
 import MainLayout from "./core/components/layout/MainLayout";
 import { Dashboard, Showcase, NotFound } from "./features/shared";
+import ComponentExplorer from "./features/shared/ComponentExplorer";
 import { UserMenu, MobileMenu } from "./core/components/navigation";
 import { ROUTES } from "./config";
 
@@ -32,6 +33,7 @@ const App: React.FC = () => {
               <Routes>
                 <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
                 <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+                <Route path={ROUTES.EXPLORER} element={<ComponentExplorer />} />
                 <Route path={ROUTES.SHOWCASE} element={<Showcase />} />
                 <Route path={ROUTES.SETTINGS} element={<NotFound />} />
                 <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />

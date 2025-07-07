@@ -1,8 +1,8 @@
 // src/features/shared/Showcase.tsx
 import React, { useState } from "react";
 import { ThemedSurface, ThemedText } from "../../core/components/atomic";
-import Button from "../../core/components/ui/Button";
-import { ShowButtons, ShowTheme } from "./components/";
+import { Button } from "../../core/components/ui";
+import { ShowButtons, ShowTheme, ShowForms, ShowDataDisplay } from "./components/";
 import { HeaderGroup } from "../../core/components/layout";
 
 type TabType = "theme" | "buttons" | "forms" | "data-display" | "feedback" | "actions";
@@ -16,23 +16,6 @@ interface Tab {
 }
 
 // Componenti placeholder per i tab non ancora implementati
-const ShowForms: React.FC = () => (
-  <div className="text-center py-16">
-    <ThemedText variant="primary" className="text-xl font-semibold mb-2">
-      Forms
-    </ThemedText>
-    <ThemedText variant="secondary">Componente in sviluppo</ThemedText>
-  </div>
-);
-
-const ShowDataDisplay: React.FC = () => (
-  <div className="text-center py-16">
-    <ThemedText variant="primary" className="text-xl font-semibold mb-2">
-      Data Display
-    </ThemedText>
-    <ThemedText variant="secondary">Componente in sviluppo</ThemedText>
-  </div>
-);
 
 const ShowFeedback: React.FC = () => (
   <div className="text-center py-16">
@@ -56,10 +39,10 @@ const Showcase: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>("theme");
 
   const tabs: Tab[] = [
-    { id: "theme", label: "Theme", component: ShowTheme, isActive: true, icon: "🎨" },
-    { id: "buttons", label: "Buttons", component: ShowButtons, isActive: true, icon: "🔘" },
-    { id: "forms", label: "Forms", component: ShowForms, isActive: false, icon: "📝" },
-    { id: "data-display", label: "Data Display", component: ShowDataDisplay, isActive: false, icon: "📊" },
+    { id: "theme", label: "Theme", component: ShowTheme, isActive: true, icon: "" },
+    { id: "buttons", label: "Buttons", component: ShowButtons, isActive: true, icon: "" },
+    { id: "forms", label: "Forms", component: ShowForms, isActive: false, icon: "" },
+    { id: "data-display", label: "Data Display", component: ShowDataDisplay, isActive: false, icon: "" },
     { id: "feedback", label: "Feedback", component: ShowFeedback, isActive: false, icon: "💬" },
     { id: "actions", label: "Actions", component: ShowActions, isActive: false, icon: "⚡" },
   ];

@@ -36,6 +36,7 @@ const ShowButtons: React.FC = () => {
   const ForwardIcon = iconMap.forward; // ArrowBigRight
   const DownloadIcon = iconMap.download; // Download
   const UploadIcon = iconMap.upload; // Upload
+  const FileIcon = iconMap.file; // Upload
 
   return (
     <div className="space-y-8">
@@ -124,10 +125,10 @@ const ShowButtons: React.FC = () => {
               With Icons
             </ThemedText>
             <div className="space-y-2">
-              <Button variant="primary" leftIcon={<span>➕</span>}>
+              <Button variant="primary" leftIcon={<span>+</span>}>
                 Add New
               </Button>
-              <Button variant="outline" rightIcon={<span>📁</span>}>
+              <Button variant="outline" className="ms-2" rightIcon={<FileIcon />}>
                 Open File
               </Button>
             </div>
@@ -216,8 +217,8 @@ const ShowButtons: React.FC = () => {
 
           <div className="bg-bg-contrast text-text-contrast p-4 rounded text-sm font-mono overflow-x-auto">
             <div className="text-green-400 mb-2">// IconMap invece che import diretto</div>
-            <div>{`<Button variant="outline" size="lg" fullWidth>`}</div>
-            <div className="ml-4">{`Indietro`}</div>
+            <div>{`<Button variant="outline" className="ms-2" rightIcon={<FileIcon />}>`}</div>
+            <div className="ml-4">{` Open File`}</div>
             <div>{`</Button>`}</div>
           </div>
         </div>

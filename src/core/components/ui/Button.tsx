@@ -8,6 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   isLoading?: boolean;
+  loadingText?: string; // ✨ NUOVA PROP per testo durante loading
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   fullWidth?: boolean;
@@ -20,6 +21,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       isLoading = false,
+      loadingText, // ✨ Nuova prop
       leftIcon,
       rightIcon,
       fullWidth = false,
@@ -159,8 +161,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           </span>
         )}
 
-        {/* Content */}
-        <span>{children}</span>
+        {/* Content - ✨ LOGICA MIGLIORATA per loadingText */}
+        <span>{isLoading && loadingText ? loadingText : children}</span>
 
         {/* Right Icon */}
         {rightIcon && (

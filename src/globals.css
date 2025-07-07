@@ -17,16 +17,22 @@
   --text-secondary: #4b5563; /* Grigio medio-scuro */
   --text-placeholder: #9ca3af;
   --text-disabled: #d1d5db;
-  --text-label: #66776f;
+  --text-label: #a8a29e; /* stone-400 in Tailwind */
   --text-contrast: #ffffff; /* Bianco per testi su sfondi scuri */
   --text-link: #6e56cf; /* Viola medio per link */
   --text-link-hover: #8e4ec6; /* Tomato medio */
+  --text-info: #0284c7; /* Sky-600 in Tailwind */
+  --text-error: #ef4444; /* red-500 in Tailwind */
 
-  /* Bordi */
+  /* Bordi e linee */
   --border-default: #e5e7eb; /* Grigio chiaro */
   --border-thin: #e0e2e4; /* Grigio molto chiaro */
   --border-strong: #d1d5db; /* Grigio */
   --border-contrast: #bcb7f7; /* viola chiaro */
+  --underline-default: #e4e6e8; /* Grigio chiaro */
+  --underline-primary: #6e56cf; /* Viola medio*/
+  --underline-focus: #a2a4a8; /* Grigio scuro */
+  --underline-error: #ef4444; /* red-500 in Tailwind */
 
   /* Ombre */
   --shadow-none: none;
@@ -36,6 +42,24 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
   --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  /* Component Categories */
+  --category-ui: #7dd3fc; /* Sky 300 - UI components */
+  --category-form: #86efac; /* Green 300 - Form components */
+  --category-navigation: #f0abfc; /* Fuchsia 300 - Navigation */
+  --category-feedback: #fdba74; /* Orange 300 - Modals, Toast */
+  --category-data: #fcd34d; /* Amber-300 - Tables, Lists */
+  --category-layout: #d4d4d8; /* Stone-300 - Layout components */
+
+  /* Modal variants - Light mode */
+  --modal-success-bg: #f0fdf4; /* Green 50 */
+  --modal-success-text: #166534; /* Green 800 */
+  --modal-warning-bg: #fffbeb; /* Amber 50 */
+  --modal-warning-text: #92400e; /* Amber 800 */
+  --modal-danger-bg: #fef2f2; /* Red 50 */
+  --modal-danger-text: #991b1b; /* Red 800 */
+  --modal-info-bg: #eff6ff; /* Blue 50 */
+  --modal-info-text: #1e40af; /* Blue 800 */
 }
 
 /* Definizioni per la modalità Dark (sovrascrivono quelle light) */
@@ -55,16 +79,22 @@
   --text-secondary: #cbd5e1; /* Grigio chiaro per testo secondario */
   --text-placeholder: #64748b; /* Grigio medio per placeholder */
   --text-disabled: #475569; /* Grigio scuro per testo disabilitato */
-  --text-label: #94a3b8; /* Grigio chiaro per label */
+  --text-label: #a8a29e; /* stone-400 in Tailwind */
   --text-contrast: #0f172a; /* Nero per testi su sfondi chiari */
   --text-link: #6e56cf; /* Viola medio per link */
   --text-link-hover: #be93e4; /* purple più chiaro per hover sui link */
+  --text-info: #38bdf8; /* Sky-400 in Tailwind */
+  --text-error: #ef4444; /* red-500 in Tailwind */
 
-  /* Bordi */
+  /* Bordi e linee */
   --border-default: #374151; /* Grigio medio-scuro */
   --border-thin: #4b5563; /* Grigio leggermente più chiaro */
   --border-strong: #6b7280; /* Grigio più visibile per bordi importanti */
   --border-contrast: #614cb5; /* viola */
+  --underline-default: #4b5563; /* Grigio chiaro */
+  --underline-primary: #6e56cf; /* Viola medio*/
+  --underline-focus: #c2c4c8; /* Grigio scuro */
+  --underline-error: #ef4444; /* red-500 in Tailwind */
 
   /* Ombre - In dark mode sono più sottili e spesso con toni più chiari */
   --shadow-none: none;
@@ -74,4 +104,30 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.2);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6), 0 10px 10px rgba(0, 0, 0, 0.3);
   --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  /* Dark mode - Component Categories */
+  --category-ui: #075985; /* Sky 800 */
+  --category-form: #166534; /* Green 800 */
+  --category-navigation: #a21caf; /* Fuchsia 800 */
+  --category-feedback: #9a3412; /* Orange 800 */
+  --category-data: #92400e; /* Amber 800 */
+  --category-layout: #42424a; /* Stone 800 */
+
+  --modal-success-bg: #166534; /* Green 00 */
+  --modal-success-text: #cbd5e1; /* Grigio chiaro */
+  --modal-warning-bg: #92400e; /* Amber 800 */
+  --modal-warning-text: #fcd34d; /* Amber 300 */
+  --modal-danger-bg: #7f1d1d; /* Red 900 */
+  --modal-danger-text: #f8fafc; /* quasi bianco */
+  --modal-info-bg: #1e3a8a; /* Blue 900 */
+  --modal-info-text: #93c5fd; /* Blue 300 */
+}
+
+/* Disable autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: inset 0 0 0px 1000px var(--bg-primary) !important;
+  box-shadow: inset 0 0 0px 1000px var(--bg-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
 }

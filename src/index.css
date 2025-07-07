@@ -24,12 +24,18 @@
   --color-text-contrast: var(--text-contrast);
   --color-text-link: var(--text-link);
   --color-text-link-hover: var(--text-link-hover);
+  --color-text-info: var(--text-info);
+  --color-text-error: var(--text-error);
 
-  /* Bordi - mapping diretto da globals.css */
+  /* Bordi e linee  - mapping diretto da globals.css */
   --color-border-default: var(--border-default);
   --color-border-thin: var(--border-thin);
   --color-border-strong: var(--border-strong);
   --color-border-contrast: var(--border-contrast);
+  --color-underline-default: var(--underline-default);
+  --color-underline-primary: var(--underline-primary);
+  --color-underline-focus: var(--underline-focus);
+  --color-underline-error: var(--underline-error);
 
   /* Ombre - mapping diretto da globals.css */
   --shadow-themed-none: var(--shadow-none);
@@ -39,4 +45,22 @@
   --shadow-themed-lg: var(--shadow-lg);
   --shadow-themed-xl: var(--shadow-xl);
   --shadow-themed-inner: var(--shadow-inner);
+
+  /* Component Categories */
+  --color-category-ui: var(--category-ui);
+  --color-category-form: var(--category-form);
+  --color-category-navigation: var(--category-navigation);
+  --color-category-feedback: var(--category-feedback);
+  --color-category-data: var(--category-data);
+  --color-category-layout: var(--category-layout);
+
+  /* Modal variants - mapping */
+  --color-modal-success-bg: var(--modal-success-bg);
+  --color-modal-success-text: var(--modal-success-text);
+  --color-modal-warning-bg: var(--modal-warning-bg);
+  --color-modal-warning-text: var(--modal-warning-text);
+  --color-modal-danger-bg: var(--modal-danger-bg);
+  --color-modal-danger-text: var(--modal-danger-text);
+  --color-modal-info-bg: var(--modal-info-bg);
+  --color-modal-info-text: var(--modal-info-text);
 }
