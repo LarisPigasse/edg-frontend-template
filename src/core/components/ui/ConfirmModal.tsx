@@ -2,7 +2,7 @@
 import React from "react";
 import { AlertTriangle, Info, CheckCircle, XCircle } from "lucide-react";
 import { ThemedSurface, ThemedText } from "../atomic";
-import { Button } from "./Button";
+import Button from "./Button";
 import Modal from "./Modal";
 import { cn } from "../../utils/";
 

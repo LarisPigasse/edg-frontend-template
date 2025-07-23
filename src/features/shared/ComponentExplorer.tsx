@@ -2,9 +2,9 @@
 import React, { useState, useMemo } from "react";
 import { InfoCard } from "../../core/components/ui";
 import { HeaderGroup } from "../../core/components/layout";
-import { COMPONENTS_LIST, searchComponents, getComponentsByCategory } from "../../data/components.data";
+import { COMPONENTS_LIST, searchComponents, getComponentsByCategory } from "../../data/";
 import type { ComponentCategory } from "../../core/components/ui/InfoCard";
-import type { ComponentData } from "../../data/components.data";
+import type { ComponentData } from "../../data/";
 import ComponentModal from "./ComponentModal";
 
 interface ComponentExplorerProps {

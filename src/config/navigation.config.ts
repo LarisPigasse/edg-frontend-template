@@ -26,7 +26,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   },
   {
     id: "showcase",
-    label: "Esempi",
+    label: "Showcase",
     href: ROUTES.SHOWCASE,
     icon: "showcase", // Usa Palette
     description: "Showcase dei componenti UI disponibili",

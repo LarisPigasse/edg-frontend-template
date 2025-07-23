@@ -1,7 +1,7 @@
 // src/core/components/atomic/ThemedText.tsx
 import { ReactNode, HTMLAttributes } from "react";
 
-export type ThemedTextVariant = "primary" | "secondary" | "muted";
+export type ThemedTextVariant = "primary" | "secondary" | "muted" | "contrast";
 
 interface ThemedTextProps extends HTMLAttributes<HTMLElement> {
   variant?: ThemedTextVariant;
@@ -23,6 +23,7 @@ const ThemedText: React.FC<ThemedTextProps> = ({
     primary: "text-text-primary",
     secondary: "text-text-secondary",
     muted: "text-text-muted",
+    contrast: "text-text-contrast",
   };
 
   // Se block è true, forziamo tag block-level

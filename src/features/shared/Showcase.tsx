@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import { ThemedSurface, ThemedText } from "../../core/components/atomic";
 import { Button } from "../../core/components/ui";
-import { ShowButtons, ShowTheme, ShowForms, ShowDataDisplay } from "./components/";
+import { ShowButtons, ShowTheme, ShowForms, ShowDataDisplay, ShowFeedback, ShowLayout } from "./components/";
 import { HeaderGroup } from "../../core/components/layout";
 
-type TabType = "theme" | "buttons" | "forms" | "data-display" | "feedback" | "actions";
+type TabType = "theme" | "buttons" | "forms" | "data-display" | "feedback" | "layout" | "actions";
 
 interface Tab {
   id: TabType;
@@ -16,15 +16,6 @@ interface Tab {
 }
 
 // Componenti placeholder per i tab non ancora implementati
-
-const ShowFeedback: React.FC = () => (
-  <div className="text-center py-16">
-    <ThemedText variant="primary" className="text-xl font-semibold mb-2">
-      Feedback
-    </ThemedText>
-    <ThemedText variant="secondary">Componente in sviluppo</ThemedText>
-  </div>
-);
 
 const ShowActions: React.FC = () => (
   <div className="text-center py-16">
@@ -43,7 +34,8 @@ const Showcase: React.FC = () => {
     { id: "buttons", label: "Buttons", component: ShowButtons, isActive: true, icon: "" },
     { id: "forms", label: "Forms", component: ShowForms, isActive: false, icon: "" },
     { id: "data-display", label: "Data Display", component: ShowDataDisplay, isActive: false, icon: "" },
-    { id: "feedback", label: "Feedback", component: ShowFeedback, isActive: false, icon: "💬" },
+    { id: "feedback", label: "Feedback", component: ShowFeedback, isActive: false, icon: "" },
+    { id: "layout", label: "Layout", component: ShowLayout, isActive: false, icon: "" },
     { id: "actions", label: "Actions", component: ShowActions, isActive: false, icon: "⚡" },
   ];
 

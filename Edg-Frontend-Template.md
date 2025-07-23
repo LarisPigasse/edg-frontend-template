@@ -84,15 +84,19 @@ edg-frontend-template/
 |   │   │   │   └── ProfileMenu.tsx             # 🟡 Menu utente con dropdown
 |   │   │   └── ui/                             # Componenti base dell'interfaccia utente
 |   │   │       ├── index.ts                    # 🟢 Barrel file dei componenti ui
+|   |   |       ├── Alert.tsx                   # 🟢 Componente alert con varianti
 |   |   |       ├── Badge.tsx                   # 🟢 Componente badge con varianti
 |   │   │       ├── Button.tsx                  # 🟢 Componente button con varianti
+|   │   │       ├── Card.tsx                    # 🟢 Componente card semplice con varianti
 |   │   │       ├── Checkbox.tsx                # 🟢 Componente checkbox
+|   │   │       ├── ConfirmModal.tsx            # 🟢 Modal di conferma
 |   │   │       ├── FormField.tsx               # 🟢 Wrapper per eliminare codice ripetitivo
 |   │   │       ├── Input.tsx                   # 🟢 Componente input con varianti
 |   │   │       ├── Label.tsx                   # 🟢 Componente label per input complessi
-|   │   │       ├── Modal.tsx                   # 🟡 Componente modale base
+|   │   │       ├── Modal.tsx                   # 🟢 Componente modale base
 |   │   │       ├── RadioGroup.tsx              # 🟢 Componente radio group
 |   │   │       ├── Select.tsx                  # 🟢 Componente select
+|   │   │       ├── Spinner.tsx                 # 🟢 Componente dots spinner
 |   │   │       ├── Switch.tsx                  # 🟢 Componente button per submit
 |   │   │       ├── Table.tsx                   # 🟢 Componente per tabella semplice
 |   │   │       ├── TableLink.tsx               # 🟢 Componente per elementi cliccabile delle righe tabella
@@ -114,8 +118,8 @@ edg-frontend-template/
 |   │   │   └── index.ts                        # 🟢 Utility unificate come iconMap oppure combinare classi CSS condizionalmente
 │   │   │
 │   ├── data/                                   # Contenuti informativi, documentazione, esempi
-│   │   ├── index.ts                            # 🟡 Barrel file
-│   │   ├── components.data.ts                  # 🟡 Dati per Component Explorer
+│   │   ├── index.ts                            # 🟢 Barrel file
+│   │   ├── components.data.ts                  # 🟢 Dati per Component Explorer
 │   │   ├── examples.data.ts                    # 🟡 Future: Esempi di codice
 │   |   └── guidelines.data.ts.ts               # 🟡 Future: Design guidelines
 │   │   │
@@ -136,7 +140,7 @@ edg-frontend-template/
 │   │   │
 │   │   └── shared/
 |   |       ├── components/                     # Componenti per le pagine shared
-│   |       |   ├── index.ts                    # 🟡 Barrel file
+│   |       |   ├── index.ts                    # 🟢 Barrel file
 |   |       |   ├── ShowTheme.tsx               # 🟢 Showcase del theme system
 │   |       |   ├── ShowButtons.tsx             # 🟢 Showcase del Button component
 |   |       |   ├── ShowForms.tsx               # 🟢 Showcase per Input, label e form validation
@@ -145,6 +149,8 @@ edg-frontend-template/
 |   |       |   └── ShowActions.tsx             # 🟡 Showcase per azioni e crud
 |   |       |
 │   │       ├── index.ts                        # 🟢 Barrel file
+│   │       ├── ComponentExplorer.tsx           # 🟢 Guida all'uso dei componenti
+│   │       ├── ComponentModal.tsx              # 🟢 Visualizzazione dei componenti scelti in ComponentExplorer
 │   │       ├── Dashboard.tsx                   # 🟢 Pagina principale
 │   │       ├── NotFound.tsx                    # 🟢 Pagina 404
 |   |       └── Showcase.tsx                    # 🟢 Pagina di esempio per i componenti

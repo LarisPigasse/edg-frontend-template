@@ -110,9 +110,6 @@ const ComponentModal: React.FC<ComponentModalProps> = ({ isOpen, component, onCl
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {/* Overview */}
             <div>
-              <ThemedText variant="primary" className="text-lg font-semibold mb-3">
-                Panoramica
-              </ThemedText>
               <ThemedText variant="secondary" className="leading-relaxed">
                 {component.description}
               </ThemedText>

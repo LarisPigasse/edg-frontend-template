@@ -1297,6 +1297,823 @@ const actions = [
     ],
     notes: "Le icone edit, delete, view sono mappate automaticamente. Usa 'divider: true' per separatori.",
   },
+
+  // Tooltip
+  tooltip: {
+    id: "tooltip",
+    title: "Tooltip",
+    description: "Tooltip con Radix UI per informazioni contestuali con positioning automatico e accessibility completa",
+    category: "ui",
+    importPath: 'import { Tooltip } from "../core/components/ui";',
+    props: [
+      {
+        name: "content",
+        type: "string",
+        required: true,
+        description: "Testo del tooltip da visualizzare",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        required: true,
+        description: "Elemento che triggera il tooltip al hover",
+      },
+      {
+        name: "side",
+        type: '"top" | "right" | "bottom" | "left"',
+        required: false,
+        defaultValue: '"top"',
+        description: "Posizione del tooltip rispetto al trigger",
+      },
+      {
+        name: "align",
+        type: '"start" | "center" | "end"',
+        required: false,
+        defaultValue: '"center"',
+        description: "Allineamento del tooltip",
+      },
+      {
+        name: "delayDuration",
+        type: "number",
+        required: false,
+        defaultValue: "300",
+        description: "Delay di apertura in millisecondi",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione del tooltip",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Disabilita il tooltip",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Tooltip Base",
+        description: "Tooltip semplice con testo informativo",
+        code: `<Tooltip content="Questa azione eliminerà definitivamente l'elemento">
+  <Button variant="danger">Elimina</Button>
+</Tooltip>`,
+      },
+      {
+        title: "Posizioni Diverse",
+        description: "Tooltip con posizionamento personalizzato",
+        code: `<Tooltip content="Tooltip a destra" side="right">
+  <Button>Hover Right</Button>
+</Tooltip>
+
+<Tooltip content="Tooltip in basso" side="bottom">
+  <Button>Hover Bottom</Button>
+</Tooltip>`,
+      },
+      {
+        title: "Dimensioni e Delay",
+        description: "Tooltip con dimensioni e timing personalizzati",
+        code: `<Tooltip 
+  content="Tooltip piccolo con delay veloce" 
+  size="sm" 
+  delayDuration={100}
+>
+  <Button size="sm">Quick Info</Button>
+</Tooltip>
+
+<Tooltip 
+  content="Tooltip grande con molto testo esplicativo per dare informazioni dettagliate all'utente" 
+  size="lg"
+>
+  <Button size="lg">Detailed Info</Button>
+</Tooltip>`,
+      },
+      {
+        title: "Con Icone",
+        description: "Tooltip su elementi icon-only",
+        code: `import { HelpCircle, Settings } from "lucide-react";
+
+<Tooltip content="Aiuto e documentazione">
+  <button className="p-2 rounded hover:bg-bg-hover">
+    <HelpCircle className="w-5 h-5 text-text-secondary" />
+  </button>
+</Tooltip>
+
+<Tooltip content="Impostazioni utente" side="bottom">
+  <button className="p-2 rounded hover:bg-bg-hover">
+    <Settings className="w-5 h-5 text-text-secondary" />
+  </button>
+</Tooltip>`,
+      },
+    ],
+    notes: "Usa positioning automatico con collision detection. Ottimo per icone e azioni che necessitano spiegazioni brevi.",
+  },
+
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  modal: {
+    id: "modal",
+    title: "Modal",
+    description: "Dialog modale generico con Radix UI, dimensioni configurabili e integrazione completa del theme system",
+    category: "feedback",
+    importPath: 'import { Modal } from "../core/components/ui";',
+    props: [
+      {
+        name: "isOpen",
+        type: "boolean",
+        required: true,
+        description: "Stato aperto/chiuso del modal",
+      },
+      {
+        name: "onClose",
+        type: "() => void",
+        required: true,
+        description: "Callback per chiusura modal",
+      },
+      {
+        name: "title",
+        type: "string",
+        required: false,
+        description: "Titolo del modal",
+      },
+      {
+        name: "description",
+        type: "string",
+        required: false,
+        description: "Descrizione sotto il titolo",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        required: true,
+        description: "Contenuto principale del modal",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg" | "xl" | "full"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione del modal",
+      },
+      {
+        name: "hideCloseButton",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Nasconde il pulsante X di chiusura",
+      },
+      {
+        name: "preventClose",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Previene chiusura con ESC o click backdrop",
+      },
+      {
+        name: "footer",
+        type: "ReactNode",
+        required: false,
+        description: "Footer personalizzato con pulsanti",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive per il contenuto",
+      },
+      {
+        name: "overlayClassName",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive per l'overlay",
+      },
+    ],
+    examples: [
+      {
+        title: "Modal Base",
+        description: "Modal semplice con header, contenuto e footer",
+        code: `<Modal
+  isOpen={isOpen}
+  onClose={handleClose}
+  title="Conferma Azione"
+  description="Descrizione dell'azione da confermare"
+  footer={
+    <div className="flex justify-end space-x-3">
+      <Button variant="ghost" onClick={handleClose}>Annulla</Button>
+      <Button variant="primary" onClick={handleConfirm}>Conferma</Button>
+    </div>
+  }
+>
+  <div className="p-6">
+    <p>Contenuto del modal...</p>
+  </div>
+</Modal>`,
+      },
+      {
+        title: "Modal con Loading",
+        description: "Modal che previene chiusura durante operazioni async",
+        code: `<Modal
+  isOpen={isOpen}
+  onClose={handleClose}
+  title="Salva Documento"
+  preventClose={isLoading}
+  footer={
+    <div className="flex justify-end space-x-3">
+      <Button variant="ghost" disabled={isLoading}>Annulla</Button>
+      <Button 
+        variant="primary" 
+        isLoading={isLoading}
+        loadingText="Salvando..."
+        onClick={handleSave}
+      >
+        Salva
+      </Button>
+    </div>
+  }
+>
+  <div className="p-6">
+    <p>Contenuto del modal...</p>
+  </div>
+</Modal>`,
+      },
+      {
+        title: "Modal Dimensioni",
+        description: "Modal con diverse dimensioni",
+        code: `<Modal size="sm" title="Small Modal" isOpen={isOpen} onClose={handleClose}>
+  <div className="p-6">Contenuto compatto</div>
+</Modal>
+
+<Modal size="xl" title="Large Modal" isOpen={isOpen} onClose={handleClose}>
+  <div className="p-6">Contenuto esteso</div>
+</Modal>`,
+      },
+    ],
+    notes:
+      "Usa Radix UI per accessibility completa. ThemedSurface garantisce coerenza visiva. preventClose per operazioni critiche.",
+  },
+
+  confirmmodal: {
+    id: "confirmmodal",
+    title: "ConfirmModal",
+    description: "Modal specializzato per conferme con varianti colore, icone semantiche e stati di caricamento",
+    category: "feedback",
+    importPath: 'import { ConfirmModal } from "../core/components/ui";',
+    props: [
+      {
+        name: "isOpen",
+        type: "boolean",
+        required: true,
+        description: "Stato aperto/chiuso del modal",
+      },
+      {
+        name: "onClose",
+        type: "() => void",
+        required: true,
+        description: "Callback per chiusura modal",
+      },
+      {
+        name: "onConfirm",
+        type: "() => void",
+        required: true,
+        description: "Callback per conferma",
+      },
+      {
+        name: "title",
+        type: "string",
+        required: true,
+        description: "Titolo del modal",
+      },
+      {
+        name: "message",
+        type: "string",
+        required: true,
+        description: "Messaggio di conferma",
+      },
+      {
+        name: "variant",
+        type: '"default" | "danger" | "warning" | "success" | "info"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante visiva del modal",
+      },
+      {
+        name: "confirmText",
+        type: "string",
+        required: false,
+        description: "Testo del pulsante di conferma (auto-mapping per variant)",
+      },
+      {
+        name: "cancelText",
+        type: "string",
+        required: false,
+        defaultValue: '"Annulla"',
+        description: "Testo del pulsante di annullamento",
+      },
+      {
+        name: "isLoading",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Stato loading del pulsante conferma",
+      },
+      {
+        name: "loadingText",
+        type: "string",
+        required: false,
+        defaultValue: '"Elaborazione..."',
+        description: "Testo durante loading",
+      },
+      {
+        name: "details",
+        type: "string",
+        required: false,
+        description: "Dettagli aggiuntivi sotto il messaggio",
+      },
+    ],
+    examples: [
+      {
+        title: "ConfirmModal Danger",
+        description: "Modal di conferma per azioni distruttive",
+        code: `<ConfirmModal
+  isOpen={isOpen}
+  onClose={handleClose}
+  onConfirm={handleDelete}
+  variant="danger"
+  title="Elimina Elemento"
+  message="Sei sicuro di voler eliminare questo elemento?"
+  details="Questa operazione non può essere annullata."
+  isLoading={isDeleting}
+  loadingText="Eliminando..."
+/>`,
+      },
+      {
+        title: "ConfirmModal Success",
+        description: "Modal di conferma per azioni positive",
+        code: `<ConfirmModal
+  isOpen={isOpen}
+  onClose={handleClose}
+  onConfirm={handleSave}
+  variant="success"
+  title="Salva Modifiche"
+  message="Vuoi salvare le modifiche apportate?"
+  confirmText="Salva Ora"
+  isLoading={isSaving}
+/>`,
+      },
+      {
+        title: "ConfirmModal Warning",
+        description: "Modal di avviso per azioni che richiedono attenzione",
+        code: `<ConfirmModal
+  isOpen={isOpen}
+  onClose={handleClose}
+  onConfirm={handleProceed}
+  variant="warning"
+  title="Attenzione"
+  message="Questa azione modificherà configurazioni importanti."
+  details="Assicurati di aver fatto un backup prima di procedere."
+  confirmText="Procedi Comunque"
+/>`,
+      },
+    ],
+    notes:
+      "Auto-mapping: danger→'Elimina', success→'Conferma', warning→'Procedi'. Usa CSS custom properties per colori variant.",
+  },
+
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+  spinner: {
+    id: "spinner",
+    title: "Spinner",
+    description: "Dots spinner con animazione CSS per indicare stati di caricamento e operazioni in corso",
+    category: "ui",
+    importPath: 'import { Spinner } from "../core/components/ui";',
+    props: [
+      {
+        name: "size",
+        type: '"xs" | "sm" | "md"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione del spinner",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        required: false,
+        defaultValue: '"Caricamento in corso"',
+        description: "Aria label per accessibility",
+      },
+    ],
+    examples: [
+      {
+        title: "Spinner Base",
+        description: "Spinner con dimensioni diverse",
+        code: `<div className="flex items-center gap-4">
+  <Spinner size="xs" />
+  <Spinner size="sm" />
+  <Spinner size="md" />
+</div>`,
+      },
+      {
+        title: "Spinner con Button",
+        description: "Spinner integrato in pulsanti durante loading",
+        code: `<Button 
+  variant="primary" 
+  disabled={isLoading}
+  leftIcon={isLoading ? <Spinner size="sm" /> : null}
+>
+  {isLoading ? 'Caricamento...' : 'Salva'}
+</Button>`,
+      },
+      {
+        title: "Spinner Centrato",
+        description: "Spinner per aree di contenuto",
+        code: `<div className="flex items-center justify-center h-32">
+  <div className="text-center">
+    <Spinner size="md" />
+    <p className="mt-2 text-sm text-text-secondary">
+      Caricamento dati...
+    </p>
+  </div>
+</div>`,
+      },
+      {
+        title: "Spinner con Accessibility",
+        description: "Spinner con aria-label personalizzato",
+        code: `<Spinner 
+  size="sm" 
+  aria-label="Sincronizzazione in corso"
+/>`,
+      },
+    ],
+    notes:
+      "Usa colore primary (violet-600) fisso. Animazione ottimizzata con transform per performance. Delay progressivo tra dots.",
+  },
+
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  card: {
+    id: "card",
+    title: "Card",
+    description: "Contenitore versatile per raggruppare contenuti con varianti visive, hover effects e comportamento clickable",
+    category: "layout",
+    importPath: 'import { Card } from "../core/components/ui";',
+    props: [
+      {
+        name: "children",
+        type: "ReactNode",
+        required: true,
+        description: "Contenuto del card",
+      },
+      {
+        name: "variant",
+        type: '"default" | "elevated" | "outlined" | "flat"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante visiva del card",
+      },
+      {
+        name: "padding",
+        type: '"none" | "sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Padding interno del card",
+      },
+      {
+        name: "hover",
+        type: "boolean",
+        required: false,
+        description: "Abilita hover effects (auto se clickable)",
+      },
+      {
+        name: "clickable",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Rende il card cliccabile con keyboard support",
+      },
+      {
+        name: "onClick",
+        type: "() => void",
+        required: false,
+        description: "Callback per click (abilita automaticamente clickable)",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Card Base",
+        description: "Card con varianti diverse",
+        code: `<div className="grid grid-cols-2 gap-4">
+  <Card variant="default">
+    <h3 className="font-semibold mb-2">Default Card</h3>
+    <p className="text-sm text-text-secondary">
+      Card con ombra leggera e bordo sottile
+    </p>
+  </Card>
+  
+  <Card variant="elevated">
+    <h3 className="font-semibold mb-2">Elevated Card</h3>
+    <p className="text-sm text-text-secondary">
+      Card con ombra più prominente
+    </p>
+  </Card>
+</div>`,
+      },
+      {
+        title: "Card Cliccabili",
+        description: "Card interattivi con hover effects",
+        code: `<div className="space-y-4">
+  <Card 
+    variant="outlined" 
+    clickable 
+    onClick={() => alert('Card cliccato!')}
+  >
+    <h3 className="font-semibold mb-2">Card Cliccabile</h3>
+    <p className="text-sm text-text-secondary">
+      Click me! Supporta anche navigazione da tastiera.
+    </p>
+  </Card>
+  
+  <Card variant="elevated" hover padding="lg">
+    <h3 className="font-semibold mb-2">Card con Hover</h3>
+    <p className="text-sm text-text-secondary">
+      Hover effects senza essere cliccabile
+    </p>
+  </Card>
+</div>`,
+      },
+      {
+        title: "Info Card",
+        description: "Card per informazioni e statistiche",
+        code: `<Card variant="flat" padding="lg">
+  <div className="flex items-center justify-between">
+    <div>
+      <h3 className="text-2xl font-bold text-text-primary">1,234</h3>
+      <p className="text-sm text-text-secondary">Utenti Attivi</p>
+    </div>
+    <div className="w-12 h-12 bg-violet-100 dark:bg-violet-900 rounded-lg flex items-center justify-center">
+      <Users className="w-6 h-6 text-violet-600" />
+    </div>
+  </div>
+</Card>`,
+      },
+      {
+        title: "Product Card",
+        description: "Card per prodotti e contenuti",
+        code: `<Card variant="default" clickable onClick={handleProductClick}>
+  <img 
+    src="/product.jpg" 
+    alt="Prodotto" 
+    className="w-full h-48 object-cover rounded-t-lg -m-4 mb-4"
+  />
+  <h3 className="font-semibold mb-2">Nome Prodotto</h3>
+  <p className="text-sm text-text-secondary mb-4">
+    Descrizione del prodotto con dettagli importanti...
+  </p>
+  <div className="flex items-center justify-between">
+    <span className="text-lg font-bold text-text-primary">€99.99</span>
+    <Badge variant="success">Disponibile</Badge>
+  </div>
+</Card>`,
+      },
+    ],
+    notes: "Usa ThemedSurface per coerenza. Focus con border violet (no ring). Auto-hover se clickable. Keyboard accessible.",
+  },
+
+  separator: {
+    id: "separator",
+    title: "Separator",
+    description: "Divisore visivo minimalista per organizzare contenuti con supporto testo decorativo e orientazioni multiple",
+    category: "layout",
+    importPath: 'import { Separator } from "../core/components/ui";',
+    props: [
+      {
+        name: "orientation",
+        type: '"horizontal" | "vertical"',
+        required: false,
+        defaultValue: '"horizontal"',
+        description: "Orientazione del separator",
+      },
+      {
+        name: "variant",
+        type: '"default" | "subtle"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante visiva del separator",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        required: false,
+        description: "Testo decorativo nel separator (solo horizontal)",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Separator Base",
+        description: "Separatori orizzontali semplici",
+        code: `<div className="space-y-4">
+  <p>Contenuto sopra</p>
+  <Separator />
+  <p>Contenuto sotto</p>
+  
+  <Separator variant="subtle" />
+  <p>Separator più sottile</p>
+</div>`,
+      },
+      {
+        title: "Separator con Testo",
+        description: "Separator decorativo con testo nel mezzo",
+        code: `<div className="space-y-4">
+  <div>Contenuto sezione 1</div>
+  <Separator>OR</Separator>
+  <div>Contenuto sezione 2</div>
+  
+  <Separator>2024</Separator>
+  <div>Contenuto anno precedente</div>
+</div>`,
+      },
+      {
+        title: "Separator Verticale",
+        description: "Separatori verticali per layout orizzontali",
+        code: `<div className="flex items-center space-x-4">
+  <span>Item 1</span>
+  <Separator orientation="vertical" className="h-6" />
+  <span>Item 2</span>
+  <Separator orientation="vertical" className="h-6" variant="subtle" />
+  <span>Item 3</span>
+</div>`,
+      },
+      {
+        title: "Separator in Layout",
+        description: "Uso pratico in sidebar e menu",
+        code: `<nav className="space-y-2">
+  <a href="/dashboard">Dashboard</a>
+  <a href="/projects">Progetti</a>
+  <Separator className="my-2" />
+  <a href="/settings">Impostazioni</a>
+  <a href="/help">Aiuto</a>
+</nav>`,
+      },
+    ],
+    notes:
+      "Children forzano orientation='horizontal'. Usa variant='subtle' per separazioni meno invasive. Height per vertical deve essere specificata.",
+  },
+
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  alert: {
+    id: "alert",
+    title: "Alert",
+    description: "Componente per messaggi informativi in-page con varianti semantiche, icone automatiche e dismissal opzionale",
+    category: "feedback",
+    importPath: 'import { Alert } from "../core/components/ui";',
+    props: [
+      {
+        name: "variant",
+        type: '"info" | "success" | "warning" | "danger"',
+        required: false,
+        defaultValue: '"info"',
+        description: "Variante semantica dell'alert",
+      },
+      {
+        name: "title",
+        type: "string",
+        required: false,
+        description: "Titolo dell'alert",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        required: true,
+        description: "Contenuto dell'alert",
+      },
+      {
+        name: "closable",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Mostra pulsante di chiusura",
+      },
+      {
+        name: "onClose",
+        type: "() => void",
+        required: false,
+        description: "Callback per chiusura alert",
+      },
+      {
+        name: "icon",
+        type: "ReactNode",
+        required: false,
+        description: "Icona personalizzata (sovrascrive quella di default)",
+      },
+      {
+        name: "hideIcon",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Nascondi icona completamente",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Alert Base",
+        description: "Alert con le 4 varianti semantiche",
+        code: `<div className="space-y-4">
+  <Alert variant="info">
+    Questa è un'informazione importante per l'utente.
+  </Alert>
+  
+  <Alert variant="success">
+    Operazione completata con successo!
+  </Alert>
+  
+  <Alert variant="warning">
+    Attenzione: questa azione potrebbe avere conseguenze.
+  </Alert>
+  
+  <Alert variant="danger">
+    Errore: impossibile completare l'operazione.
+  </Alert>
+</div>`,
+      },
+      {
+        title: "Alert con Titolo",
+        description: "Alert con titolo e contenuto dettagliato",
+        code: `<div className="space-y-4">
+  <Alert variant="success" title="Salvataggio Completato">
+    Il documento è stato salvato correttamente nel database.
+    Tutte le modifiche sono state applicate.
+  </Alert>
+  
+  <Alert variant="warning" title="Attenzione">
+    Il sistema verrà riavviato alle 02:00 per manutenzione programmata.
+    Salva il tuo lavoro prima di quell'orario.
+  </Alert>
+</div>`,
+      },
+      {
+        title: "Alert Dismissible",
+        description: "Alert con pulsante di chiusura",
+        code: `<Alert 
+  variant="info" 
+  title="Notifica"
+  closable 
+  onClose={() => console.log('Alert chiuso')}
+>
+  Questo alert può essere chiuso dall'utente cliccando la X.
+</Alert>`,
+      },
+      {
+        title: "Alert Personalizzati",
+        description: "Alert con icone custom o senza icone",
+        code: `import { Zap, Bell } from "lucide-react";
+
+<div className="space-y-4">
+  <Alert variant="warning" icon={<Zap className="w-5 h-5" />}>
+    Alert con icona personalizzata
+  </Alert>
+  
+  <Alert variant="info" hideIcon>
+    Alert senza icona per design minimale
+  </Alert>
+</div>`,
+      },
+    ],
+    notes:
+      "Usa CSS custom properties per colori varianti. In-page positioning. Auto-mapping icone: Info, CheckCircle, AlertTriangle, XCircle.",
+  },
 };
 
 // Lista ordinata per Component Explorer
