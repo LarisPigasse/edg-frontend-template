@@ -4,6 +4,8 @@ export { default as Footer } from "./Footer";
 export { default as Sidebar } from "./Sidebar";
 export { default as HeaderGroup } from "./HeaderGroup";
 export { default as TitledSurface } from "./TitledSurface";
+export { default as CenteredPage } from "./CenteredPage";
+export { default as CenteredSection } from "./CenteredSection";
 
 // Re-export dei tipi
 export type { default as HeaderProps } from "./Header";
