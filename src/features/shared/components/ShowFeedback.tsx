@@ -6,6 +6,8 @@ import { TitledSurface } from "../../../core/components/layout";
 import { ThemedText } from "../../../core/components/atomic";
 import type { ConfirmVariant } from "../../../core/components/ui/ConfirmModal";
 import type { ModalSize } from "../../../core/components/ui/Modal";
+import ToastShowcaseDemo from "./ToastShowcaseDemo";
+import { Progress } from "../../../core/components/ui";
 
 /**
  * ShowFeedback - Showcase completo per componenti di feedback:
@@ -543,6 +545,152 @@ const ShowFeedback: React.FC = () => {
         isLoading={confirmLoading}
         loadingText="Elaborando..."
       />
+      <TitledSurface title="Toast System" padding="lg">
+        <ToastShowcaseDemo />
+      </TitledSurface>
+
+      {/* Progress Showcase */}
+      <TitledSurface title="Progress Components" padding="lg">
+        <div className="space-y-8">
+          {/* Progress Base */}
+          <div>
+            <ThemedText variant="label" className="text-sm font-medium mb-4 block">
+              Progress Base
+            </ThemedText>
+            <div className="space-y-3">
+              <Progress value={25} />
+              <Progress value={50} />
+              <Progress value={75} />
+              <Progress value={100} />
+            </div>
+          </div>
+
+          {/* Progress con Label */}
+          <div>
+            <ThemedText variant="label" className="text-sm font-medium mb-4 block">
+              Progress con Label
+            </ThemedText>
+            <div className="space-y-4">
+              <Progress value={60} showLabel />
+              <Progress value={80} showLabel label="Download in corso..." />
+              <Progress value={45} showLabel label="Installazione pacchetti" />
+              <Progress value={90} showLabel label="Finalizzazione setup" />
+            </div>
+          </div>
+
+          {/* Progress Varianti */}
+          <div>
+            <ThemedText variant="label" className="text-sm font-medium mb-4 block">
+              Varianti Colore
+            </ThemedText>
+            <div className="space-y-4">
+              <Progress value={70} variant="default" showLabel label="Default Progress" />
+              <Progress value={85} variant="success" showLabel label="Upload Completato" />
+              <Progress value={40} variant="warning" showLabel label="Spazio Disco" />
+              <Progress value={15} variant="danger" showLabel label="Errori Rilevati" />
+              <Progress value={60} variant="info" showLabel label="Sincronizzazione" />
+            </div>
+          </div>
+
+          {/* Progress Indeterminato */}
+          <div>
+            <ThemedText variant="label" className="text-sm font-medium mb-4 block">
+              Progress Indeterminato (Shimmer)
+            </ThemedText>
+            <div className="space-y-4">
+              <Progress indeterminate showLabel label="Caricamento..." />
+              <Progress indeterminate variant="info" showLabel label="Sincronizzazione cloud" />
+              <Progress indeterminate variant="success" showLabel label="Backup in corso" />
+              <Progress indeterminate variant="warning" size="lg" />
+            </div>
+          </div>
+
+          {/* Progress Dimensioni */}
+          <div>
+            <ThemedText variant="label" className="text-sm font-medium mb-4 block">
+              Dimensioni
+            </ThemedText>
+            <div className="space-y-4">
+              <div>
+                <ThemedText variant="secondary" className="text-xs mb-1 block">
+                  Small
+                </ThemedText>
+                <Progress value={60} size="sm" showLabel label="Compact Progress" />
+              </div>
+
+              <div>
+                <ThemedText variant="secondary" className="text-xs mb-1 block">
+                  Medium (Default)
+                </ThemedText>
+                <Progress value={60} size="md" showLabel label="Standard Progress" />
+              </div>
+
+              <div>
+                <ThemedText variant="secondary" className="text-xs mb-1 block">
+                  Large
+                </ThemedText>
+                <Progress value={60} size="lg" showLabel label="Prominent Progress" />
+              </div>
+            </div>
+          </div>
+
+          {/* Progress Stati Reali */}
+          <div>
+            <ThemedText variant="label" className="text-sm font-medium mb-4 block">
+              Simulazione Stati Reali
+            </ThemedText>
+            <div className="space-y-4">
+              <div className="p-4 border border-border-default rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <ThemedText variant="primary" className="text-sm font-medium">
+                    Upload documento.pdf
+                  </ThemedText>
+                  <ThemedText variant="secondary" className="text-xs">
+                    2.4 MB / 3.2 MB
+                  </ThemedText>
+                </div>
+                <Progress value={75} variant="info" />
+              </div>
+
+              <div className="p-4 border border-border-default rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <ThemedText variant="primary" className="text-sm font-medium">
+                    Installazione aggiornamento
+                  </ThemedText>
+                  <ThemedText variant="secondary" className="text-xs">
+                    Fase 2 di 3
+                  </ThemedText>
+                </div>
+                <Progress indeterminate variant="success" />
+              </div>
+
+              <div className="p-4 border border-border-default rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <ThemedText variant="primary" className="text-sm font-medium">
+                    Spazio disco disponibile
+                  </ThemedText>
+                  <ThemedText variant="secondary" className="text-xs">
+                    23.4 GB / 256 GB
+                  </ThemedText>
+                </div>
+                <Progress value={9} variant="danger" />
+              </div>
+
+              <div className="p-4 border border-border-default rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <ThemedText variant="primary" className="text-sm font-medium">
+                    Backup completato
+                  </ThemedText>
+                  <ThemedText variant="secondary" className="text-xs">
+                    1.2 GB salvati
+                  </ThemedText>
+                </div>
+                <Progress value={100} variant="success" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </TitledSurface>
     </div>
   );
 };

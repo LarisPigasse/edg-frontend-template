@@ -36,4 +36,18 @@ export { NAVIGATION_ITEMS } from "./navigation.config";
 export type { NavigationItem, NavigationIconType, NavigationItemId } from "./navigation.config";
 export type { RouteKeys, RouteValues } from "./routes.config";
 
+/** Posizioni disponibili per i toast */
+export type ToastPosition = "top-center" | "bottom-center" | "top-right" | "bottom-right";
+
+/** Configurazione Toast System */
+export const TOAST_CONFIG = {
+  DEFAULT_POSITION: "top-center" as ToastPosition,
+  DEFAULT_DURATION: 4000,
+  MAX_CONCURRENT: 2,
+  /** Abilita swipe dismiss su mobile */
+  SWIPE_ENABLED: false,
+  /** Offset dal bordo dello schermo */
+  VIEWPORT_OFFSET: 16,
+} as const;
+
 export default APP_CONFIG;

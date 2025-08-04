@@ -61,13 +61,13 @@ edg-frontend-template/
 |   │   │   │   ├── index.ts                    # 🟢 Barrel file
 |   │   │   │   ├── Logo.tsx                    # 🟢 Logo dell'applicazione
 |   │   │   │   ├── UserAvatar.tsx              # 🟢 Avatar dell'utente
-|   │   │   │   ├── VersionInfo.tsx             # 🟡 Componente info versione (da definire)
-|   │   │   │   ├── ConnectionStatus.tsx        # 🟡 Indicatore connessione backend (da definire)
-|   │   │   │   └── QuickLink.tsx               # 🟡 Link rapidi (da definire)
+|   │   │   │   ├── VersionInfo.tsx             # 🟢 Componente info versione
+|   │   │   │   ├── ConnectionStatus.tsx        # 🟢 Indicatore connessione backend
+|   │   │   │   └── QuickLink.tsx               # 🟢 Link rapidi
 |   │   │   ├── layout/                         # Componenti base del layout
 |   │   │   |   ├── index.ts                    # 🟢 Barrel file dei componenti layout
-|   │   │   │   ├── CenteredPage.tsx            # 🟡 Container di pagina per centrare in verticale
-|   │   │   │   ├── CenteredSection.tsx         # 🟡 Container di sezione per centrare in verticale
+|   │   │   │   ├── CenteredPage.tsx            # 🟢 Container di pagina per centrare in verticale
+|   │   │   │   ├── CenteredSection.tsx         # 🟢 Container di sezione per centrare in verticale
 |   │   │   │   ├── Footer.tsx                  # 🟢 Footer dell'applicazione
 |   │   │   │   ├── Header.tsx                  # 🟢 Header dell'applicazione
 |   │   │   │   ├── HeaderGroup.tsx             # 🟢 Titolo e sottotitolo di un gruppo di elementi
@@ -80,28 +80,37 @@ edg-frontend-template/
 |   │   │   │   ├── MainMenu.tsx                # 🟡 Menu principale
 |   │   │   │   ├── Settings.tsx                # 🟢 Menu per configurazione app
 |   │   │   │   ├── UserMenu.tsx                # 🟢 Menu del profilo utente
-|   │   │   │   ├── MobileMenu.tsx              # 🟢 Mobile menu
-|   │   │   │   └── ProfileMenu.tsx             # 🟡 Menu utente con dropdown
+|   │   │   │   └── MobileMenu.tsx              # 🟢 Mobile menu
 |   │   │   └── ui/                             # Componenti base dell'interfaccia utente
 |   │   │       ├── index.ts                    # 🟢 Barrel file dei componenti ui
+|   |   |       ├── Avatar.tsx                  # 🟢 Componente avatar con varianti
+|   |   |       ├── Accordion.tsx               # 🟢 Componente accordion con varianti
 |   |   |       ├── Alert.tsx                   # 🟢 Componente alert con varianti
 |   |   |       ├── Badge.tsx                   # 🟢 Componente badge con varianti
 |   │   │       ├── Button.tsx                  # 🟢 Componente button con varianti
 |   │   │       ├── Card.tsx                    # 🟢 Componente card semplice con varianti
 |   │   │       ├── Checkbox.tsx                # 🟢 Componente checkbox
 |   │   │       ├── ConfirmModal.tsx            # 🟢 Modal di conferma
+|   │   │       ├── DatePicker.tsx              # 🟢 Componente DatePicker
 |   │   │       ├── FormField.tsx               # 🟢 Wrapper per eliminare codice ripetitivo
+|   │   │       ├── InfoCard.tsx                # 🟢 Card informative cliccabili con varianti
 |   │   │       ├── Input.tsx                   # 🟢 Componente input con varianti
 |   │   │       ├── Label.tsx                   # 🟢 Componente label per input complessi
 |   │   │       ├── Modal.tsx                   # 🟢 Componente modale base
+|   │   │       ├── NavigationMenu.tsx          # 🟢 Componente NavigationMenu da Radix
+|   │   │       ├── Progress.tsx                # 🟢 Progress bar
 |   │   │       ├── RadioGroup.tsx              # 🟢 Componente radio group
 |   │   │       ├── Select.tsx                  # 🟢 Componente select
+|   │   │       ├── Separator.tsx               # 🟢 Separator verticale e orizzontale
 |   │   │       ├── Spinner.tsx                 # 🟢 Componente dots spinner
 |   │   │       ├── Switch.tsx                  # 🟢 Componente button per submit
 |   │   │       ├── Table.tsx                   # 🟢 Componente per tabella semplice
 |   │   │       ├── TableLink.tsx               # 🟢 Componente per elementi cliccabile delle righe tabella
+|   │   │       ├── Tabs.tsx                    # 🟢 Componente tabs con varianti
 |   │   │       ├── TextArea.tsx                # 🟢 Componente textarea per form
-|   │   │       └── Tooltip.tsx                 # 🟡 Componente per tooltip, richiede headless
+|   │   │       ├── TimePicker.tsx              # 🟢 Componente TimePicker con varianti
+|   │   │       ├── Toast.tsx                   # 🟢 Componente per feedback in stile toast
+|   │   │       └── Tooltip.tsx                 # 🟢 Componente per tooltip, richiede headless
 |   │   ├── hooks/                              # Hook personalizzati condivisi
 |   │   │   ├── index.ts                        # 🟢 Barrel file degli Hooks
 |   │   │   ├── useLocalStorage.ts              # 🟡 Hook per la gestione del local storage
@@ -145,7 +154,12 @@ edg-frontend-template/
 │   |       |   ├── ShowButtons.tsx             # 🟢 Showcase del Button component
 |   |       |   ├── ShowForms.tsx               # 🟢 Showcase per Input, label e form validation
 │   |       |   ├── ShowDataDisplay.tsx         # 🟢 Showcase per Table, TableLink e Badge
-│   |       |   ├── ShowFeedback.tsx            # 🟡 Showcase Modal, Tooltip e notification/alert
+│   |       |   ├── ShowDatePicker.tsx          # 🟢 Showcase DatePicker
+│   |       |   ├── ShowFeedback.tsx            # 🟢 Showcase Modal, Tooltip e notification/alert
+|   |       |   ├── ShowLayout.tsx              # 🟢 Showcase Card, Separator, Accordion, Tabs
+|   |       |   ├── ShowNavigationMenu.tsx      # 🟢 Showcase per NavigationMenu
+|   |       |   ├── ShowTime.tsx                # 🟢 Demo per ShowTime component
+|   |       |   ├── ToastShowDemo.tsx           # 🟢 Demo per Toast component
 |   |       |   └── ShowActions.tsx             # 🟡 Showcase per azioni e crud
 |   |       |
 │   │       ├── index.ts                        # 🟢 Barrel file

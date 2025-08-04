@@ -2114,6 +2114,1586 @@ const actions = [
     notes:
       "Usa CSS custom properties per colori varianti. In-page positioning. Auto-mapping icone: Info, CheckCircle, AlertTriangle, XCircle.",
   },
+
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  toast: {
+    id: "toast",
+    title: "Toast",
+    description: "Sistema di notifiche temporanee con Radix UI, positioning configurabile e queue management automatico",
+    category: "feedback",
+    importPath: 'import { useToast } from "../core/hooks";',
+    props: [
+      {
+        name: "variant",
+        type: '"default" | "success" | "warning" | "danger"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante semantica del toast (gestita automaticamente dai metodi)",
+      },
+      {
+        name: "title",
+        type: "string",
+        required: false,
+        description: "Titolo del toast",
+      },
+      {
+        name: "description",
+        type: "string",
+        required: false,
+        description: "Descrizione del toast",
+      },
+      {
+        name: "duration",
+        type: "number",
+        required: false,
+        defaultValue: "4000",
+        description: "Durata in millisecondi (0 per permanente)",
+      },
+      {
+        name: "action",
+        type: "{ label: string; onClick: () => void }",
+        required: false,
+        description: "Azione opzionale (Undo, View, etc.)",
+      },
+    ],
+    examples: [
+      {
+        title: "Toast Base",
+        description: "Utilizzo base del sistema Toast con hook",
+        code: `const { toast } = useToast();
+
+// Toast di default
+toast("Operazione completata");
+
+// Toast con titolo
+toast("Salvato con successo", {
+  title: "Documento",
+  duration: 6000
+});`,
+      },
+      {
+        title: "Toast Semantici",
+        description: "Toast con varianti semantiche",
+        code: `const { toast } = useToast();
+
+// Success toast
+toast.success("File salvato correttamente");
+
+// Warning toast  
+toast.warning("Connessione instabile", {
+  duration: 8000
+});
+
+// Danger toast
+toast.danger("Errore durante il salvataggio");
+
+// Info toast
+toast.info("Nuova versione disponibile");`,
+      },
+      {
+        title: "Toast con Azioni",
+        description: "Toast con action button per interazioni",
+        code: `const { toast } = useToast();
+
+// Toast con azione Undo
+toast.success("Elemento eliminato", {
+  action: {
+    label: "Annulla",
+    onClick: () => restoreItem()
+  }
+});
+
+// Toast con azione View
+toast.info("Report generato", {
+  title: "Export Completato",
+  action: {
+    label: "Visualizza",
+    onClick: () => openReport()
+  }
+});`,
+      },
+      {
+        title: "Gestione Toast",
+        description: "Controllo avanzato dei toast",
+        code: `const { toast, dismiss, dismissAll } = useToast();
+
+// Toast permanente (durata 0)
+const id = toast.warning("Connessione persa", { 
+  duration: 0,
+  action: {
+    label: "Riconnetti",
+    onClick: () => reconnect()
+  }
+});
+
+// Chiudi toast specifico
+dismiss(id);
+
+// Chiudi tutti i toast
+dismissAll();`,
+      },
+    ],
+    notes:
+      "Configurabile via TOAST_CONFIG. Max 2 toast contemporanei. Position top-center default. Swipe disabled su mobile. Richiede ToastProvider nel root dell'app.",
+  },
+
+  accordion: {
+    id: "accordion",
+    title: "Accordion",
+    description: "Contenuti collassibili con Radix UI, keyboard navigation e smooth animations per FAQ e pannelli informativi",
+    category: "ui",
+    importPath: 'import { Accordion } from "../core/components/ui";',
+    props: [
+      {
+        name: "type",
+        type: '"single" | "multiple"',
+        required: false,
+        defaultValue: '"single"',
+        description: "Modalità accordion - single (un item aperto) o multiple (più items aperti)",
+      },
+      {
+        name: "items",
+        type: "AccordionItem[]",
+        required: true,
+        description: "Array di items dell'accordion",
+      },
+      {
+        name: "defaultValue",
+        type: "string | string[]",
+        required: false,
+        description: "Valore/i di default aperti (string per single, string[] per multiple)",
+      },
+      {
+        name: "collapsible",
+        type: "boolean",
+        required: false,
+        defaultValue: "true",
+        description: "Se type='single', permette di chiudere tutti gli item",
+      },
+      {
+        name: "variant",
+        type: '"default" | "bordered" | "separated"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante visiva dell'accordion",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione dell'accordion",
+      },
+      {
+        name: "onValueChange",
+        type: "(value: string | string[]) => void",
+        required: false,
+        description: "Callback per cambi di stato",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Accordion Single",
+        description: "Accordion basic con un solo item aperto alla volta",
+        code: `const faqItems = [
+  {
+    value: "item-1",
+    title: "Come posso cambiare la mia password?",
+    content: "Vai nelle impostazioni del tuo account e clicca su 'Cambia Password'. Inserisci la password attuale e quella nuova."
+  },
+  {
+    value: "item-2", 
+    title: "Come posso contattare il supporto?",
+    content: "Puoi contattarci tramite email a support@example.com o tramite il modulo di contatto nella sezione Aiuto."
+  }
+];
+
+<Accordion
+  type="single"
+  collapsible
+  items={faqItems}
+  defaultValue="item-1"
+/>`,
+      },
+      {
+        title: "Accordion Multiple",
+        description: "Accordion con possibilità di aprire più item contemporaneamente",
+        code: `const settingsItems = [
+  {
+    value: "privacy",
+    title: "Impostazioni Privacy",
+    content: "Gestisci le tue impostazioni di privacy e controlla chi può vedere le tue informazioni."
+  },
+  {
+    value: "notifications",
+    title: "Notifiche",
+    content: "Configura quando e come ricevere le notifiche dall'applicazione."
+  },
+  {
+    value: "security",
+    title: "Sicurezza",
+    content: "Attiva l'autenticazione a due fattori e gestisci i dispositivi connessi."
+  }
+];
+
+<Accordion
+  type="multiple"
+  items={settingsItems}
+  defaultValue={["privacy", "notifications"]}
+/>`,
+      },
+      {
+        title: "Accordion Varianti",
+        description: "Diverse varianti visive dell'accordion",
+        code: `// Default variant
+<Accordion variant="default" items={items} />
+
+// Bordered variant
+<Accordion variant="bordered" items={items} />
+
+// Separated variant  
+<Accordion variant="separated" items={items} />`,
+      },
+      {
+        title: "Accordion Dimensioni",
+        description: "Accordion con diverse dimensioni",
+        code: `// Small accordion
+<Accordion size="sm" items={items} />
+
+// Medium accordion (default)
+<Accordion size="md" items={items} />
+
+// Large accordion
+<Accordion size="lg" items={items} />`,
+      },
+    ],
+    notes:
+      "Usa type='single' per FAQ, type='multiple' per configurazioni. Keyboard navigation: frecce, Home, End, Space, Enter. Chevron ruota automaticamente.",
+  },
+
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  progress: {
+    id: "progress",
+    title: "Progress",
+    description: "Progress bar con Radix UI per stati di avanzamento, upload files e loading con modalità indeterminata",
+    category: "feedback",
+    importPath: 'import { Progress } from "../core/components/ui";',
+    props: [
+      {
+        name: "value",
+        type: "number",
+        required: false,
+        defaultValue: "0",
+        description: "Valore corrente (0-100)",
+      },
+      {
+        name: "max",
+        type: "number",
+        required: false,
+        defaultValue: "100",
+        description: "Valore massimo",
+      },
+      {
+        name: "variant",
+        type: '"default" | "success" | "warning" | "danger" | "info"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante colore della progress bar",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione della progress bar",
+      },
+      {
+        name: "showLabel",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Mostra label sopra con percentuale o testo custom",
+      },
+      {
+        name: "label",
+        type: "string",
+        required: false,
+        description: "Testo label personalizzato (default: percentuale)",
+      },
+      {
+        name: "indeterminate",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Modalità indeterminata per loading infinito con shimmer",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Progress Base",
+        description: "Progress bar con valori diversi",
+        code: `<div className="space-y-4">
+  <Progress value={25} />
+  <Progress value={50} />
+  <Progress value={75} />
+  <Progress value={100} />
+</div>`,
+      },
+      {
+        title: "Progress con Label",
+        description: "Progress bar con label e percentuali",
+        code: `<div className="space-y-4">
+  <Progress value={60} showLabel />
+  <Progress value={80} showLabel label="Download in corso..." />
+  <Progress value={45} showLabel label="Installazione" />
+</div>`,
+      },
+      {
+        title: "Progress Varianti",
+        description: "Progress bar con colori semantici",
+        code: `<div className="space-y-4">
+  <Progress value={70} variant="default" showLabel />
+  <Progress value={85} variant="success" showLabel />
+  <Progress value={40} variant="warning" showLabel />
+  <Progress value={15} variant="danger" showLabel />
+  <Progress value={60} variant="info" showLabel />
+</div>`,
+      },
+      {
+        title: "Progress Indeterminato",
+        description: "Progress bar per loading senza fine definito",
+        code: `<div className="space-y-4">
+  <Progress indeterminate showLabel label="Caricamento..." />
+  <Progress indeterminate variant="info" showLabel label="Sincronizzazione" />
+  <Progress indeterminate variant="success" />
+</div>`,
+      },
+      {
+        title: "Progress Dimensioni",
+        description: "Progress bar con diverse dimensioni",
+        code: `<div className="space-y-4">
+  <Progress value={60} size="sm" showLabel label="Small" />
+  <Progress value={60} size="md" showLabel label="Medium" />
+  <Progress value={60} size="lg" showLabel label="Large" />
+</div>`,
+      },
+    ],
+    notes:
+      "Usa indeterminate per loading senza durata definita. Varianti colore semantiche per diversi stati. Smooth transitions per value changes.",
+  },
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  tabs: {
+    id: "tabs",
+    title: "Tabs",
+    description: "Componente per organizzare contenuti in schede con varianti visive e responsive scroll",
+    category: "navigation",
+    importPath: 'import { Tabs } from "../core/components/ui";',
+    props: [
+      {
+        name: "items",
+        type: "TabItem[]",
+        required: true,
+        description: "Array di tab items con id, label e content",
+      },
+      {
+        name: "defaultTab",
+        type: "string",
+        required: false,
+        description: "ID del tab attivo di default (primo tab se non specificato)",
+      },
+      {
+        name: "variant",
+        type: '"default" | "pills" | "underline"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Variante visiva dei tab",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione dei tab",
+      },
+      {
+        name: "onTabChange",
+        type: "(tabId: string) => void",
+        required: false,
+        description: "Callback chiamata quando cambia il tab attivo",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Tabs Base",
+        description: "Tabs semplici con contenuto diverso",
+        code: `const tabItems = [
+  {
+    id: "overview",
+    label: "Panoramica",
+    content: <div>Contenuto panoramica...</div>
+  },
+  {
+    id: "details", 
+    label: "Dettagli",
+    content: <div>Contenuto dettagli...</div>
+  },
+  {
+    id: "settings",
+    label: "Impostazioni", 
+    content: <div>Contenuto impostazioni...</div>
+  }
+];
+
+<Tabs items={tabItems} defaultTab="overview" />`,
+      },
+      {
+        title: "Tabs Varianti",
+        description: "Diverse varianti visive",
+        code: `// Default variant (come Showcase)
+<Tabs variant="default" items={items} />
+
+// Pills variant (rounded background)
+<Tabs variant="pills" items={items} />
+
+// Underline variant (minimal con linea sotto)
+<Tabs variant="underline" items={items} />`,
+      },
+      {
+        title: "Tabs con Callback",
+        description: "Gestione cambio tab con callback",
+        code: `const [currentTab, setCurrentTab] = useState("tab1");
+
+<Tabs
+  items={items}
+  defaultTab="tab1"
+  onTabChange={(tabId) => {
+    setCurrentTab(tabId);
+    console.log('Tab changed to:', tabId);
+  }}
+/>`,
+      },
+      {
+        title: "Tabs Responsive",
+        description: "Tabs con scroll orizzontale su mobile",
+        code: `const manyTabs = [
+  { id: "tab1", label: "Dashboard", content: <Dashboard /> },
+  { id: "tab2", label: "Analytics", content: <Analytics /> },
+  { id: "tab3", label: "Reports", content: <Reports /> },
+  { id: "tab4", label: "Settings", content: <Settings /> },
+  { id: "tab5", label: "Users", content: <Users /> },
+  { id: "tab6", label: "Permissions", content: <Permissions /> }
+];
+
+<Tabs items={manyTabs} variant="pills" />`,
+      },
+      {
+        title: "Tabs con Stati",
+        description: "Tab disabilitati e gestione stati",
+        code: `const tabsWithStates = [
+  { id: "active", label: "Attivo", content: <div>Tab attivo</div> },
+  { id: "disabled", label: "Disabilitato", content: <div>Non accessibile</div>, disabled: true },
+  { id: "normal", label: "Normale", content: <div>Tab normale</div> }
+];
+
+<Tabs items={tabsWithStates} />`,
+      },
+    ],
+    notes: "Content management interno automatico. Responsive scroll su mobile. Pattern validato dal Showcase esistente.",
+  },
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  datepicker: {
+    id: "datepicker",
+    title: "DatePicker",
+    description: "Selezione date con calendario popup, input editabile e validazione integrata per form e filtri",
+    category: "form",
+    importPath: 'import { DatePicker } from "../core/components/ui";',
+    props: [
+      {
+        name: "label",
+        type: "string",
+        required: true,
+        description: "Etichetta del campo (floating label)",
+      },
+      {
+        name: "value",
+        type: "Date",
+        required: false,
+        description: "Data selezionata controllata",
+      },
+      {
+        name: "onChange",
+        type: "(date: Date | undefined) => void",
+        required: false,
+        description: "Callback chiamata quando cambia la data",
+      },
+      {
+        name: "format",
+        type: '"DD/MM/YYYY" | "MM/DD/YYYY" | "YYYY-MM-DD"',
+        required: false,
+        defaultValue: '"DD/MM/YYYY"',
+        description: "Formato di visualizzazione della data",
+      },
+      {
+        name: "minDate",
+        type: "Date",
+        required: false,
+        description: "Data minima selezionabile",
+      },
+      {
+        name: "maxDate",
+        type: "Date",
+        required: false,
+        description: "Data massima selezionabile",
+      },
+      {
+        name: "disabledDates",
+        type: "Date[]",
+        required: false,
+        defaultValue: "[]",
+        description: "Array di date non selezionabili",
+      },
+      {
+        name: "error",
+        type: "string",
+        required: false,
+        description: "Messaggio di errore da visualizzare",
+      },
+      {
+        name: "helperText",
+        type: "string",
+        required: false,
+        description: "Testo di aiuto sotto il campo",
+      },
+      {
+        name: "required",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Campo obbligatorio (mostra asterisco rosso)",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione del componente",
+      },
+      {
+        name: "fullWidth",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Occupa tutta la larghezza disponibile",
+      },
+      {
+        name: "placeholder",
+        type: "string",
+        required: false,
+        description: "Placeholder quando il campo è vuoto",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Disabilita il DatePicker",
+      },
+    ],
+    examples: [
+      {
+        title: "DatePicker Base",
+        description: "DatePicker semplice con formato italiano",
+        code: `<DatePicker 
+  label="Data di nascita"
+  format="DD/MM/YYYY"
+  placeholder="Seleziona una data"
+/>`,
+      },
+      {
+        title: "DatePicker Controllato",
+        description: "DatePicker con stato controllato e callback",
+        code: `const [selectedDate, setSelectedDate] = useState<Date>();
+
+<DatePicker 
+  label="Data appuntamento"
+  value={selectedDate}
+  onChange={setSelectedDate}
+  required
+  helperText="Seleziona la data dell'appuntamento"
+/>`,
+      },
+      {
+        title: "DatePicker con Validazione",
+        description: "DatePicker con date minime, massime e validazione",
+        code: `const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+const nextMonth = new Date();
+nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+<DatePicker 
+  label="Data consegna"
+  minDate={tomorrow}
+  maxDate={nextMonth}
+  error={deliveryError}
+  format="DD/MM/YYYY"
+  required
+/>`,
+      },
+      {
+        title: "DatePicker con Date Disabilitate",
+        description: "DatePicker con esclusione di weekend e festivi",
+        code: `// Genera weekend del mese corrente
+const getWeekends = () => {
+  const weekends = [];
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  
+  for (let day = 1; day <= 31; day++) {
+    const date = new Date(year, month, day);
+    if (date.getMonth() !== month) break;
+    if (date.getDay() === 0 || date.getDay() === 6) {
+      weekends.push(date);
+    }
+  }
+  return weekends;
+};
+
+const holidays = [
+  new Date(2024, 11, 25), // Natale
+  new Date(2024, 11, 26), // Santo Stefano
+  new Date(2025, 0, 1),   // Capodanno
+];
+
+<DatePicker 
+  label="Data lavorativa"
+  disabledDates={[...getWeekends(), ...holidays]}
+  helperText="Weekend e festivi non disponibili"
+  format="DD/MM/YYYY"
+/>`,
+      },
+      {
+        title: "DatePicker Formati Diversi",
+        description: "DatePicker con formati internazionali",
+        code: `<div className="space-y-4">
+  <DatePicker 
+    label="Formato Italiano"
+    format="DD/MM/YYYY"
+    size="sm"
+  />
+  
+  <DatePicker 
+    label="Formato Americano"
+    format="MM/DD/YYYY"
+    size="md"
+  />
+  
+  <DatePicker 
+    label="Formato ISO"
+    format="YYYY-MM-DD"
+    size="lg"
+  />
+</div>`,
+      },
+      {
+        title: "DatePicker in Form",
+        description: "Integrazione con form validation",
+        code: `const [formData, setFormData] = useState({
+  birthDate: undefined as Date | undefined,
+  appointmentDate: undefined as Date | undefined,
+});
+
+const [errors, setErrors] = useState<Record<string, string>>({});
+
+const validateForm = () => {
+  const newErrors: Record<string, string> = {};
+  
+  if (!formData.birthDate) {
+    newErrors.birthDate = "Data di nascita obbligatoria";
+  }
+  
+  if (!formData.appointmentDate) {
+    newErrors.appointmentDate = "Data appuntamento obbligatoria";
+  } else if (formData.appointmentDate < new Date()) {
+    newErrors.appointmentDate = "La data deve essere futura";
+  }
+  
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+<form className="space-y-4">
+  <DatePicker 
+    label="Data di nascita"
+    value={formData.birthDate}
+    onChange={(date) => setFormData(prev => ({ ...prev, birthDate: date }))}
+    maxDate={new Date()}
+    error={errors.birthDate}
+    required
+    fullWidth
+  />
+  
+  <DatePicker 
+    label="Data appuntamento"
+    value={formData.appointmentDate}
+    onChange={(date) => setFormData(prev => ({ ...prev, appointmentDate: date }))}
+    minDate={new Date()}
+    error={errors.appointmentDate}
+    helperText="Seleziona una data futura"
+    required
+    fullWidth
+  />
+  
+  <Button 
+    variant="primary" 
+    onClick={validateForm}
+    fullWidth
+  >
+    Conferma Date
+  </Button>
+</form>`,
+      },
+    ],
+    notes:
+      "Usa Radix Popover per positioning. Input editabile con parsing automatico. Calendario con navigation mese/anno e Today button. Integrazione completa con theme system e underline states.",
+  },
+  timepicker: {
+    id: "timepicker",
+    title: "TimePicker",
+    description: "Selezione orario con dropdown scrollabile, formati 12h/24h e step configurabili per working hours",
+    category: "form",
+    importPath: 'import { TimePicker } from "../core/components/ui";',
+    props: [
+      {
+        name: "label",
+        type: "string",
+        required: true,
+        description: "Etichetta del campo (floating label)",
+      },
+      {
+        name: "value",
+        type: "TimeValue",
+        required: false,
+        description: "Valore dell'orario selezionato ({ hours: number, minutes: number })",
+      },
+      {
+        name: "onChange",
+        type: "(time: TimeValue | undefined) => void",
+        required: false,
+        description: "Callback chiamata quando cambia l'orario",
+      },
+      {
+        name: "format",
+        type: '"12h" | "24h"',
+        required: false,
+        defaultValue: '"24h"',
+        description: "Formato di visualizzazione dell'orario",
+      },
+      {
+        name: "step",
+        type: "5 | 10 | 15 | 30",
+        required: false,
+        defaultValue: "15",
+        description: "Step in minuti per l'incremento nelle opzioni",
+      },
+      {
+        name: "minTime",
+        type: "TimeValue",
+        required: false,
+        description: "Orario minimo selezionabile",
+      },
+      {
+        name: "maxTime",
+        type: "TimeValue",
+        required: false,
+        description: "Orario massimo selezionabile",
+      },
+      {
+        name: "error",
+        type: "string",
+        required: false,
+        description: "Messaggio di errore da visualizzare",
+      },
+      {
+        name: "helperText",
+        type: "string",
+        required: false,
+        description: "Testo di aiuto sotto il campo",
+      },
+      {
+        name: "required",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Campo obbligatorio (mostra asterisco rosso)",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione del componente",
+      },
+      {
+        name: "fullWidth",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Occupa tutta la larghezza disponibile",
+      },
+      {
+        name: "placeholder",
+        type: "string",
+        required: false,
+        description: "Placeholder personalizzato (default: HH:MM o HH:MM AM/PM)",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Disabilita il TimePicker",
+      },
+    ],
+    examples: [
+      {
+        title: "TimePicker Base",
+        description: "TimePicker semplice con formato 24h",
+        code: `<TimePicker 
+  label="Orario apertura"
+  format="24h"
+  step={30}
+  placeholder="Seleziona orario"
+/>`,
+      },
+      {
+        title: "TimePicker 12h",
+        description: "TimePicker con formato americano AM/PM",
+        code: `const [selectedTime, setSelectedTime] = useState<TimeValue>();
+
+<TimePicker 
+  label="Orario appuntamento"
+  value={selectedTime}
+  onChange={setSelectedTime}
+  format="12h"
+  step={15}
+  required
+/>`,
+      },
+      {
+        title: "Working Hours",
+        description: "TimePicker limitato agli orari di lavoro",
+        code: `<TimePicker 
+  label="Orario riunione"
+  format="24h"
+  step={30}
+  minTime={{ hours: 9, minutes: 0 }}
+  maxTime={{ hours: 17, minutes: 30 }}
+  helperText="Solo orari lavorativi (9:00 - 17:30)"
+  required
+/>`,
+      },
+      {
+        title: "TimePicker Dimensioni",
+        description: "TimePicker con diverse dimensioni",
+        code: `<div className="space-y-4">
+  <TimePicker 
+    label="Small Time"
+    size="sm"
+    format="24h"
+  />
+  
+  <TimePicker 
+    label="Medium Time"
+    size="md"
+    format="12h"
+  />
+  
+  <TimePicker 
+    label="Large Time"
+    size="lg"
+    format="24h"
+    fullWidth
+  />
+</div>`,
+      },
+      {
+        title: "TimePicker con Validazione",
+        description: "TimePicker con errori e step personalizzati",
+        code: `const [meetingTime, setMeetingTime] = useState<TimeValue>();
+const [error, setError] = useState("");
+
+const validateTime = (time: TimeValue | undefined) => {
+  if (!time) {
+    setError("Orario obbligatorio");
+    return;
+  }
+  
+  const timeInMinutes = time.hours * 60 + time.minutes;
+  const lunchStart = 12 * 60; // 12:00
+  const lunchEnd = 13 * 60;   // 13:00
+  
+  if (timeInMinutes >= lunchStart && timeInMinutes < lunchEnd) {
+    setError("Non è possibile programmare riunioni durante la pausa pranzo");
+  } else {
+    setError("");
+  }
+};
+
+<TimePicker 
+  label="Orario riunione"
+  value={meetingTime}
+  onChange={(time) => {
+    setMeetingTime(time);
+    validateTime(time);
+  }}
+  step={15}
+  error={error}
+  minTime={{ hours: 8, minutes: 0 }}
+  maxTime={{ hours: 18, minutes: 0 }}
+  required
+/>`,
+      },
+    ],
+    notes:
+      "Usa step=15 per appuntamenti standard, step=30 per slot più lunghi. Format 12h per utenti US, 24h per Europa. minTime/maxTime per working hours.",
+  },
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  avatar: {
+    id: "avatar",
+    title: "Avatar",
+    description: "Avatar utenti con fallback intelligente, status indicators e forme personalizzabili per profili e liste",
+    category: "ui",
+    importPath: 'import { Avatar } from "../core/components/ui";',
+    props: [
+      {
+        name: "src",
+        type: "string",
+        required: false,
+        description: "URL dell'immagine avatar",
+      },
+      {
+        name: "alt",
+        type: "string",
+        required: false,
+        description: "Testo alternativo per l'immagine",
+      },
+      {
+        name: "initials",
+        type: "string",
+        required: false,
+        description: "Iniziali da mostrare come fallback (max 2 caratteri)",
+      },
+      {
+        name: "fallback",
+        type: "ReactNode",
+        required: false,
+        description: "Fallback personalizzato (icona o elemento)",
+      },
+      {
+        name: "size",
+        type: '"xs" | "sm" | "md" | "lg" | "xl"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione dell'avatar",
+      },
+      {
+        name: "shape",
+        type: '"circle" | "square" | "rounded"',
+        required: false,
+        defaultValue: '"circle"',
+        description: "Forma dell'avatar",
+      },
+      {
+        name: "variant",
+        type: '"primary" | "secondary" | "success" | "warning" | "danger" | "info"',
+        required: false,
+        defaultValue: '"primary"',
+        description: "Variante colore per initials/fallback",
+      },
+      {
+        name: "status",
+        type: '"online" | "offline" | "busy" | "away"',
+        required: false,
+        description: "Indicatore di stato utente",
+      },
+      {
+        name: "statusPosition",
+        type: '"top-right" | "bottom-right" | "top-left" | "bottom-left"',
+        required: false,
+        defaultValue: '"bottom-right"',
+        description: "Posizione dell'indicatore di stato",
+      },
+      {
+        name: "clickable",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Avatar cliccabile con hover effects",
+      },
+      {
+        name: "onClick",
+        type: "() => void",
+        required: false,
+        description: "Callback per click (richiede clickable=true)",
+      },
+      {
+        name: "bordered",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Aggiunge border bianco intorno all'avatar",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive",
+      },
+    ],
+    examples: [
+      {
+        title: "Avatar Base",
+        description: "Avatar con immagine e fallback automatico",
+        code: `<div className="flex items-center gap-4">
+  <Avatar 
+    src="/user1.jpg" 
+    alt="John Doe" 
+    size="md" 
+  />
+  
+  <Avatar 
+    src="/invalid-url.jpg" 
+    alt="Jane Smith" 
+    initials="JS" 
+    variant="primary"
+  />
+  
+  <Avatar 
+    initials="AB" 
+    variant="secondary" 
+    size="md"
+  />
+</div>`,
+      },
+      {
+        title: "Dimensioni Avatar",
+        description: "Avatar in tutte le dimensioni disponibili",
+        code: `<div className="flex items-center gap-4">
+  <Avatar initials="XS" size="xs" variant="primary" />
+  <Avatar initials="SM" size="sm" variant="secondary" />
+  <Avatar initials="MD" size="md" variant="success" />
+  <Avatar initials="LG" size="lg" variant="warning" />
+  <Avatar initials="XL" size="xl" variant="danger" />
+</div>`,
+      },
+      {
+        title: "Forme e Varianti",
+        description: "Avatar con forme diverse e varianti colore",
+        code: `<div className="space-y-4">
+  {/* Forme diverse */}
+  <div className="flex items-center gap-4">
+    <Avatar initials="CI" shape="circle" variant="primary" />
+    <Avatar initials="SQ" shape="square" variant="secondary" />
+    <Avatar initials="RO" shape="rounded" variant="info" />
+  </div>
+  
+  {/* Varianti colore */}
+  <div className="flex items-center gap-4">
+    <Avatar initials="PR" variant="primary" />
+    <Avatar initials="SC" variant="secondary" />
+    <Avatar initials="SU" variant="success" />
+    <Avatar initials="WA" variant="warning" />
+    <Avatar initials="DA" variant="danger" />
+    <Avatar initials="IN" variant="info" />
+  </div>
+</div>`,
+      },
+      {
+        title: "Status Indicators",
+        description: "Avatar con indicatori di stato utente",
+        code: `<div className="flex items-center gap-6">
+  <Avatar 
+    src="/user1.jpg" 
+    alt="Online User" 
+    status="online" 
+    statusPosition="bottom-right"
+    size="lg"
+  />
+  
+  <Avatar 
+    initials="BU" 
+    status="busy" 
+    statusPosition="top-right"
+    variant="danger"
+    size="lg"
+  />
+  
+  <Avatar 
+    initials="AW" 
+    status="away" 
+    statusPosition="bottom-left"
+    variant="warning"
+    size="lg"
+  />
+  
+  <Avatar 
+    initials="OF" 
+    status="offline" 
+    variant="secondary"
+    size="lg"
+  />
+</div>`,
+      },
+      {
+        title: "Avatar Interattivi",
+        description: "Avatar cliccabili con azioni personalizzate",
+        code: `const handleAvatarClick = (user: string) => {
+  console.log(\`Clicked on \${user} avatar\`);
+  // Apri profilo utente, menu, etc.
+};
+
+<div className="flex items-center gap-4">
+  <Avatar 
+    src="/user1.jpg"
+    alt="Profile Avatar"
+    clickable
+    onClick={() => handleAvatarClick('John')}
+    bordered
+    size="lg"
+    status="online"
+  />
+  
+  <Avatar 
+    initials="JS"
+    variant="primary"
+    clickable
+    onClick={() => handleAvatarClick('Jane')}
+    size="md"
+    status="busy"
+  />
+  
+  <Avatar 
+    fallback={<Settings className="w-5 h-5" />}
+    variant="secondary"
+    clickable
+    onClick={() => handleAvatarClick('Settings')}
+    shape="rounded"
+  />
+</div>`,
+      },
+      {
+        title: "Avatar in Lista Utenti",
+        description: "Uso pratico in liste e tabelle",
+        code: `const users = [
+  { id: 1, name: "John Doe", avatar: "/john.jpg", status: "online" },
+  { id: 2, name: "Jane Smith", avatar: null, initials: "JS", status: "busy" },
+  { id: 3, name: "Bob Wilson", avatar: "/bob.jpg", status: "away" },
+  { id: 4, name: "Alice Brown", avatar: null, initials: "AB", status: "offline" },
+];
+
+<div className="space-y-3">
+  {users.map((user) => (
+    <div key={user.id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-bg-hover">
+      <Avatar
+        src={user.avatar}
+        alt={user.name}
+        initials={user.initials}
+        status={user.status}
+        clickable
+        onClick={() => openUserProfile(user.id)}
+        size="md"
+        variant={user.status === 'online' ? 'success' : 'secondary'}
+      />
+      <div>
+        <p className="font-medium text-text-primary">{user.name}</p>
+        <p className="text-sm text-text-secondary capitalize">{user.status}</p>
+      </div>
+    </div>
+  ))}
+</div>`,
+      },
+      {
+        title: "Avatar Group",
+        description: "Gruppo di avatar sovrapposti per team/collaboratori",
+        code: `<div className="flex -space-x-2">
+  <Avatar 
+    src="/user1.jpg" 
+    alt="User 1" 
+    size="md" 
+    bordered
+    className="z-30"
+  />
+  <Avatar 
+    src="/user2.jpg" 
+    alt="User 2" 
+    size="md" 
+    bordered
+    className="z-20"
+  />
+  <Avatar 
+    initials="JS" 
+    variant="primary" 
+    size="md" 
+    bordered
+    className="z-10"
+  />
+  <Avatar 
+    initials="+5" 
+    variant="secondary" 
+    size="md" 
+    bordered
+    clickable
+    onClick={() => showAllMembers()}
+  />
+</div>`,
+      },
+    ],
+    notes:
+      "Initials sono limitate a 2 caratteri e uppercase automatico. Status indicator con border bianco per contrast. Loading state con skeleton per immagini. Keyboard navigation completa per clickable avatars.",
+  },
+  // Entry da aggiungere in COMPONENTS_DATA nel file components.data.ts
+
+  navigationmenu: {
+    id: "navigationmenu",
+    title: "NavigationMenu",
+    description: "Menu di navigazione professionale con Radix UI, keyboard navigation e layout flessibili per header e sidebar",
+    category: "navigation",
+    importPath: 'import { NavigationMenu } from "../core/components/ui";',
+    props: [
+      {
+        name: "items",
+        type: "NavigationMenuItem[]",
+        required: true,
+        description: "Array di menu items con trigger e content",
+      },
+      {
+        name: "orientation",
+        type: '"horizontal" | "vertical"',
+        required: false,
+        defaultValue: '"horizontal"',
+        description: "Orientamento del menu principale",
+      },
+      {
+        name: "triggerVariant",
+        type: '"default" | "ghost" | "minimal"',
+        required: false,
+        defaultValue: '"default"',
+        description: "Stile dei trigger button",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        required: false,
+        defaultValue: '"md"',
+        description: "Dimensione generale del componente",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        required: false,
+        defaultValue: "false",
+        description: "Disabilita tutto il navigation menu",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description: "Classi CSS aggiuntive per il container",
+      },
+    ],
+    examples: [
+      {
+        title: "NavigationMenu Base",
+        description: "Menu semplice con dropdown list",
+        code: `const menuItems = [
+  {
+    trigger: "Prodotti",
+    content: [
+      { 
+        title: "Web App", 
+        href: "/web-app", 
+        description: "Applicazione web completa",
+        icon: <Globe className="w-4 h-4" />
+      },
+      { 
+        title: "Mobile App", 
+        href: "/mobile", 
+        description: "App per iOS e Android",
+        icon: <Smartphone className="w-4 h-4" />
+      },
+      { 
+        title: "Desktop", 
+        href: "/desktop", 
+        description: "Applicazione desktop",
+        icon: <Monitor className="w-4 h-4" />
+      }
+    ]
+  },
+  {
+    trigger: "Soluzioni",
+    content: [
+      { title: "Per Startup", href: "/startup" },
+      { title: "Per Enterprise", href: "/enterprise" },
+      { title: "Per Sviluppatori", href: "/developers" }
+    ]
+  }
+];
+
+<NavigationMenu items={menuItems} />`,
+      },
+      {
+        title: "Menu con Gruppi",
+        description: "NavigationMenu con content raggruppato",
+        code: `const groupedMenuItems = [
+  {
+    trigger: "Risorse",
+    triggerIcon: <BookOpen className="w-4 h-4" />,
+    content: [
+      {
+        title: "Documentazione",
+        links: [
+          { 
+            title: "Getting Started", 
+            href: "/docs/getting-started",
+            badge: { text: "New", variant: "success" }
+          },
+          { 
+            title: "API Reference", 
+            href: "/docs/api",
+            description: "Documentazione completa API"
+          },
+          { 
+            title: "Examples", 
+            href: "/docs/examples",
+            description: "Esempi pratici"
+          }
+        ]
+      },
+      {
+        title: "Community",
+        links: [
+          { 
+            title: "GitHub", 
+            href: "https://github.com/company/repo",
+            external: true,
+            icon: <Github className="w-4 h-4" />
+          },
+          { 
+            title: "Discord", 
+            href: "https://discord.com/invite/company",
+            external: true,
+            icon: <MessageSquare className="w-4 h-4" />
+          }
+        ]
+      }
+    ],
+    layout: "list"
+  }
+];
+
+<NavigationMenu items={groupedMenuItems} />`,
+      },
+      {
+        title: "Layout Grid",
+        description: "NavigationMenu con layout a griglia",
+        code: `const gridMenuItems = [
+  {
+    trigger: "Features",
+    content: [
+      { 
+        title: "Authentication", 
+        href: "/features/auth",
+        description: "Sistema di autenticazione",
+        icon: <Shield className="w-4 h-4" />
+      },
+      { 
+        title: "Database", 
+        href: "/features/database",
+        description: "Gestione dati",
+        icon: <Database className="w-4 h-4" />
+      },
+      { 
+        title: "Analytics", 
+        href: "/features/analytics",
+        description: "Analisi e reporting",
+        icon: <BarChart className="w-4 h-4" />
+      },
+      { 
+        title: "Integrations", 
+        href: "/features/integrations",
+        description: "Integrazioni esterne",
+        icon: <Zap className="w-4 h-4" />
+      }
+    ],
+    layout: "grid",
+    width: "lg"
+  }
+];
+
+<NavigationMenu 
+  items={gridMenuItems}
+  triggerVariant="ghost"
+  size="lg"
+/>`,
+      },
+      {
+        title: "Mega Menu",
+        description: "NavigationMenu con layout mega menu",
+        code: `const megaMenuItems = [
+  {
+    trigger: "Solutions",
+    content: [
+      {
+        title: "By Industry",
+        links: [
+          { title: "E-commerce", href: "/solutions/ecommerce" },
+          { title: "Healthcare", href: "/solutions/healthcare" },
+          { title: "Education", href: "/solutions/education" },
+          { title: "Finance", href: "/solutions/finance" }
+        ]
+      },
+      {
+        title: "By Size",
+        links: [
+          { 
+            title: "Startup", 
+            href: "/solutions/startup",
+            badge: { text: "Popular", variant: "info" }
+          },
+          { title: "SMB", href: "/solutions/smb" },
+          { title: "Enterprise", href: "/solutions/enterprise" }
+        ]
+      },
+      {
+        title: "By Use Case",
+        links: [
+          { title: "CRM", href: "/solutions/crm" },
+          { title: "Project Management", href: "/solutions/pm" },
+          { title: "Team Collaboration", href: "/solutions/collaboration" }
+        ]
+      }
+    ],
+    layout: "mega",
+    width: "xl"
+  }
+];
+
+<NavigationMenu 
+  items={megaMenuItems}
+  triggerVariant="minimal"
+/>`,
+      },
+      {
+        title: "Menu Verticale",
+        description: "NavigationMenu con orientamento verticale per sidebar",
+        code: `const verticalMenuItems = [
+  {
+    trigger: "Dashboard",
+    triggerIcon: <LayoutDashboard className="w-4 h-4" />,
+    content: [
+      { title: "Overview", href: "/dashboard" },
+      { title: "Analytics", href: "/dashboard/analytics" },
+      { title: "Reports", href: "/dashboard/reports" }
+    ]
+  },
+  {
+    trigger: "Projects",
+    triggerIcon: <FolderOpen className="w-4 h-4" />,
+    content: [
+      { 
+        title: "All Projects", 
+        href: "/projects",
+        badge: { text: "12", variant: "default" }
+      },
+      { title: "Active", href: "/projects/active" },
+      { title: "Archived", href: "/projects/archived" }
+    ]
+  },
+  {
+    trigger: "Settings",
+    triggerIcon: <Settings className="w-4 h-4" />,
+    content: [
+      { title: "Profile", href: "/settings/profile" },
+      { title: "Account", href: "/settings/account" },
+      { title: "Billing", href: "/settings/billing" }
+    ]
+  }
+];
+
+<NavigationMenu 
+  items={verticalMenuItems}
+  orientation="vertical"
+  triggerVariant="ghost"
+  size="md"
+  className="w-64"
+/>`,
+      },
+      {
+        title: "Menu con Stati",
+        description: "NavigationMenu con items disabilitati e badge",
+        code: `const stateMenuItems = [
+  {
+    trigger: "Products",
+    content: [
+      { 
+        title: "Basic Plan", 
+        href: "/plans/basic",
+        description: "Per iniziare",
+        badge: { text: "Free", variant: "success" }
+      },
+      { 
+        title: "Pro Plan", 
+        href: "/plans/pro",
+        description: "Per professionisti",
+        badge: { text: "Popular", variant: "info" }
+      },
+      { 
+        title: "Enterprise", 
+        href: "/plans/enterprise",
+        description: "Per grandi team",
+        badge: { text: "Coming Soon", variant: "warning" },
+        disabled: true
+      }
+    ]
+  },
+  {
+    trigger: "Beta Features",
+    disabled: true,
+    content: []
+  }
+];
+
+<NavigationMenu items={stateMenuItems} />`,
+      },
+    ],
+    notes:
+      "Usa Radix UI per keyboard navigation completa. Layout 'list' per menu semplici, 'grid' per features, 'mega' per soluzioni complesse. Orientation 'vertical' per sidebar navigation.",
+  },
 };
 
 // Lista ordinata per Component Explorer

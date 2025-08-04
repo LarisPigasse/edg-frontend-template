@@ -63,4 +63,11 @@
   --color-modal-danger-text: var(--modal-danger-text);
   --color-modal-info-bg: var(--modal-info-bg);
   --color-modal-info-text: var(--modal-info-text);
+
+  /* Accordion animations - mapping */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  /* Progress shimmer animation - mapping */
+  --animate-shimmer: shimmer 2s infinite linear;
 }

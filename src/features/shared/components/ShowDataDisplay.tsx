@@ -1,7 +1,7 @@
 // src/features/shared/components/ShowDataDisplay.tsx
 import React, { useState } from "react";
 import { ThemedSurface, ThemedText } from "../../../core/components/atomic";
-import { Badge, Button, Table, TableLink, type BadgeVariant, type BadgeSize } from "../../../core/components/ui";
+import { Avatar, Badge, Button, Table, TableLink, type BadgeVariant, type BadgeSize } from "../../../core/components/ui";
 import { HeaderGroup, TitledSurface } from "../../../core/components/layout";
 import {
   Clock,
@@ -16,6 +16,10 @@ import {
   Trash2,
   Copy,
   Download,
+  Settings,
+  Crown,
+  Shield,
+  Star,
 } from "lucide-react";
 
 const ShowDataDisplay: React.FC = () => {
@@ -39,6 +43,141 @@ const ShowDataDisplay: React.FC = () => {
     { id: "PRJ-002", name: "API Gateway", type: "Node.js", priority: "medium", status: "in_elaborazione" },
     { id: "PRJ-003", name: "Mobile App", type: "React Native", priority: "low", status: "nuovo" },
   ];
+
+  const userData = [
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john.doe@example.com",
+      role: "Admin",
+      status: "active",
+      avatar: "/api/placeholder/40/40?text=JD",
+      lastSeen: "2 min fa",
+      joinDate: "2023-01-15",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      role: "Editor",
+      status: "active",
+      avatar: null, // Test fallback
+      lastSeen: "1 ora fa",
+      joinDate: "2023-03-22",
+    },
+    {
+      id: 3,
+      name: "Bob Wilson",
+      email: "bob.wilson@example.com",
+      role: "Viewer",
+      status: "inactive",
+      avatar: "/api/placeholder/40/40?text=BW",
+      lastSeen: "3 giorni fa",
+      joinDate: "2023-02-10",
+    },
+    {
+      id: 4,
+      name: "Alice Brown",
+      email: "alice.brown@example.com",
+      role: "Admin",
+      status: "pending",
+      avatar: null,
+      lastSeen: "Mai",
+      joinDate: "2024-01-08",
+    },
+  ];
+
+  const [selectedUser, setSelectedUser] = useState<number | null>(null);
+
+  // Table columns for user data
+  const userColumns = [
+    {
+      header: "Utente",
+      accessor: "user" as const,
+      render: (user: (typeof userData)[0]) => (
+        <div className="flex items-center gap-3">
+          <Avatar
+            src={user.avatar}
+            alt={user.name}
+            initials={user.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")}
+            size="md"
+            status={user.status === "active" ? "online" : user.status === "inactive" ? "offline" : undefined}
+            variant={user.role === "Admin" ? "danger" : user.role === "Editor" ? "warning" : "secondary"}
+            clickable
+            onClick={() => setSelectedUser(user.id)}
+          />
+          <div>
+            <div className="font-medium text-text-primary">{user.name}</div>
+            <div className="text-sm text-text-secondary">{user.email}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      header: "Ruolo",
+      accessor: "role" as const,
+      render: (user: (typeof userData)[0]) => (
+        <div className="flex items-center gap-2">
+          {user.role === "Admin" && <Crown className="w-4 h-4 text-amber-500" />}
+          {user.role === "Editor" && <Shield className="w-4 h-4 text-blue-500" />}
+          <Badge status={user.role.toLowerCase()}>{user.role}</Badge>
+        </div>
+      ),
+    },
+    {
+      header: "Status",
+      accessor: "status" as const,
+      render: (user: (typeof userData)[0]) => <Badge status={user.status}>{user.status}</Badge>,
+    },
+    {
+      header: "Ultimo Accesso",
+      accessor: "lastSeen" as const,
+    },
+    {
+      header: "Email",
+      accessor: "email" as const,
+      render: (user: (typeof userData)[0]) => (
+        <TableLink variant="primary" onClick={() => window.open(`mailto:${user.email}`)}>
+          {user.email}
+        </TableLink>
+      ),
+    },
+  ];
+
+  // Mock team data for avatar groups
+  const teams = [
+    {
+      id: 1,
+      name: "Frontend Team",
+      members: [
+        { name: "John Doe", avatar: "/api/placeholder/32/32?text=JD", status: "online" },
+        { name: "Jane Smith", avatar: null, initials: "JS", status: "busy" },
+        { name: "Bob Wilson", avatar: "/api/placeholder/32/32?text=BW", status: "away" },
+        { name: "Alice Brown", avatar: null, initials: "AB", status: "offline" },
+        { name: "Charlie Davis", avatar: "/api/placeholder/32/32?text=CD", status: "online" },
+      ],
+      project: "React Dashboard",
+    },
+    {
+      id: 2,
+      name: "Backend Team",
+      members: [
+        { name: "Eva Martinez", avatar: "/api/placeholder/32/32?text=EM", status: "online" },
+        { name: "Frank Thompson", avatar: null, initials: "FT", status: "busy" },
+        { name: "Grace Lee", avatar: "/api/placeholder/32/32?text=GL", status: "online" },
+      ],
+      project: "API Gateway",
+    },
+  ];
+
+  const handleUserClick = (userId: number) => {
+    setSelectedUser(userId);
+    const user = userData.find((u) => u.id === userId);
+    console.log("Clicked user:", user?.name);
+  };
 
   const handleRowClick = (id: string) => {
     setSelectedRow(selectedRow === id ? null : id);
@@ -510,6 +649,175 @@ const ShowDataDisplay: React.FC = () => {
           </div>
         </div>
       </ThemedSurface>
+
+      {/* Avatar Showcase */}
+      <TitledSurface title="Avatar Components" variant="primary" padding="lg">
+        <div className="space-y-6">
+          {/* Basic Avatars */}
+          <div>
+            <ThemedText variant="label" className="font-medium mb-3" block>
+              Avatar Base - Dimensioni e Forme
+            </ThemedText>
+            <div className="flex items-center gap-4 mb-4">
+              <Avatar initials="XS" size="xs" variant="primary" />
+              <Avatar initials="SM" size="sm" variant="secondary" />
+              <Avatar initials="MD" size="md" variant="success" />
+              <Avatar initials="LG" size="lg" variant="warning" />
+              <Avatar initials="XL" size="xl" variant="danger" />
+            </div>
+
+            <div className="flex items-center gap-4">
+              <Avatar initials="CI" shape="circle" variant="primary" size="lg" />
+              <Avatar initials="SQ" shape="square" variant="secondary" size="lg" />
+              <Avatar initials="RO" shape="rounded" variant="info" size="lg" />
+            </div>
+          </div>
+
+          {/* Status Indicators */}
+          <div>
+            <ThemedText variant="label" className="font-medium mb-3" block>
+              Status Indicators
+            </ThemedText>
+            <div className="flex items-center gap-6">
+              <Avatar src="/api/placeholder/48/48?text=ON" alt="Online User" status="online" size="lg" bordered />
+              <Avatar initials="BU" status="busy" variant="danger" size="lg" bordered />
+              <Avatar initials="AW" status="away" variant="warning" size="lg" bordered />
+              <Avatar initials="OF" status="offline" variant="secondary" size="lg" bordered />
+            </div>
+          </div>
+
+          {/* Interactive Avatars */}
+          <div>
+            <ThemedText variant="label" className="font-medium mb-3" block>
+              Avatar Interattivi
+            </ThemedText>
+            <div className="flex items-center gap-4">
+              <Avatar
+                src="/api/placeholder/48/48?text=PR"
+                alt="Profile Avatar"
+                clickable
+                onClick={() => handleUserClick(1)}
+                bordered
+                size="lg"
+                status="online"
+              />
+              <Avatar initials="JS" variant="primary" clickable onClick={() => handleUserClick(2)} size="md" status="busy" />
+              <Avatar
+                fallback={<Settings className="w-5 h-5" />}
+                variant="secondary"
+                clickable
+                onClick={() => console.log("Settings clicked")}
+                shape="rounded"
+                size="md"
+              />
+            </div>
+
+            {selectedUser && (
+              <div className="mt-3 p-3 bg-bg-info rounded-lg">
+                <ThemedText variant="primary" className="text-sm">
+                  Avatar cliccato: User ID {selectedUser}
+                </ThemedText>
+              </div>
+            )}
+          </div>
+        </div>
+      </TitledSurface>
+
+      {/* Avatar Groups */}
+      <TitledSurface title="Avatar Groups - Team Display" variant="secondary" padding="lg">
+        <div className="space-y-6">
+          {teams.map((team) => (
+            <div key={team.id} className="p-4 border border-border-default rounded-lg">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <ThemedText variant="primary" className="font-semibold" block>
+                    {team.name}
+                  </ThemedText>
+                  <ThemedText variant="secondary" className="text-sm">
+                    {team.project} • {team.members.length} membri
+                  </ThemedText>
+                </div>
+                <Badge variant="info">{team.members.length}</Badge>
+              </div>
+
+              {/* Avatar Group */}
+              <div className="flex items-center">
+                <div className="flex -space-x-2 mr-3">
+                  {team.members.slice(0, 4).map((member, index) => (
+                    <Avatar
+                      key={index}
+                      src={member.avatar}
+                      alt={member.name}
+                      initials={member.initials}
+                      size="md"
+                      status={member.status as any}
+                      bordered
+                      clickable
+                      className={`z-${40 - index * 10}`}
+                      onClick={() => console.log("Member clicked:", member.name)}
+                    />
+                  ))}
+                  {team.members.length > 4 && (
+                    <Avatar
+                      initials={`+${team.members.length - 4}`}
+                      variant="secondary"
+                      size="md"
+                      bordered
+                      clickable
+                      onClick={() => console.log("Show all members for", team.name)}
+                    />
+                  )}
+                </div>
+                <ThemedText variant="secondary" className="text-xs">
+                  {team.members.filter((m) => m.status === "online").length} online
+                </ThemedText>
+              </div>
+            </div>
+          ))}
+        </div>
+      </TitledSurface>
+
+      {/* Table with Avatars */}
+      <TitledSurface title="Tabella Utenti con Avatar" variant="modal" padding="lg">
+        <div className="space-y-4">
+          <ThemedText variant="secondary" className="text-sm">
+            Esempio di integrazione Avatar in tabelle per liste utenti con status e ruoli.
+          </ThemedText>
+
+          <Table data={userData} columns={userColumns} keyExtractor={(item) => item.id.toString()} hoverable size="md" />
+
+          {selectedUser && (
+            <div className="p-4 bg-bg-info rounded-lg">
+              <ThemedText variant="primary" className="font-medium mb-2" block>
+                Utente Selezionato:
+              </ThemedText>
+              {(() => {
+                const user = userData.find((u) => u.id === selectedUser);
+                return user ? (
+                  <div className="flex items-center gap-3">
+                    <Avatar
+                      src={user.avatar}
+                      alt={user.name}
+                      initials={user.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                      status={user.status === "active" ? "online" : "offline"}
+                      variant={user.role === "Admin" ? "danger" : "primary"}
+                    />
+                    <div>
+                      <div className="font-medium">{user.name}</div>
+                      <div className="text-sm text-text-secondary">
+                        {user.role} • {user.email}
+                      </div>
+                    </div>
+                  </div>
+                ) : null;
+              })()}
+            </div>
+          )}
+        </div>
+      </TitledSurface>
     </div>
   );
 };

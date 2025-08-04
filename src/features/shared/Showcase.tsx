@@ -2,10 +2,20 @@
 import React, { useState } from "react";
 import { ThemedSurface, ThemedText } from "../../core/components/atomic";
 import { Button } from "../../core/components/ui";
-import { ShowButtons, ShowTheme, ShowForms, ShowDataDisplay, ShowFeedback, ShowLayout } from "./components/";
+import {
+  ShowButtons,
+  ShowTheme,
+  ShowForms,
+  ShowDataDisplay,
+  ShowFeedback,
+  ShowLayout,
+  ShowDatePicker,
+  ShowTime,
+  ShowNavigationMenu,
+} from "./components/";
 import { HeaderGroup } from "../../core/components/layout";
 
-type TabType = "theme" | "buttons" | "forms" | "data-display" | "feedback" | "layout" | "actions";
+type TabType = "theme" | "buttons" | "forms" | "data-display" | "feedback" | "layout" | "date-time" | "actions";
 
 interface Tab {
   id: TabType;
@@ -36,6 +46,9 @@ const Showcase: React.FC = () => {
     { id: "data-display", label: "Data Display", component: ShowDataDisplay, isActive: false, icon: "" },
     { id: "feedback", label: "Feedback", component: ShowFeedback, isActive: false, icon: "" },
     { id: "layout", label: "Layout", component: ShowLayout, isActive: false, icon: "" },
+    { id: "date", label: "Date", component: ShowDatePicker, isActive: false, icon: "⚡" },
+    { id: "time", label: "Time", component: ShowTime, isActive: false, icon: "⚡" },
+    { id: "navigation", label: "Navigation Menu", component: ShowNavigationMenu, isActive: false, icon: "⚡" },
     { id: "actions", label: "Actions", component: ShowActions, isActive: false, icon: "⚡" },
   ];
 
