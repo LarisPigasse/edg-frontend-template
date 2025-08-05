@@ -1,7 +1,7 @@
 # EDG Frontend Template - Catalogo Componenti
 
-**Versione**: 2.2  
-**Data aggiornamento**: 31 Luglio 2025  
+**Versione**: 2.3  
+**Data aggiornamento**: 5 Agosto 2025  
 **Stack**: React + TypeScript + Tailwind CSS + Radix UI
 
 ---
@@ -9,7 +9,7 @@
 ## Indice
 
 - [🎨 Componenti Atomici](#-componenti-atomici)
-- [🖼️ Componenti Info](#️-componenti-info)  
+- [🖼️ Componenti Info](#️-componenti-info)
 - [🏗️ Componenti Layout](#️-componenti-layout)
 - [🧭 Componenti Navigation](#-componenti-navigation)
 - [🔧 Componenti UI](#-componenti-ui)
@@ -22,6 +22,7 @@
 ## 🎨 Componenti Atomici
 
 ### ThemedSurface
+
 **Location**: `src/core/components/atomic/ThemedSurface.tsx`
 
 **Purpose**: Componente base per gestire sfondi, bordi e contenitori con theming automatico.
@@ -38,6 +39,7 @@ interface ThemedSurfaceProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Card semplice
 <ThemedSurface variant="primary" borderVariant="default">
@@ -58,6 +60,7 @@ interface ThemedSurfaceProps {
 ---
 
 ### ThemedText
+
 **Location**: `src/core/components/atomic/ThemedText.tsx`
 
 **Purpose**: Componente per testi semantici con theming automatico.
@@ -72,6 +75,7 @@ interface ThemedTextProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Titolo principale
 <ThemedText variant="primary" as="h1" className="text-2xl font-bold">
@@ -92,6 +96,7 @@ interface ThemedTextProps {
 ---
 
 ### ThemedImage
+
 **Location**: `src/core/components/atomic/ThemedImage.tsx`
 
 **Purpose**: Immagini che cambiano automaticamente con il tema (light/dark).
@@ -105,18 +110,19 @@ interface ThemedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Logo che cambia con il tema
-<ThemedImage 
-  imageKey="logo" 
-  alt="Company Logo" 
+<ThemedImage
+  imageKey="logo"
+  alt="Company Logo"
   className="w-32 h-auto"
 />
 
 // Icona nel header
-<ThemedImage 
-  imageKey="icon" 
-  alt="App Icon" 
+<ThemedImage
+  imageKey="icon"
+  alt="App Icon"
   className="w-8 h-8"
 />
 ```
@@ -124,6 +130,7 @@ interface ThemedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 ---
 
 ### ThemedBorder
+
 **Location**: `src/core/components/atomic/ThemedBorder.tsx`
 
 **Purpose**: Wrapper per elementi che necessitano solo bordi tematici.
@@ -141,6 +148,7 @@ interface ThemedBorderProps {
 ---
 
 ### ThemedShadow
+
 **Location**: `src/core/components/atomic/ThemedShadow.tsx`
 
 **Purpose**: Wrapper per gestire ombre responsive al tema.
@@ -159,13 +167,14 @@ interface ThemedShadowProps {
 ## 🖼️ Componenti Info
 
 ### VersionInfo
+
 **Location**: `src/core/components/info/VersionInfo.tsx`
 
 **Purpose**: Visualizza informazioni sulla versione dell'applicazione con dettagli di build.
 
 ```typescript
 interface VersionInfoProps {
-  variant?: 'compact' | 'detailed';
+  variant?: "compact" | "detailed";
   showEnvironment?: boolean;
   showBuildTime?: boolean;
   version?: string;
@@ -174,13 +183,14 @@ interface VersionInfoProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Version info compatta nel footer
 <VersionInfo variant="compact" />
 
 // Version info dettagliata in settings
-<VersionInfo 
-  variant="detailed" 
+<VersionInfo
+  variant="detailed"
   showEnvironment={true}
   showBuildTime={true}
 />
@@ -189,13 +199,14 @@ interface VersionInfoProps {
 ---
 
 ### ConnectionStatus
+
 **Location**: `src/core/components/info/ConnectionStatus.tsx`
 
 **Purpose**: Monitora e visualizza lo stato della connessione al backend in real-time.
 
 ```typescript
 interface ConnectionStatusProps {
-  variant?: 'indicator' | 'detailed';
+  variant?: "indicator" | "detailed";
   pollInterval?: number;
   healthEndpoint?: string;
   showRetryButton?: boolean;
@@ -205,12 +216,13 @@ interface ConnectionStatusProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Indicatore semplice nell'header
 <ConnectionStatus variant="indicator" />
 
 // Status dettagliato con retry
-<ConnectionStatus 
+<ConnectionStatus
   variant="detailed"
   pollInterval={30000}
   showRetryButton={true}
@@ -221,6 +233,7 @@ interface ConnectionStatusProps {
 ---
 
 ### QuickLink
+
 **Location**: `src/core/components/info/QuickLink.tsx`
 
 **Purpose**: Link rapidi con icone, badge e supporto per link interni/esterni.
@@ -231,9 +244,9 @@ interface QuickLinkProps {
   description?: string;
   href: string;
   icon?: keyof typeof iconMap;
-  badge?: { text: string; variant?: BadgeVariant; };
-  size?: 'sm' | 'md' | 'lg';
-  variant?: 'card' | 'list' | 'minimal';
+  badge?: { text: string; variant?: BadgeVariant };
+  size?: "sm" | "md" | "lg";
+  variant?: "card" | "list" | "minimal";
   openInNewTab?: boolean;
   className?: string;
   onClick?: () => void;
@@ -241,9 +254,10 @@ interface QuickLinkProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Link interno con icona
-<QuickLink 
+<QuickLink
   title="Dashboard"
   description="Vai alla dashboard principale"
   href="/dashboard"
@@ -252,7 +266,7 @@ interface QuickLinkProps {
 />
 
 // Link esterno con badge
-<QuickLink 
+<QuickLink
   title="GitHub"
   href="https://github.com/user/repo"
   icon="github"
@@ -264,6 +278,7 @@ interface QuickLinkProps {
 ---
 
 ### UserAvatar
+
 **Location**: `src/core/components/info/UserAvatar.tsx`
 
 **Purpose**: Avatar utente con iniziali e varianti colore.
@@ -280,6 +295,7 @@ interface UserAvatarProps {
 ---
 
 ### Logo
+
 **Location**: `src/core/components/info/Logo.tsx`
 
 **Purpose**: Logo dell'applicazione con modalità compatta e completa.
@@ -296,6 +312,7 @@ interface LogoProps {
 ## 🏗️ Componenti Layout
 
 ### MainLayout
+
 **Location**: `src/core/components/layout/MainLayout.tsx`
 
 **Purpose**: Layout principale dell'applicazione con gestione sidebar e footer.
@@ -307,6 +324,7 @@ interface MainLayoutProps {
 ```
 
 **Features:**
+
 - Grid layout responsive (header, content, footer)
 - Gestione automatica sidebar margins
 - Integrazione con Redux UI state
@@ -315,6 +333,7 @@ interface MainLayoutProps {
 ---
 
 ### Header
+
 **Location**: `src/core/components/layout/Header.tsx`
 
 **Purpose**: Header dell'applicazione con navigazione e controlli utente.
@@ -327,6 +346,7 @@ interface HeaderProps {
 ```
 
 **Features:**
+
 - Logo condizionale
 - Navigation menu desktop/mobile
 - User controls (avatar, settings)
@@ -335,11 +355,13 @@ interface HeaderProps {
 ---
 
 ### Sidebar
+
 **Location**: `src/core/components/layout/Sidebar.tsx`
 
 **Purpose**: Barra laterale con navigazione e controlli.
 
 **Features:**
+
 - Width dinamica (w-12 compressa, w-64 espansa)
 - Navigation items con icone semantiche
 - Logo adattivo
@@ -348,6 +370,7 @@ interface HeaderProps {
 ---
 
 ### Footer
+
 **Location**: `src/core/components/layout/Footer.tsx`
 
 **Purpose**: Footer dell'applicazione con informazioni e link.
@@ -362,6 +385,7 @@ interface FooterProps {
 ---
 
 ### CenteredPage
+
 **Location**: `src/core/components/layout/CenteredPage.tsx`
 
 **Purpose**: Container per pagine che necessitano centratura verticale (login, 404, loading).
@@ -369,9 +393,9 @@ interface FooterProps {
 ```typescript
 interface CenteredPageProps {
   children: React.ReactNode;
-  variant?: 'base' | 'primary' | 'secondary' | 'modal';
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'none';
-  padding?: 'sm' | 'md' | 'lg';
+  variant?: "base" | "primary" | "secondary" | "modal";
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "none";
+  padding?: "sm" | "md" | "lg";
   isLoading?: boolean;
   loadingMessage?: string;
   animate?: boolean;
@@ -380,6 +404,7 @@ interface CenteredPageProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Pagina di login
 <CenteredPage maxWidth="md" animate={true}>
@@ -387,8 +412,8 @@ interface CenteredPageProps {
 </CenteredPage>
 
 // Loading page
-<CenteredPage 
-  isLoading={true} 
+<CenteredPage
+  isLoading={true}
   loadingMessage="Caricamento dati..."
 />
 ```
@@ -396,6 +421,7 @@ interface CenteredPageProps {
 ---
 
 ### CenteredSection
+
 **Location**: `src/core/components/layout/CenteredSection.tsx`
 
 **Purpose**: Container per sezioni interne che necessitano centratura.
@@ -403,24 +429,25 @@ interface CenteredPageProps {
 ```typescript
 interface CenteredSectionProps {
   children: React.ReactNode;
-  variant?: 'base' | 'primary' | 'secondary' | 'modal' | 'info';
-  borderVariant?: 'none' | 'thin' | 'default' | 'strong';
-  height?: 'auto' | 'screen' | 'half' | 'tall' | string;
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'none';
-  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  align?: 'start' | 'center' | 'end';
+  variant?: "base" | "primary" | "secondary" | "modal" | "info";
+  borderVariant?: "none" | "thin" | "default" | "strong";
+  height?: "auto" | "screen" | "half" | "tall" | string;
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "none";
+  padding?: "none" | "sm" | "md" | "lg" | "xl";
+  align?: "start" | "center" | "end";
   icon?: keyof typeof iconMap;
-  iconSize?: 'sm' | 'md' | 'lg' | 'xl';
+  iconSize?: "sm" | "md" | "lg" | "xl";
   rounded?: boolean;
   className?: string;
 }
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Empty state con icona
-<CenteredSection 
-  height="half" 
+<CenteredSection
+  height="half"
   icon="info"
   variant="info"
   align="center"
@@ -437,6 +464,7 @@ interface CenteredSectionProps {
 ---
 
 ### HeaderGroup
+
 **Location**: `src/core/components/layout/HeaderGroup.tsx`
 
 **Purpose**: Titolo e sottotitolo con spacing ottimizzato.
@@ -454,6 +482,7 @@ interface HeaderGroupProps {
 ---
 
 ### TitledSurface
+
 **Location**: `src/core/components/layout/TitledSurface.tsx`
 
 **Purpose**: Surface con titolo che interrompe il bordo superiore (fieldset-style).
@@ -474,11 +503,13 @@ interface TitledSurfaceProps {
 ## 🧭 Componenti Navigation
 
 ### SettingsMenu
+
 **Location**: `src/core/components/navigation/SettingsMenu.tsx`
 
 **Purpose**: Menu delle impostazioni dell'applicazione.
 
 **Features:**
+
 - Dark mode toggle
 - Layout controls (sidebar, footer)
 - Auto-save information
@@ -487,11 +518,13 @@ interface TitledSurfaceProps {
 ---
 
 ### UserMenu
+
 **Location**: `src/core/components/navigation/UserMenu.tsx`
 
 **Purpose**: Menu del profilo utente.
 
 **Features:**
+
 - User info display
 - Profile navigation
 - Logout functionality
@@ -500,6 +533,7 @@ interface TitledSurfaceProps {
 ---
 
 ### MobileMenu
+
 **Location**: `src/core/components/navigation/MobileMenu.tsx`
 
 **Purpose**: Menu di navigazione per dispositivi mobile.
@@ -509,14 +543,15 @@ interface TitledSurfaceProps {
 ## 🔧 Componenti UI
 
 ### Button
+
 **Location**: `src/core/components/ui/Button.tsx`
 
 **Purpose**: Componente button con varianti e stati.
 
 ```typescript
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger";
+  size?: "sm" | "md" | "lg";
   isLoading?: boolean;
   loadingText?: string;
   leftIcon?: React.ReactNode;
@@ -526,6 +561,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Button primario
 <Button variant="primary" size="lg">
@@ -533,8 +569,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 </Button>
 
 // Button con loading
-<Button 
-  variant="primary" 
+<Button
+  variant="primary"
   isLoading={isSubmitting}
   loadingText="Salvando..."
 >
@@ -542,8 +578,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 </Button>
 
 // Button con icone
-<Button 
-  variant="outline" 
+<Button
+  variant="outline"
   leftIcon={<PlusIcon />}
   rightIcon={<ArrowRightIcon />}
 >
@@ -554,6 +590,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 ---
 
 ### Input
+
 **Location**: `src/core/components/ui/Input.tsx`
 
 **Purpose**: Campo input con floating label e validazione.
@@ -564,23 +601,24 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   helperText?: string;
   required?: boolean;
-  variant?: 'default' | 'error';
+  variant?: "default" | "error";
   fullWidth?: boolean;
 }
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Input base
-<Input 
-  label="Email" 
-  type="email" 
-  required 
+<Input
+  label="Email"
+  type="email"
+  required
   placeholder="Inserisci la tua email"
 />
 
 // Input con errore
-<Input 
+<Input
   label="Password"
   type="password"
   error="Password troppo corta"
@@ -591,6 +629,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 ---
 
 ### TextArea
+
 **Location**: `src/core/components/ui/TextArea.tsx`
 
 **Purpose**: Area di testo con auto-resize e character counter.
@@ -608,6 +647,7 @@ interface TextAreaProps extends InputProps {
 ---
 
 ### Select
+
 **Location**: `src/core/components/ui/Select.tsx`
 
 **Purpose**: Select dropdown con Radix UI e floating label.
@@ -628,6 +668,7 @@ interface SelectProps {
 ---
 
 ### Checkbox
+
 **Location**: `src/core/components/ui/Checkbox.tsx`
 
 **Purpose**: Checkbox con stati avanzati e Radix UI.
@@ -638,7 +679,7 @@ interface CheckboxProps {
   description?: string;
   error?: string;
   required?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   checked?: boolean;
   indeterminate?: boolean;
   onCheckedChange?: (checked: boolean) => void;
@@ -649,6 +690,7 @@ interface CheckboxProps {
 ---
 
 ### Switch
+
 **Location**: `src/core/components/ui/Switch.tsx`
 
 **Purpose**: Toggle switch iOS-style con Radix UI.
@@ -667,6 +709,7 @@ interface SwitchProps {
 ---
 
 ### RadioGroup
+
 **Location**: `src/core/components/ui/RadioGroup.tsx`
 
 **Purpose**: Gruppo di radio button con Radix UI.
@@ -677,8 +720,8 @@ interface RadioGroupProps {
   options: RadioOption[];
   value?: string;
   onValueChange?: (value: string) => void;
-  orientation?: 'vertical' | 'horizontal';
-  size?: 'sm' | 'md' | 'lg';
+  orientation?: "vertical" | "horizontal";
+  size?: "sm" | "md" | "lg";
   error?: string;
   required?: boolean;
   className?: string;
@@ -688,6 +731,7 @@ interface RadioGroupProps {
 ---
 
 ### FormField
+
 **Location**: `src/core/components/ui/FormField.tsx`
 
 **Purpose**: Wrapper universale per eliminare codice ripetitivo nei form.
@@ -706,6 +750,7 @@ interface FormFieldProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Con componenti che hanno label interna
 <FormField error={errors.email} helperText="Formato email" hideLabel>
@@ -721,6 +766,7 @@ interface FormFieldProps {
 ---
 
 ### Label
+
 **Location**: `src/core/components/ui/Label.tsx`
 
 **Purpose**: Label standalone con varianti semantiche.
@@ -728,9 +774,9 @@ interface FormFieldProps {
 ```typescript
 interface LabelProps {
   children: React.ReactNode;
-  variant?: 'default' | 'required' | 'disabled' | 'error' | 'info';
-  size?: 'xs' | 'sm' | 'md' | 'lg';
-  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
+  variant?: "default" | "required" | "disabled" | "error" | "info";
+  size?: "xs" | "sm" | "md" | "lg";
+  weight?: "normal" | "medium" | "semibold" | "bold";
   required?: boolean;
   optional?: boolean;
   htmlFor?: string;
@@ -741,6 +787,7 @@ interface LabelProps {
 ---
 
 ### Card
+
 **Location**: `src/core/components/ui/Card.tsx`
 
 **Purpose**: Card container con varianti e theming.
@@ -748,8 +795,8 @@ interface LabelProps {
 ```typescript
 interface CardProps {
   children: React.ReactNode;
-  variant?: 'default' | 'outlined' | 'elevated';
-  padding?: 'none' | 'sm' | 'md' | 'lg';
+  variant?: "default" | "outlined" | "elevated";
+  padding?: "none" | "sm" | "md" | "lg";
   className?: string;
 }
 ```
@@ -757,6 +804,7 @@ interface CardProps {
 ---
 
 ### Badge
+
 **Location**: `src/core/components/ui/Badge.tsx`
 
 **Purpose**: Badge per etichette e stati.
@@ -764,8 +812,8 @@ interface CardProps {
 ```typescript
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'default' | 'success' | 'warning' | 'error' | 'info';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "default" | "success" | "warning" | "error" | "info";
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 ```
@@ -773,6 +821,7 @@ interface BadgeProps {
 ---
 
 ### Modal
+
 **Location**: `src/core/components/ui/Modal.tsx`
 
 **Purpose**: Modal base con overlay e gestione focus.
@@ -783,7 +832,7 @@ interface ModalProps {
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   showCloseButton?: boolean;
   closeOnOverlayClick?: boolean;
   closeOnEscape?: boolean;
@@ -793,6 +842,7 @@ interface ModalProps {
 ---
 
 ### ConfirmModal
+
 **Location**: `src/core/components/ui/ConfirmModal.tsx`
 
 **Purpose**: Modal di conferma per azioni destructive.
@@ -806,7 +856,7 @@ interface ConfirmModalProps {
   message: string;
   confirmText?: string;
   cancelText?: string;
-  variant?: 'default' | 'danger';
+  variant?: "default" | "danger";
   isLoading?: boolean;
 }
 ```
@@ -814,6 +864,7 @@ interface ConfirmModalProps {
 ---
 
 ### Table
+
 **Location**: `src/core/components/ui/Table.tsx`
 
 **Purpose**: Tabella responsive con theming.
@@ -830,6 +881,7 @@ interface TableProps {
 ---
 
 ### TableLink
+
 **Location**: `src/core/components/ui/TableLink.tsx`
 
 **Purpose**: Link per elementi cliccabili nelle righe della tabella.
@@ -846,13 +898,14 @@ interface TableLinkProps {
 ---
 
 ### Spinner
+
 **Location**: `src/core/components/ui/Spinner.tsx`
 
 **Purpose**: Spinner di caricamento con varianti.
 
 ```typescript
 interface SpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 ```
@@ -860,6 +913,7 @@ interface SpinnerProps {
 ---
 
 ### Alert
+
 **Location**: `src/core/components/ui/Alert.tsx`
 
 **Purpose**: Alert per messaggi e notifiche.
@@ -867,7 +921,7 @@ interface SpinnerProps {
 ```typescript
 interface AlertProps {
   children: React.ReactNode;
-  variant?: 'info' | 'success' | 'warning' | 'error';
+  variant?: "info" | "success" | "warning" | "error";
   title?: string;
   dismissible?: boolean;
   onDismiss?: () => void;
@@ -878,13 +932,14 @@ interface AlertProps {
 ---
 
 ### Separator
+
 **Location**: `src/core/components/ui/Separator.tsx`
 
 **Purpose**: Separatore visuale con orientazione.
 
 ```typescript
 interface SeparatorProps {
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   className?: string;
 }
 ```
@@ -892,6 +947,7 @@ interface SeparatorProps {
 ---
 
 ### Tooltip
+
 **Location**: `src/core/components/ui/Tooltip.tsx`
 
 **Purpose**: Tooltip con Radix UI e theming automatico.
@@ -900,8 +956,8 @@ interface SeparatorProps {
 interface TooltipProps {
   content: React.ReactNode;
   children: React.ReactNode;
-  side?: 'top' | 'right' | 'bottom' | 'left';
-  align?: 'start' | 'center' | 'end';
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
   delayDuration?: number;
   className?: string;
 }
@@ -910,6 +966,7 @@ interface TooltipProps {
 ---
 
 ### InfoCard
+
 **Location**: `src/core/components/ui/InfoCard.tsx`
 
 **Purpose**: Card informativa con icona e contenuto strutturato.
@@ -919,7 +976,7 @@ interface InfoCardProps {
   title: string;
   description?: string;
   icon?: keyof typeof iconMap;
-  variant?: 'default' | 'success' | 'warning' | 'error' | 'info';
+  variant?: "default" | "success" | "warning" | "error" | "info";
   children?: React.ReactNode;
   className?: string;
 }
@@ -928,6 +985,7 @@ interface InfoCardProps {
 ---
 
 ### Accordion
+
 **Location**: `src/core/components/ui/Accordion.tsx`
 
 **Purpose**: Componente per contenuti collassibili organizzati in sezioni.
@@ -953,6 +1011,7 @@ interface AccordionProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Accordion single con collapsible
 <Accordion
@@ -978,6 +1037,7 @@ interface AccordionProps {
 ---
 
 ### Progress
+
 **Location**: `src/core/components/ui/Progress.tsx`
 
 **Purpose**: Progress bar per visualizzare stati di avanzamento.
@@ -996,23 +1056,24 @@ interface ProgressProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Progress bar base
 <Progress value={75} variant="success" showLabel />
 
 // Progress indeterminata con label
-<Progress 
-  indeterminate 
-  variant="info" 
-  label="Caricamento dati..." 
-  showLabel 
+<Progress
+  indeterminate
+  variant="info"
+  label="Caricamento dati..."
+  showLabel
 />
 
 // Progress con dimensioni custom
-<Progress 
-  value={45} 
-  max={100} 
-  size="lg" 
+<Progress
+  value={45}
+  max={100}
+  size="lg"
   variant="warning"
   showLabel
 />
@@ -1021,6 +1082,7 @@ interface ProgressProps {
 ---
 
 ### Tabs
+
 **Location**: `src/core/components/ui/Tabs.tsx`
 
 **Purpose**: Componente per organizzare contenuti in schede navigabili.
@@ -1044,6 +1106,7 @@ interface TabsProps {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 // Tabs base
 <Tabs
@@ -1067,6 +1130,7 @@ interface TabsProps {
 ---
 
 ### Toast
+
 **Location**: `src/core/components/ui/Toast.tsx`
 
 **Purpose**: Sistema di notifiche temporanee con gestione automatica della coda.
@@ -1086,6 +1150,7 @@ interface ToastProps {
 ```
 
 **Utilizzo tramite hook:**
+
 ```tsx
 const { toast } = useToast();
 
@@ -1101,15 +1166,240 @@ toast.danger("Errore durante il salvataggio");
 toast.success("Elemento eliminato", {
   action: {
     label: "Annulla",
-    onClick: () => undoDelete()
-  }
+    onClick: () => undoDelete(),
+  },
 });
 
 // Toast permanente
-toast.info("Messaggio importante", { 
+toast.info("Messaggio importante", {
   duration: 0,
-  title: "Attenzione" 
+  title: "Attenzione",
 });
+```
+
+---
+
+### DatePicker
+
+**Location**: `src/core/components/ui/DatePicker.tsx`
+
+**Purpose**: Selettore date con popup calendario e validazione input.
+
+```typescript
+interface DatePickerProps {
+  label?: string;
+  value?: Date;
+  onChange?: (date: Date | undefined) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  required?: boolean;
+  minDate?: Date;
+  maxDate?: Date;
+  format?: string;
+  className?: string;
+}
+```
+
+**Esempi d'uso:**
+
+```tsx
+// Date picker base
+<DatePicker
+  label="Data di nascita"
+  placeholder="Seleziona una data"
+  value={birthDate}
+  onChange={setBirthDate}
+/>
+
+// Date picker con validazione
+<DatePicker
+  label="Data evento"
+  required
+  minDate={new Date()}
+  error={dateError}
+  value={eventDate}
+  onChange={setEventDate}
+/>
+
+// Date picker con formato custom
+<DatePicker
+  label="Data scadenza"
+  format="dd/MM/yyyy"
+  maxDate={new Date(2030, 11, 31)}
+  value={expiryDate}
+  onChange={setExpiryDate}
+/>
+```
+
+---
+
+### TimePicker
+
+**Location**: `src/core/components/ui/TimePicker.tsx`
+
+**Purpose**: Selettore orario con supporto 12/24h e controlli step.
+
+```typescript
+interface TimePickerProps {
+  label?: string;
+  value?: string;
+  onChange?: (time: string) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  required?: boolean;
+  format?: "12h" | "24h";
+  step?: number;
+  minTime?: string;
+  maxTime?: string;
+  className?: string;
+}
+```
+
+**Esempi d'uso:**
+
+```tsx
+// Time picker base
+<TimePicker
+  label="Orario inizio"
+  placeholder="Seleziona orario"
+  value={startTime}
+  onChange={setStartTime}
+  format="24h"
+/>
+
+// Time picker 12h con step
+<TimePicker
+  label="Orario sveglia"
+  format="12h"
+  step={15}
+  value={alarmTime}
+  onChange={setAlarmTime}
+/>
+
+// Time picker con range
+<TimePicker
+  label="Orario appuntamento"
+  minTime="09:00"
+  maxTime="18:00"
+  required
+  error={timeError}
+  value={appointmentTime}
+  onChange={setAppointmentTime}
+/>
+```
+
+---
+
+### Avatar
+
+**Location**: `src/core/components/ui/Avatar.tsx`
+
+**Purpose**: Avatar utente con immagine, fallback initials e status indicators.
+
+```typescript
+interface AvatarProps {
+  src?: string;
+  alt?: string;
+  fallback?: string;
+  size?: "sm" | "md" | "lg" | "xl";
+  variant?: "circular" | "square";
+  status?: "online" | "offline" | "busy" | "away";
+  showStatus?: boolean;
+  className?: string;
+  onClick?: () => void;
+}
+```
+
+**Esempi d'uso:**
+
+```tsx
+// Avatar base con immagine
+<Avatar
+  src="/path/to/avatar.jpg"
+  alt="John Doe"
+  fallback="JD"
+  size="lg"
+/>
+
+// Avatar con status online
+<Avatar
+  src={user.avatar}
+  alt={user.name}
+  fallback={getInitials(user.name)}
+  status="online"
+  showStatus
+  size="md"
+/>
+
+// Avatar cliccabile senza immagine
+<Avatar
+  fallback="AD"
+  size="sm"
+  variant="square"
+  onClick={() => openProfile()}
+  className="cursor-pointer"
+/>
+```
+
+---
+
+### NavigationMenu
+
+**Location**: `src/core/components/ui/NavigationMenu.tsx`
+
+**Purpose**: Menu navigazione multi-livello con dropdown e responsive design.
+
+```typescript
+interface NavigationItem {
+  id: string;
+  label: string;
+  href?: string;
+  icon?: keyof typeof iconMap;
+  disabled?: boolean;
+  children?: NavigationItem[];
+}
+
+interface NavigationMenuProps {
+  items: NavigationItem[];
+  orientation?: "horizontal" | "vertical";
+  variant?: "default" | "pills" | "underline";
+  onItemClick?: (item: NavigationItem) => void;
+  className?: string;
+}
+```
+
+**Esempi d'uso:**
+
+```tsx
+// Navigation menu orizzontale
+<NavigationMenu
+  items={[
+    { id: "home", label: "Home", href: "/", icon: "home" },
+    { 
+      id: "products", 
+      label: "Prodotti", 
+      children: [
+        { id: "catalog", label: "Catalogo", href: "/products" },
+        { id: "featured", label: "In evidenza", href: "/featured" }
+      ]
+    },
+    { id: "about", label: "Chi siamo", href: "/about" }
+  ]}
+  orientation="horizontal"
+  variant="default"
+/>
+
+// Navigation menu verticale con pills
+<NavigationMenu
+  items={sidebarItems}
+  orientation="vertical"
+  variant="pills"
+  onItemClick={(item) => handleNavigation(item)}
+/>
 ```
 
 ---
@@ -1117,6 +1407,7 @@ toast.info("Messaggio importante", {
 ## ⚡ Componenti Actions
 
 ### ActionMenu
+
 **Location**: `src/core/components/actions/ActionMenu.tsx`
 
 **Purpose**: Menu dropdown per azioni CRUD.
@@ -1132,6 +1423,7 @@ interface ActionMenuProps {
 ---
 
 ### CreateAction
+
 **Location**: `src/core/components/actions/CreateAction.tsx`
 
 **Purpose**: Pulsante per creare nuovi elementi.
@@ -1148,6 +1440,7 @@ interface CreateActionProps {
 ---
 
 ### EditAction
+
 **Location**: `src/core/components/actions/EditAction.tsx`
 
 **Purpose**: Pulsante per modificare elementi esistenti.
@@ -1163,6 +1456,7 @@ interface EditActionProps {
 ---
 
 ### DeleteAction
+
 **Location**: `src/core/components/actions/DeleteAction.tsx`
 
 **Purpose**: Pulsante per eliminare elementi con conferma.
@@ -1182,6 +1476,7 @@ interface DeleteActionProps {
 ## 🛠️ Hooks e Utilities
 
 ### useUISettings
+
 **Location**: `src/app/hooks.ts`
 
 **Purpose**: Hook principale per gestire lo stato UI dell'applicazione.
@@ -1202,20 +1497,21 @@ const {
   toggleSettingsMenu,
   closeUserMenu,
   closeSettingsMenu,
-  resetUISettings
+  resetUISettings,
 } = useUISettings();
 ```
 
 ---
 
 ### useThemedImage
+
 **Location**: `src/core/hooks/useThemedImage.ts`
 
 **Purpose**: Hook per gestire immagini che cambiano con il tema.
 
 ```typescript
 // Hook generico
-const logoSrc = useThemedImage('logo');
+const logoSrc = useThemedImage("logo");
 
 // Hook specifici
 const logoSrc = useThemedLogo();
@@ -1225,18 +1521,20 @@ const iconSrc = useThemedIcon();
 ---
 
 ### useMediaQuery
+
 **Location**: `src/core/hooks/useMediaQuery.ts`
 
 **Purpose**: Hook per rilevare media queries e gestire responsive behavior.
 
 ```typescript
-const isMobile = useMediaQuery('(max-width: 768px)');
-const isDesktop = useMediaQuery('(min-width: 1024px)');
+const isMobile = useMediaQuery("(max-width: 768px)");
+const isDesktop = useMediaQuery("(min-width: 1024px)");
 ```
 
 ---
 
 ### useToast
+
 **Location**: `src/core/hooks/useToast.ts`
 
 **Purpose**: Hook per utilizzare il sistema Toast con context-based state management.
@@ -1261,6 +1559,7 @@ interface ToastContextValue {
 ```
 
 **Esempi d'uso:**
+
 ```tsx
 const { toast, dismiss, dismissAll } = useToast();
 
@@ -1270,11 +1569,11 @@ toast("Operazione completata");
 // Toast semantici con opzioni
 toast.success("File salvato", {
   title: "Successo",
-  duration: 6000
+  duration: 6000,
 });
 
 toast.warning("Attenzione", {
-  action: { label: "OK", onClick: () => handleWarning() }
+  action: { label: "OK", onClick: () => handleWarning() },
 });
 
 // Gestione manuale
@@ -1287,42 +1586,44 @@ setTimeout(() => dismiss(toastId), 10000);
 ## 📡 Servizi
 
 ### ApiService
+
 **Location**: `src/core/services/apiService.ts`
 
 **Purpose**: Servizio HTTP client completo con autenticazione e gestione errori.
 
 ```typescript
 // GET request tipizzato
-const response = await apiService.get<UserData>('/users/me');
+const response = await apiService.get<UserData>("/users/me");
 const userData = response.data;
 
 // POST con dati
-const newUser = await apiService.post<User>('/users', {
-  name: 'John Doe',
-  email: 'john@example.com'
+const newUser = await apiService.post<User>("/users", {
+  name: "John Doe",
+  email: "john@example.com",
 });
 
 // Gestione errori
-import { isApiError } from '../services';
+import { isApiError } from "../services";
 try {
-  const data = await apiService.get('/protected');
+  const data = await apiService.get("/protected");
 } catch (error) {
   if (isApiError(error)) {
-    console.log('API Error:', error.status, error.message);
+    console.log("API Error:", error.status, error.message);
   }
 }
 
 // Authentication
-apiService.setAuthToken('your-jwt-token');
+apiService.setAuthToken("your-jwt-token");
 apiService.removeAuthToken();
 
 // File upload
 const formData = new FormData();
-formData.append('file', file);
-const result = await apiService.upload('/upload', formData);
+formData.append("file", file);
+const result = await apiService.upload("/upload", formData);
 ```
 
 **Features:**
+
 - HTTP methods completi (GET, POST, PUT, PATCH, DELETE, UPLOAD)
 - Authentication support con token management
 - Error handling tipizzato con `ApiError` interface
@@ -1335,27 +1636,29 @@ const result = await apiService.upload('/upload', formData);
 ## 🎨 Pattern di Utilizzo
 
 ### Import Pattern
+
 ```typescript
 // Componenti atomici
-import { ThemedSurface, ThemedText } from '../components/atomic';
+import { ThemedSurface, ThemedText } from "../components/atomic";
 
 // Componenti UI
-import { Button, Input, Modal } from '../components/ui';
+import { Button, Input, Modal } from "../components/ui";
 
 // Componenti layout
-import { Header, Footer, CenteredPage } from '../components/layout';
+import { Header, Footer, CenteredPage } from "../components/layout";
 
 // Componenti info
-import { VersionInfo, ConnectionStatus } from '../components/info';
+import { VersionInfo, ConnectionStatus } from "../components/info";
 
 // Servizi
-import { apiService, isApiError } from '../services';
+import { apiService, isApiError } from "../services";
 
 // Hooks
-import { useUISettings } from '../hooks';
+import { useUISettings } from "../hooks";
 ```
 
 ### Theming Pattern
+
 ```typescript
 // Superficie con testo integrato
 <ThemedSurface variant="primary" textVariant="contrast">
@@ -1374,21 +1677,16 @@ import { useUISettings } from '../hooks';
 ```
 
 ### Form Pattern
+
 ```typescript
 // Form completo con validazione
 <form onSubmit={handleSubmit}>
   <FormField error={errors.email} hideLabel>
-    <Input 
-      label="Email" 
-      type="email" 
-      required 
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-    />
+    <Input label="Email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
   </FormField>
-  
+
   <FormField error={errors.message} hideLabel>
-    <TextArea 
+    <TextArea
       label="Messaggio"
       maxLength={500}
       showCharCount={true}
@@ -1396,30 +1694,25 @@ import { useUISettings } from '../hooks';
       onChange={(e) => setMessage(e.target.value)}
     />
   </FormField>
-  
-  <Button 
-    type="submit" 
-    variant="primary" 
-    isLoading={isSubmitting}
-    loadingText="Invio in corso..."
-    fullWidth
-  >
+
+  <Button type="submit" variant="primary" isLoading={isSubmitting} loadingText="Invio in corso..." fullWidth>
     Invia Messaggio
   </Button>
 </form>
 ```
 
 ### Layout Pattern
+
 ```typescript
 // Layout con sidebar
 <MainLayout>
   <CenteredSection height="half" icon="info">
-    <HeaderGroup 
-      title="Benvenuto" 
+    <HeaderGroup
+      title="Benvenuto"
       subtitle="Inizia a esplorare i componenti"
       spacing="tight"
     />
-    <QuickLink 
+    <QuickLink
       title="Componenti"
       href="/showcase"
       icon="components"
@@ -1440,9 +1733,10 @@ import { useUISettings } from '../hooks';
 
 ## 📋 Checklist Implementazione
 
-### ✅ Componenti Completati (39/46)
+### ✅ Componenti Completati (43/50)
 
 **Atomici (5/5)**
+
 - ✅ ThemedSurface - Superfici con theming
 - ✅ ThemedText - Testi semantici
 - ✅ ThemedImage - Immagini tematiche
@@ -1450,6 +1744,7 @@ import { useUISettings } from '../hooks';
 - ✅ ThemedShadow - Ombre responsive
 
 **Info (5/5)**
+
 - ✅ Logo - Logo applicazione
 - ✅ UserAvatar - Avatar utente
 - ✅ VersionInfo - Info versione e build
@@ -1457,6 +1752,7 @@ import { useUISettings } from '../hooks';
 - ✅ QuickLink - Link rapidi con icone
 
 **Layout (8/8)**
+
 - ✅ MainLayout - Layout principale
 - ✅ Header - Header applicazione
 - ✅ Sidebar - Barra laterale
@@ -1466,7 +1762,8 @@ import { useUISettings } from '../hooks';
 - ✅ CenteredPage - Pagine centrate
 - ✅ CenteredSection - Sezioni centrate
 
-**UI (18/18)**
+**UI (22/22)**
+
 - ✅ Button - Pulsanti con varianti
 - ✅ Input - Campi input con floating label
 - ✅ TextArea - Area testo con auto-resize
@@ -1491,16 +1788,22 @@ import { useUISettings } from '../hooks';
 - ✅ Progress - Progress bar con varianti
 - ✅ Tabs - Sistema di schede navigabili
 - ✅ Toast - Sistema notifiche temporanee
+- ✅ DatePicker - Selettore date con calendario
+- ✅ TimePicker - Selettore orario 12/24h
+- ✅ Avatar - Avatar utente con fallback
+- ✅ NavigationMenu - Menu navigazione multi-livello
 
 **Actions (4/4)**
+
 - ✅ ActionMenu - Menu azioni CRUD
 - ✅ CreateAction - Pulsante creazione
 - ✅ EditAction - Pulsante modifica
 - ✅ DeleteAction - Pulsante eliminazione
 
-### 🟡 Componenti da Completare (7/46)
+### 🟡 Componenti da Completare (7/50)
 
 **Navigation (3/6)**
+
 - ✅ SettingsMenu - Menu impostazioni app
 - ✅ UserMenu - Menu profilo utente
 - ✅ MobileMenu - Menu mobile
@@ -1509,6 +1812,7 @@ import { useUISettings } from '../hooks';
 - 🟡 ProfileMenu - Menu profilo con dropdown
 
 **Hooks (4/7)**
+
 - ✅ useUISettings - Hook stato UI
 - ✅ useThemedImage - Hook immagini tematiche
 - ✅ useMediaQuery - Hook media queries
@@ -1518,6 +1822,7 @@ import { useUISettings } from '../hooks';
 - 🟡 useThemeStyles - Hook gestione stili
 
 **Servizi (1/1)**
+
 - ✅ ApiService - HTTP client completo
 
 ---
@@ -1525,17 +1830,20 @@ import { useUISettings } from '../hooks';
 ## 🚀 Roadmap Futuri Sviluppi
 
 ### Phase 1: Completamento Base
+
 - Implementare componenti navigation mancanti
 - Completare hooks utilities
 - Aggiungere showcase components
 
 ### Phase 2: Advanced Features
+
 - Sistema autenticazione completo
 - Form validation avanzata
 - Data fetching patterns
 - Error boundaries
 
 ### Phase 3: Performance & Scale
+
 - Code splitting per componenti
 - Lazy loading utilities
 - Bundle optimization
@@ -1543,6 +1851,6 @@ import { useUISettings } from '../hooks';
 
 ---
 
-**Ultima modifica**: 31 Luglio 2025  
-**Versione catalogo**: 2.2  
-**Completamento**: 85% (39/46 componenti)
+**Ultima modifica**: 5 Agosto 2025  
+**Versione catalogo**: 2.3  
+**Completamento**: 86% (43/50 componenti)
