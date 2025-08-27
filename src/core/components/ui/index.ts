@@ -1,40 +1,41 @@
-export { default as Button } from "./Button";
-export type { ButtonVariant, ButtonSize } from "./Button";
-export { default as Badge } from "./Badge";
-export type { BadgeVariant, BadgeSize } from "./Badge";
-export { Input } from "./Input";
-export { Label } from "./Label";
-export { Checkbox } from "./Checkbox";
-export { TextArea } from "./TextArea";
-export { Select } from "./Select";
-export { Switch } from "./Switch";
-export { FormField } from "./FormField";
-export { RadioGroup } from "./RadioGroup";
-export { default as Table } from "./Table";
-export type { TableColumn, TableSize, TableRowActions } from "./Table";
-export { default as TableLink } from "./TableLink";
-export type { TableLinkVariant } from "./TableLink";
-export { default as InfoCard } from "./InfoCard";
-export type { ComponentCategory } from "./InfoCard";
-export { default as Modal } from "./Modal";
-export type { ModalSize } from "./Modal";
-export { default as ConfirmModal } from "./ConfirmModal";
-export type { ConfirmVariant } from "./ConfirmModal";
-export { Tooltip } from "./Tooltip";
-export { Spinner } from "./Spinner";
-export { Card } from "./Card";
-export { Separator } from "./Separator";
-export { Alert } from "./Alert";
-export type { AlertVariant } from "./Alert";
-export { Toast, ToastProvider } from "./Toast";
-export type { ToastVariant } from "./Toast";
-export { Accordion } from "./Accordion";
-export { Progress } from "./Progress";
-export { Tabs } from "./Tabs";
-export type { TabItem } from "./Tabs";
-export { DatePicker } from "./DatePicker";
-export { TimePicker } from "./TimePicker";
-export type { TimeValue } from "./TimePicker";
-export { Avatar } from "./Avatar";
-export { NavigationMenu } from "./NavigationMenu";
-export type { NavigationMenuItem, NavigationLink, NavigationGroup } from "./NavigationMenu";
+// Avatar
+export { default as Avatar } from "./avatar/Avatar";
+export { default as AvatarShowcase } from "./avatar/Avatar.showcase";
+export { avatarData } from "./avatar/Avatar.data";
+export type { AvatarSize, AvatarShape, AvatarVariant, AvatarStatus, AvatarStatusPosition } from "./avatar/Avatar";
+
+// Accordion
+export { default as Accordion } from "./accordion/Accordion";
+export { default as AccordionShowcase } from "./accordion/Accordion.showcase";
+export { accordionData } from "./accordion/Accordion.data";
+export type { AccordionType, AccordionVariant, AccordionSize } from "./accordion/Accordion";
+
+// Button
+export { default as Button } from "./button/Button";
+export { default as ButtonShowcase } from "./button/Button.showcase";
+export { buttonData } from "./button/Button.data";
+export type { ButtonVariant, ButtonSize } from "./button/Button";
+
+//Badge
+export { default as Badge } from "./badge/Badge";
+export { default as BadgeShowcase } from "./badge/Badge.showcase";
+export { badgeData } from "./badge/Badge.data";
+export type { BadgeVariant, BadgeSize } from "./badge/Badge";
+
+//ConfirmModal
+export { default as ConfirmModal } from "./confirm-modal/ConfirmModal";
+export { default as ConfirmModalShowcase } from "./confirm-modal/ConfirmModal.showcase";
+export { confirmModalData } from "./confirm-modal/ConfirmModal.data";
+export type { ConfirmVariant } from "./confirm-modal/ConfirmModal";
+
+// InfoCard
+export { default as InfoCard } from "./info-card/InfoCard";
+export { infoCardData } from "./info-card/InfoCard.data";
+export { InfoCardShowcase } from "./info-card/InfoCard.showcase";
+export type { ComponentCategory } from "./info-card/InfoCard";
+
+// Modal
+export { default as Modal } from "./modal/Modal";
+export { modalData } from "./modal/Modal.data";
+export { ModalShowcase } from "./modal/Modal.showcase";
+export type { ModalSize } from "./modal/Modal";

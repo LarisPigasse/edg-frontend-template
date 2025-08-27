@@ -70,4 +70,7 @@
 
   /* Progress shimmer animation - mapping */
   --animate-shimmer: shimmer 2s infinite linear;
+
+  /* Spinner animation */
+  --animate-spinner-pulse: spinnerPulse 1.4s infinite ease-in-out both;
 }

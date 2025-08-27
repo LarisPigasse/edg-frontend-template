@@ -22,170 +22,313 @@ I file che hanno il seguente simbolo associato 🟢 sono stati realizzati e test
 
 
 edg-frontend-template/
-├── public/                             
-│   └── favicon.png
-├── src/
-│   ├── app/                                    # Elementi principali dell'app
-|   |   ├── middleware/                         # app middleware
-|   |   |   ├── index.ts                        # 🟢 barrel file del middleware 
-│   │   |   └── persistenceMiddleware.ts        # 🟢 middleware per la persistenza
-|   |   ├── index.ts                            # 🟢 barrel file
-|   |   ├── constants.ts                        # 🟢 Parametri e costanti globali
-│   │   ├── hooks.ts                            # 🟢 Redux hooks tipizzati
-│   │   └── store.ts                            # 🟢 Redux store
-|   ├── assets/
+├── config/                                         # Folder config
+│   ├── eslint.config.js                            # 🟢 Configurazione di esLint per il controllo del codice
+│   ├── tsconfig.app.json                           # 🟢 Configurazione TypeScript specifica per la compilazione
+│   ├── tsconfig.json                               # 🟢 Configurazione TypeScript principale per tutto il progetto
+│   ├── tsconfig.node.json                          # 🟢 Configurazione TypeScript per l'esecuzione in ambiente node                           
+│   └── vite.config.ts                              # 🟢 Configurazione Vite
+├── node_modules  
+| 
+├── public/                                         # Public folder                             
+│   └── favicon.png 
+| 
+├── src/                                            # Src folder
+│   ├── app/                                        # Folder per gli elementi principali dell'app
+|   |   ├── middleware/                             # App middleware folder
+|   |   |   ├── index.ts                            # 🟢 barrel file del middleware 
+│   │   |   └── persistenceMiddleware.ts            # 🟢 middleware per la persistenza
+|   |   | 
+|   |   ├── slices/                                 # App slices folder
+|   |   |   ├── index.ts                            # 🟢 barrel file del middleware 
+│   │   |   └── uiSlice.ts                          # 🟢 Redux slice per impostazioni ui
+|   |   | 
+|   |   ├── index.ts                                # 🟢 barrel file
+|   |   ├── constants.ts                            # 🟢 Parametri e costanti globali
+│   │   ├── hooks.ts                                # 🟢 Redux hooks tipizzati
+│   │   └── store.ts                                # 🟢 Redux store
+|   | 
+|   ├── assets/                                     # Assets folder
 │   |   ├── icon.png
 │   |   ├── icon-reverse.png                             
 │   |   ├── logo.png
 │   |   └── icon-reverse.png
-│   ├── config/                                 # Configurazione
-|   |   ├── index.ts                            # 🟢 Configurazioni unificate 
-│   │   ├── navigation.config.ts                # 🟢 Navigazione di default 
-│   │   └── routes.config.ts                    # 🟢 Route definitions 
-|   ├── core/                                   # Componenti e utility condivisi
-|   |   ├── components/                         # Componenti riutilizzabili
-|   │   │   ├── actions                         # Componenti per le azioni principali
-|   │   │   │   ├── index.ts                    # 🟢 barrel file dei componenti layout
-|   │   │   │   ├── ActionMenu.tsx              # 🟢 Menu a tendina delle actions
-|   │   │   │   ├── CreateAction.tsx            # 🟢 Creare un nuovo elemento dell'identità
-|   │   │   │   ├── DeleteAction.tsx            # 🟢 Eliminare l'elemento selezionato
-|   │   │   │   └── EditAction.tsx              # 🟢 Modificare l'elemento selezionato
-|   │   │   ├── atomic                          # Componenti atomici per la gestione del tema
-|   │   │   │   ├── index.ts                    # 🟢 barrel file dei componenti atomici
-|   │   │   │   ├── ThemesSurface.tsx           # 🟢 Gestisce sfondo + testo + bordi per superfici
-|   │   │   │   ├── ThemedText.tsx              # 🟢 Gestisce solo i colori del testo semantici
-|   │   │   │   ├── ThemedShadow.tsx            # 🟢 Gestisce le ombre
-|   │   │   │   ├── ThemedImage.tsx             # 🟢 Gestisce le immagini che si modificano con tema
-|   │   │   │   └── ThemedBorder.tsx            # 🟢 Wrapper per elementi che hanno solo bordi tematici 
-|   │   │   ├── info                            # Componenti utili secondari e informativi
-|   │   │   │   ├── index.ts                    # 🟢 Barrel file
-|   │   │   │   ├── Logo.tsx                    # 🟢 Logo dell'applicazione
-|   │   │   │   ├── UserAvatar.tsx              # 🟢 Avatar dell'utente
-|   │   │   │   ├── VersionInfo.tsx             # 🟢 Componente info versione
-|   │   │   │   ├── ConnectionStatus.tsx        # 🟢 Indicatore connessione backend
-|   │   │   │   └── QuickLink.tsx               # 🟢 Link rapidi
-|   │   │   ├── layout/                         # Componenti base del layout
-|   │   │   |   ├── index.ts                    # 🟢 Barrel file dei componenti layout
-|   │   │   │   ├── CenteredPage.tsx            # 🟢 Container di pagina per centrare in verticale
-|   │   │   │   ├── CenteredSection.tsx         # 🟢 Container di sezione per centrare in verticale
-|   │   │   │   ├── Footer.tsx                  # 🟢 Footer dell'applicazione
-|   │   │   │   ├── Header.tsx                  # 🟢 Header dell'applicazione
-|   │   │   │   ├── HeaderGroup.tsx             # 🟢 Titolo e sottotitolo di un gruppo di elementi
-|   │   │   │   ├── MainLayout.tsx              # 🟢 Gestione del layout dell'app
-|   │   │   |   ├── Sidebar.ts                  # 🟢 Sidebar dell'applicazione
-|   │   │   |   └── TitlesSurface.ts            # 🟢 Surface con titolo nel bordo superiore (fieldset-style)
-|   │   │   ├── navigation/                     # Componenti navigazione
-|   │   │   |   ├── index.ts                    # 🟢 Barrel file dei componenti navigation
-|   │   │   │   ├── FooterMenu.tsx              # 🟡 Menu nel footer
-|   │   │   │   ├── MainMenu.tsx                # 🟡 Menu principale
-|   │   │   │   ├── Settings.tsx                # 🟢 Menu per configurazione app
-|   │   │   │   ├── UserMenu.tsx                # 🟢 Menu del profilo utente
-|   │   │   │   └── MobileMenu.tsx              # 🟢 Mobile menu
-|   │   │   └── ui/                             # Componenti base dell'interfaccia utente
-|   │   │       ├── index.ts                    # 🟢 Barrel file dei componenti ui
-|   |   |       ├── Avatar.tsx                  # 🟢 Componente avatar con varianti
-|   |   |       ├── Accordion.tsx               # 🟢 Componente accordion con varianti
-|   |   |       ├── Alert.tsx                   # 🟢 Componente alert con varianti
-|   |   |       ├── Badge.tsx                   # 🟢 Componente badge con varianti
-|   │   │       ├── Button.tsx                  # 🟢 Componente button con varianti
-|   │   │       ├── Card.tsx                    # 🟢 Componente card semplice con varianti
-|   │   │       ├── Checkbox.tsx                # 🟢 Componente checkbox
-|   │   │       ├── ConfirmModal.tsx            # 🟢 Modal di conferma
-|   │   │       ├── DatePicker.tsx              # 🟢 Componente DatePicker
-|   │   │       ├── FormField.tsx               # 🟢 Wrapper per eliminare codice ripetitivo
-|   │   │       ├── InfoCard.tsx                # 🟢 Card informative cliccabili con varianti
-|   │   │       ├── Input.tsx                   # 🟢 Componente input con varianti
-|   │   │       ├── Label.tsx                   # 🟢 Componente label per input complessi
-|   │   │       ├── Modal.tsx                   # 🟢 Componente modale base
-|   │   │       ├── NavigationMenu.tsx          # 🟢 Componente NavigationMenu da Radix
-|   │   │       ├── Progress.tsx                # 🟢 Progress bar
-|   │   │       ├── RadioGroup.tsx              # 🟢 Componente radio group
-|   │   │       ├── Select.tsx                  # 🟢 Componente select
-|   │   │       ├── Separator.tsx               # 🟢 Separator verticale e orizzontale
-|   │   │       ├── Spinner.tsx                 # 🟢 Componente dots spinner
-|   │   │       ├── Switch.tsx                  # 🟢 Componente button per submit
-|   │   │       ├── Table.tsx                   # 🟢 Componente per tabella semplice
-|   │   │       ├── TableLink.tsx               # 🟢 Componente per elementi cliccabile delle righe tabella
-|   │   │       ├── Tabs.tsx                    # 🟢 Componente tabs con varianti
-|   │   │       ├── TextArea.tsx                # 🟢 Componente textarea per form
-|   │   │       ├── TimePicker.tsx              # 🟢 Componente TimePicker con varianti
-|   │   │       ├── Toast.tsx                   # 🟢 Componente per feedback in stile toast
-|   │   │       └── Tooltip.tsx                 # 🟢 Componente per tooltip, richiede headless
-|   │   ├── hooks/                              # Hook personalizzati condivisi
-|   │   │   ├── index.ts                        # 🟢 Barrel file degli Hooks
-|   │   │   ├── useLocalStorage.ts              # 🟡 Hook per la gestione del local storage
-|   │   │   ├── useModal.ts                     # 🟡 Hook per gestione modal
-|   │   │   ├── useMediaQuery.ts                # 🟢 Hook per rilevare media queries e gestire responsive behavior
-|   │   │   ├── useThemedImage.ts               # 🟢 Hook per gestione delle immagini che variano in base al tema
-|   │   │   └── useThemeStyles.ts               # 🟡 Hook per gestione stili e temi
-|   │   ├── services/                           # Servizi di base condivisi
-|   │   │   ├── index.ts                        # 🟡 barrel file 
-|   │   │   └── apiService.ts                   # 🟡 Servizio base per le richieste API 
-|   │   ├── styles/                             # Stile personalizzati
-|   │   │   └── typography.css                  # 🟢 Classi per stili tipografici
-|   │   └── utils/                              # Utility condivise
-|   │   │   └── index.ts                        # 🟢 Utility unificate come iconMap oppure combinare classi CSS condizionalmente
-│   │   │
-│   ├── data/                                   # Contenuti informativi, documentazione, esempi
-│   │   ├── index.ts                            # 🟢 Barrel file
-│   │   ├── components.data.ts                  # 🟢 Dati per Component Explorer
-│   │   ├── examples.data.ts                    # 🟡 Future: Esempi di codice
-│   |   └── guidelines.data.ts.ts               # 🟡 Future: Design guidelines
-│   │   │
-│   ├── features/
-│   │   ├── auth/                               # Tutto ancora da deinire
-│   │   |   ├── index.ts                        # 🟡 Barrel file exports
-│   │   |   ├── AuthInitializer.tsx             # 🟡 Componente per verifica autenticazione
-│   │   |   ├── authService.ts                  # 🟡 Servizio autenticazione
-│   │   |   ├── authSlice.ts                    # 🟡 Slice Redux per auth
-│   │   |   ├── ChangePasswordModal.tsx         # 🟡 Modal cambio password
-│   │   |   ├── Login.tsx                       # 🟡 Pagina login
-│   │   |   ├── ResetPasswordConfirm.tsx        # 🟡 Pagina conferma reset password
-│   │   |   └── ResetPasswordRequest.tsx        # 🟡 Pagina richiesta reset password
-│   │   │
-│   │   ├── settings/
-│   │   │   ├── index.ts                        # 🟡 Barrel file
-│   │   │   └── uiSlice.ts                      # 🟢 Redux slice per impostazioni ui
-│   │   │
-│   │   └── shared/
-|   |       ├── components/                     # Componenti per le pagine shared
-│   |       |   ├── index.ts                    # 🟢 Barrel file
-|   |       |   ├── ShowTheme.tsx               # 🟢 Showcase del theme system
-│   |       |   ├── ShowButtons.tsx             # 🟢 Showcase del Button component
-|   |       |   ├── ShowForms.tsx               # 🟢 Showcase per Input, label e form validation
-│   |       |   ├── ShowDataDisplay.tsx         # 🟢 Showcase per Table, TableLink e Badge
-│   |       |   ├── ShowDatePicker.tsx          # 🟢 Showcase DatePicker
-│   |       |   ├── ShowFeedback.tsx            # 🟢 Showcase Modal, Tooltip e notification/alert
-|   |       |   ├── ShowLayout.tsx              # 🟢 Showcase Card, Separator, Accordion, Tabs
-|   |       |   ├── ShowNavigationMenu.tsx      # 🟢 Showcase per NavigationMenu
-|   |       |   ├── ShowTime.tsx                # 🟢 Demo per ShowTime component
-|   |       |   ├── ToastShowDemo.tsx           # 🟢 Demo per Toast component
-|   |       |   └── ShowActions.tsx             # 🟡 Showcase per azioni e crud
-|   |       |
-│   │       ├── index.ts                        # 🟢 Barrel file
-│   │       ├── ComponentExplorer.tsx           # 🟢 Guida all'uso dei componenti
-│   │       ├── ComponentModal.tsx              # 🟢 Visualizzazione dei componenti scelti in ComponentExplorer
-│   │       ├── Dashboard.tsx                   # 🟢 Pagina principale
-│   │       ├── NotFound.tsx                    # 🟢 Pagina 404
-|   |       └── Showcase.tsx                    # 🟢 Pagina di esempio per i componenti
-│   │
-│   ├── App.tsx                                 # 🟢 Componente root applicazione
-│   ├── index.css                               # 🟢 Stili di base Tailwind
-│   ├── global.css                              # 🟢 Stili per definire temi dark e light (root)
-│   ├── main.tsx                                # 🟢 Entry point React
-│   └── vite-env.d.ts                           # 🟢 Garantisce che TypeSscript validi il codice che interagisce con Vite
-├── .env.development                            # 🟢 variabili d'ambiente per lo sviluppo
-├── .env.production                             # 🟢 variabili d'ambiente per la produzione
-├── .gitignore                                  # 🟢 ignore per git
-├── .prettierignore                             # 🟢 ignore per estensione Prettier
-├── eslint.config.js                            # 🟢 Configurazione di esLint per il controllo del codice
-├── index.html                                  # 🟢 l'index html dell'applicazione
-├── package.json                                # 🟢 Dipendenze del progetto
-├── tsconfig.app.json                           # 🟢 Configurazione TypeScript specifico
-├── tsconfig.json                               # 🟢 Configurazione TypeScript principale
-├── vite.config.ts                              # 🟢 Configurazione Vite
-├── Edg-Frontend-Template.md                    # 🟢 Struttura e funzioni del progetto
-└── README.md                                   # 🟢
+|   |
+│   ├── config/                                     # Folder per le configurazioni
+|   |   ├── index.ts                                # 🟢 Configurazioni unificate 
+│   │   ├── navigation.config.ts                    # 🟢 Navigazione di default 
+│   │   └── routes.config.ts                        # 🟢 Route definitions
+|   |   
+|   ├── core/                                       # Folder per Componenti e utility condivise
+|   |   ├── components/                             # Folder dei Componenti riutilizzabili
+|   │   │   ├── actions                             # Folder dei Componenti per le azioni principali
+|   │   │   │   ├── index.ts                        # 🟢 barrel file dei componenti layout
+|   │   │   │   ├── ActionMenu.tsx                  # 🟢 Menu a tendina delle actions
+|   │   │   │   ├── CreateAction.tsx                # 🟢 Creare un nuovo elemento dell'identità
+|   │   │   │   ├── DeleteAction.tsx                # 🟢 Eliminare l'elemento selezionato
+|   │   │   │   └── EditAction.tsx                  # 🟢 Modificare l'elemento selezionato
+|   |   |   | 
+|   │   │   ├── atomic                              # Folder dei Componenti atomici per la gestione del tema
+|   │   │   │   ├── index.ts                        # 🟢 barrel file dei componenti atomici
+|   │   │   │   ├── ThemedSurface.tsx               # 🟢 Gestisce sfondo + testo + bordi per superfici
+|   │   │   │   ├── ThemedText.tsx                  # 🟢 Gestisce solo i colori del testo semantici
+|   │   │   │   ├── ThemedShadow.tsx                # 🟢 Gestisce le ombre
+|   │   │   │   ├── ThemedImage.tsx                 # 🟢 Gestisce le immagini che si modificano con tema
+|   │   │   │   └── ThemedBorder.tsx                # 🟢 Wrapper per elementi che hanno solo bordi tematici
+|   |   |   |   
+|   │   │   ├── data                                # Folder dei Componenti per la gestione delle tabelle
+|   |   |   |   ├── table/                          # Folder per la Tabella semplice
+|   │   │   |   |   ├── Table.data.ts               # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Table.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Table.tsx                   # 🟢 Componente Table
+|   |   |   |   | 
+|   |   |   |   └── table-link/                     # Folder per TableLink
+|   │   │   |       ├── TableLink.data.ts           # 🟢 Informazioni sul componente
+|   │   │   |       ├── TableLink.showcase.tsx      # 🟢 Esempi d'uso del componente
+|   │   │   |       └── TableLink.tsx               # 🟢 Componente TableLink
+|   |   |   |     
+|   │   │   ├── feedback                            # Folder per Componenti della categoria feedback
+|   |   |   |   ├── alert/                          # Folder per Alert
+|   │   │   |   |   ├── Alert.data.ts               # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Alert.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Alert.tsx                   # 🟢 Componente Alert
+|   |   |   |   |   
+|   |   |   |   ├── progress/                       # Folder per Progress bar
+|   │   │   |   |   ├── Progress.data.ts            # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Progress.showcase.tsx       # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Progress.tsx                # 🟢 Componente Progress
+|   |   |   |   | 
+|   |   |   |   ├── skeleton/                       # Folder per Skeleton
+|   │   │   |   |   ├── Skeleton.data.ts            # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Skeleton.showcase.tsx       # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Skeleton.tsx                # 🟢 Componente Skeleton
+|   |   |   |   |   
+|   |   |   |   ├── spinner/                        # Folder per Spinner
+|   │   │   |   |   ├── Spinner.data.ts             # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Spinner.showcase.tsx        # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Spinner.tsx                 # 🟢 Componente Spinner
+|   |   |   |   |   
+|   |   |   |   ├── toast/                          # Folder per Toast
+|   │   │   |   |   ├── Toast.context.ts            # 🟢 Context del componente
+|   │   │   |   |   ├── Toast.provider.tsx          # 🟢 Provider del componente
+|   │   │   |   |   ├── Toast.data.ts               # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Toast.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │   |   |   ├── Toast.tsx                   # 🟢 Componente Toast
+|   │   │   |   |   └── useToast.hooks.ts           # 🟢 Hooks per utilizzare il comnponente
+|   |   |   |   |   
+|   |   |   |   └── tooltip/                        # Folder per Tooltip
+|   │   │   |       ├── Tooltip.data.ts             # 🟢 Informazioni sul componente
+|   │   │   |       ├── Tooltip.showcase.tsx        # 🟢 Esempi d'uso del componente
+|   │   │   |       └── Tooltip.tsx                 # 🟢 Componente Tooltip
+|   |   |   |   
+|   │   │   ├── form                                # Folder dei Componenti per la gestione delle form
+|   |   |   |   ├── checkbox/                       # Folder per Checkbox
+|   │   │   |   |   ├── Checkbox.data.ts            # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Checkbox.showcase.tsx       # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Checkbox.tsx                # 🟢 Componente Checkbox
+|   |   |   |   |   
+|   |   |   |   ├── date-picker/                    # Folder per DatePicker
+|   │   │   |   |   ├── DatePicker.data.ts          # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── DatePicker.showcase.tsx     # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── DatePicker.tsx              # 🟢 Componente DatePicker
+|   |   |   |   |   
+|   |   |   |   ├── form-field/                     # Folder per FormField
+|   │   │   |   |   ├── FormField.data.ts           # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── FormField.showcase.tsx      # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── FormField.tsx               # 🟢 Componente FormField
+|   |   |   |   |   
+|   |   |   |   ├── input/                          # Folder per Input
+|   │   │   |   |   ├── Input.data.ts               # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Input.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Input.tsx                   # 🟢 Componente Input
+|   |   |   |   |   
+|   |   |   |   ├── label/                          # Folder per Label
+|   │   │   |   |   ├── Label.data.ts               # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Label.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Label.tsx                   # 🟢 Componente Label
+|   |   |   |   | 
+|   |   |   |   ├── multi-select/                   # Folder per MultiSelect
+|   │   │   |   |   ├── MultiSelect.data.ts         # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── MultiSelect.showcase.tsx    # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── MultiSelect.tsx             # 🟢 Componente MultiSelect
+|   |   |   |   | 
+|   |   |   |   ├── radio-group/                    # Folder per RadioGroup
+|   │   │   |   |   ├── RadioGroup.data.ts          # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── RadioGroup.showcase.tsx     # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── RadioGroup.tsx              # 🟢 Componente RadioGroup
+|   |   |   |   | 
+|   |   |   |   ├── select/                         # Folder per Select
+|   │   │   |   |   ├── Select.data.ts              # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Select.showcase.tsx         # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Select.tsx                  # 🟢 Componente Select
+|   |   |   |   | 
+|   |   |   |   ├── switch/                         # Folder per Switch
+|   │   │   |   |   ├── Switch.data.ts              # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Switch.showcase.tsx         # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Switch.tsx                  # 🟢 Componente Switch
+|   |   |   |   | 
+|   |   |   |   ├── textarea/                       # Folder per Textarea
+|   │   │   |   |   ├── TextArea.data.ts            # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── TextArea.showcase.tsx       # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── TextArea.tsx                # 🟢 Componente TextArea
+|   |   |   |   | 
+|   |   |   |   └── time-picker/                    # Folder per TimePicker
+|   │   │   |       ├── TimePicker.data.ts          # 🟢 Informazioni sul componente
+|   │   │   |       ├── TimePicker.showcase.tsx     # 🟢 Esempi d'uso del componente
+|   │   │   |       └── TimePicker.tsx              # 🟢 Componente TimePicker
+|   |   |   | 
+|   │   │   ├── info                                # Folder dei Componenti utili secondari e informativi
+|   │   │   │   ├── index.ts                        # 🟢 Barrel file
+|   │   │   │   ├── Logo.tsx                        # 🟢 Logo dell'applicazione
+|   │   │   │   ├── UserAvatar.tsx                  # 🟢 Avatar dell'utente
+|   │   │   │   ├── VersionInfo.tsx                 # 🟢 Componente info versione
+|   │   │   │   ├── ConnectionStatus.tsx            # 🟢 Indicatore connessione backend
+|   │   │   │   └── QuickLink.tsx                   # 🟢 Link rapidi
+|   |   |   |   
+|   │   │   ├── layout/                             # Folder dei Componenti base del layout
+|   |   |   |   ├── card/                           # Folder per Card
+|   │   │   |   |   ├── Card.data.ts                # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Card.showcase.tsx           # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Card.tsx                    # 🟢 Componente Card
+|   |   |   |   |   
+|   |   |   |   ├── custom/                         # Folder dei Componenti specifici custom
+|   │   │   |   |   ├── CenteredPage.tsx            # 🟢 Container per pagine che richiedono vertical centering
+|   │   │   |   |   ├── CenteredSection.tsx         # 🟢 Container per sezioni che richiedono vertical centering
+|   │   │   |   |   ├── Footer.tsx                  # 🟢 footer
+|   │   │   |   |   ├── Header.tsx                  # 🟢 header
+|   │   │   |   |   ├── HeaderGroup.tsx             # 🟢 raggruppamenti nell'header
+|   │   │   |   |   ├── MainLayout.tsx              # 🟢 Componente per l'intero layout
+|   │   │   |   |   ├── Sidebar.tsx                 # 🟢 sidebar
+|   │   │   |   |   └── TitledSurface.tsx           # 🟢 contenitore con titolo che si sovrappone al bordo superiore
+|   |   |   |   | 
+|   |   |   |   ├── separator/                      # Folder per Separator
+|   │   │   |   |   ├── Separator.data.ts           # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Separator.showcase.tsx      # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Separator.tsx               # 🟢 Componente Separator
+|   |   |   |   | 
+|   |   |   |   ├── sheet/                          # Folder per Sheet
+|   │   │   |   |    ├── Sheet.data.ts              # 🟢 Informazioni sul componente
+|   │   │   |   |    ├── Sheet.showcase.tsx         # 🟢 Esempi d'uso del componente
+|   │   │   |   |    └── Sheet.tsx                  # 🟢 Componente Sheet
+|   |   |   |   | 
+|   │   │   |   └── index.ts                        # 🟢 Barrel file dei componenti layout
+|   |   |   | 
+|   │   │   ├── navigation/                         # Folder dei Componenti navigazione
+|   |   |   |   ├── command/                        # Folder per Command Dialog
+|   │   │   |   |   ├── Command.data.ts             # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Command.showcase.tsx        # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Command.tsx                 # 🟢 Componente Command
+|   |   |   |   | 
+|   |   |   |   ├── custom/                         # Folder dei Componenti custom specifici per la navigazione
+|   │   │   |   |   ├── FooterMenu.tsx              # 🟡 Informazioni sul componente
+|   │   │   |   |   ├── MainMenu.tsx                # 🟡 Esempi d'uso del componente
+|   │   │   │   |   ├── Settings.tsx                # 🟢 Menu per configurazione app
+|   │   │   │   |   ├── UserMenu.tsx                # 🟢 Menu del profilo utente
+|   │   │   │   |   └── MobileMenu.tsx              # 🟢 Mobile menu
+|   |   |   |   |
+|   |   |   |   ├── navigation-menu/                # Folder per Navigation Menu
+|   │   │   |   |   ├── NavigationMenu.data.ts      # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── NavigationMenu.showcase.tsx # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── NavigationMenu.tsx          # 🟢 Componente NavigationMenu
+|   |   |   |   |
+|   |   |   |   ├── tabs/                           # Folder per Tabs
+|   │   │   |   |   ├── Tabs.data.ts                # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Tabs.showcase.tsx           # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Tabs.tsx                    # 🟢 Componente Tabs
+|   |   |   |   |
+|   │   │   |   └── index.ts                        # 🟢 Barrel file dei componenti navigation
+|   |   |   |   
+|   │   │   └── ui/                                 # Folder dei Componenti base dell'interfaccia utente
+|   |   |       ├── accordion/                      # Folder per Accordion
+|   │   │       |   ├── Accordion.data.ts           # 🟢 Informazioni sul componente
+|   │   │       |   ├── Accordion.showcase.tsx      # 🟢 Esempi d'uso del componente
+|   │   │       |   └── Accordion.tsx               # 🟢 Componente Accordion
+|   |   |       |
+|   |   |       ├── avatar/                         # Folder per Avatar
+|   │   │       |   ├── Avatar.data.ts              # 🟢 Informazioni sul componente
+|   │   │       |   ├── Avatar.showcase.tsx         # 🟢 Esempi d'uso del componente
+|   │   │       |   └── Avatar.tsx                  # 🟢 Componente Avatar
+|   |   |       |
+|   |   |       ├── badge/                          # Folder per Badge
+|   │   │       |   ├── Badge.data.ts               # 🟢 Informazioni sul componente
+|   │   │       |   ├── Badge.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │       |   └── Badge.tsx                   # 🟢 Componente Badge
+|   |   |       |
+|   |   |       ├── button/                         # Folder per Button
+|   │   │       |   ├── Button.data.ts              # 🟢 Informazioni sul componente
+|   │   │       |   ├── Button.showcase.tsx         # 🟢 Esempi d'uso del componente
+|   │   │       |   └── Button.tsx                  # 🟢 Componente Button
+|   |   |       |
+|   |   |       ├── confirm-modal/                  # Folder per ConfirmModal
+|   │   │       |   ├── ConfirmModal.data.ts        # 🟢 Informazioni sul componente
+|   │   │       |   ├── ConfirmModal.showcase.tsx   # 🟢 Esempi d'uso del componente
+|   │   │       |   └── ConfirmModal.tsx            # 🟢 Componente ConfirmModal
+|   |   |       |
+|   |   |       ├── info-card/                      # Folder per InfoCard
+|   │   │       |   ├── InfoCard.data.ts            # 🟢 Informazioni sul componente
+|   │   │       |   ├── InfoCard.showcase.tsx       # 🟢 Esempi d'uso del componente
+|   │   │       |   └── InfoCard.tsx                # 🟢 Componente InfoCard
+|   |   |       |
+|   |   |       ├── modal/                          # Folder per Modal
+|   │   │       |   ├── Modal.data.ts               # 🟢 Informazioni sul componente
+|   │   │       |   ├── Modal.showcase.tsx          # 🟢 Esempi d'uso del componente
+|   │   │       |   └── Modal.tsx                   # 🟢 Componente Modal
+|   |   |       |
+|   │   │       └── index.ts                        # 🟢 Barrel file dei componenti ui
+|   |   |   
+|   │   ├── hooks/                                  # Hook personalizzati condivisi
+|   │   |    ├── index.ts                           # 🟢 Barrel file degli Hooks
+|   │   |    ├── useLocalStorage.ts                 # 🟡 Hook per la gestione del local storage
+|   │   |    ├── useModal.ts                        # 🟡 Hook per gestione modal
+|   │   |    ├── useMediaQuery.ts                   # 🟢 Hook per rilevare media queries e gestire responsive behavior
+|   │   |    ├── useThemedImage.ts                  # 🟢 Hook per gestione delle immagini che variano in base al tema
+|   │   |    └── useThemeStyles.ts                  # 🟡 Hook per gestione stili e temi
+|   |   |   
+|   │   ├── services/                               # Services condivisi
+|   │   |    ├── index.ts                           # 🟢 Barrel file dei services
+|   │   |    └── apiService.ts                      # 🟢 Base service per richieste API
+|   |   |   
+|   │   └── utils/                                  # Utility condivise
+|   │        └── index.ts                           # 🟢 Barrel file delle utility
+│   │       
+│   ├── features/                                   # contiene i moduli dell'applicazione
+│   │   └── auth/                                   # Tutto ancora da deinire
+│   │        ├── index.ts                           # 🟡 Barrel file exports
+│   │        ├── AuthInitializer.tsx                # 🟡 Componente per verifica autenticazione
+│   │        ├── authService.ts                     # 🟡 Servizio autenticazione
+│   │        ├── authSlice.ts                       # 🟡 Slice Redux per auth
+│   │        ├── ChangePasswordModal.tsx            # 🟡 Modal cambio password
+│   │        ├── Login.tsx                          # 🟡 Pagina login
+│   │        ├── ResetPasswordConfirm.tsx           # 🟡 Pagina conferma reset password
+│   │        └── ResetPasswordRequest.tsx           # 🟡 Pagina richiesta reset password
+│   │   
+│   ├── pages/                                      # Pagine principali dell'applicazione
+│   │   ├── Dashboard.tsx                           # 🟢 Pagina principale
+│   │   ├── Explorer.tsx                            # 🟢 Guida all'uso dei componenti
+│   │   ├── ExplorerModal.tsx                       # 🟢 Visualizzazione dei componenti selezionati in Explorer
+│   │   ├── NotFound.tsx                            # 🟢 Pagina 404
+|   |   └── index.ts                                # 🟢 Barrel file
+│   │   
+│   ├── styles/                                     # Stili globali
+│   │   ├── global.css                              # 🟢 Stili custom per definire il tema
+|   │   ├── typography.css                          # 🟢 Classi per stili tipografici
+|   |   └── index.css                               # 🟢 Stili di base Tailwind
+│   │ 
+│   ├── template/                                   # Pagine complete di esempio, pronte per essere utilizzate
+│   │ 
+│   ├── App.tsx                                     # 🟢 Componente root applicazione
+│   ├── main.tsx                                    # 🟢 Entry point React
+│   └── vite-env.d.ts                               # 🟢 Garantisce che TypeSscript validi il codice che interagisce con Vite
+├── .env.development                                # 🟢 variabili d'ambiente per lo sviluppo
+├── .env.production                                 # 🟢 variabili d'ambiente per la produzione
+├── .gitignore                                      # 🟢 ignore per git
+├── .prettierignore                                 # 🟢 ignore per estensione Prettier
+├── index.html                                      # 🟢 l'index html dell'applicazione
+├── package.json                                    # 🟢 Dipendenze del progetto
+├── DOCUMENTATION.md                                # 🟢 Struttura e funzioni del progetto
+├── CHANGELOG.md                                    # 🟢 Informazioni sui progressi nelllo sviluppo dell'applicazione
+├── COMPONENTS.md                                   # 🟢 Guida ai componenti implementati
+└── README.md                                       # 🟢 Documentazione principale
 
 
 ## Metodologia di sviluppo

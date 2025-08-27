@@ -1,11 +1,11 @@
 // src/app/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import uiReducer from "../features/settings/uiSlice";
+import { uiSliceReducer } from "./slices";
 import persistenceMiddleware from "./middleware/persistenceMiddleware";
 
 export const store = configureStore({
   reducer: {
-    ui: uiReducer,
+    ui: uiSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

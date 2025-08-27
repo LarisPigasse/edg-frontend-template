@@ -4,7 +4,6 @@ export const ROUTES = {
   HOME: "/",
   DASHBOARD: "/dashboard",
   EXPLORER: "/explorer",
-  SHOWCASE: "/showcase",
   SETTINGS: "/settings",
   NOT_FOUND: "/404",
 } as const;

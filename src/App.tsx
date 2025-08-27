@@ -3,13 +3,12 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./app/store";
-import { initializeFromStorage } from "./features/settings/uiSlice";
-import MainLayout from "./core/components/layout/MainLayout";
-import { Dashboard, Showcase, NotFound } from "./features/shared";
-import ComponentExplorer from "./features/shared/ComponentExplorer";
+import { initializeFromStorage } from "./app/slices";
+import MainLayout from "./core/components/layout/custom/MainLayout";
+import { Dashboard, NotFound, Explorer } from "./pages";
 import { UserMenu, MobileMenu } from "./core/components/navigation";
 import { ROUTES } from "./config";
-import { ToastProvider } from "./core/components/ui";
+import { ToastProvider } from "./core/components/feedback";
 
 // Componente per inizializzazione completa del tema e settings
 const AppInitializer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -35,8 +34,7 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
                   <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
-                  <Route path={ROUTES.EXPLORER} element={<ComponentExplorer />} />
-                  <Route path={ROUTES.SHOWCASE} element={<Showcase />} />
+                  <Route path={ROUTES.EXPLORER} element={<Explorer />} />
                   <Route path={ROUTES.SETTINGS} element={<NotFound />} />
                   <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                   <Route path="*" element={<NotFound />} />

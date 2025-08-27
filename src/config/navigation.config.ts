@@ -5,7 +5,7 @@ export interface NavigationItem {
   id: string;
   label: string;
   href: string;
-  icon: "home" | "dashboard" | "components" | "settings" | "showcase";
+  icon: "home" | "dashboard" | "components" | "settings";
   description?: string;
 }
 
@@ -23,13 +23,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     href: ROUTES.EXPLORER,
     icon: "components", // Usa Package/Components icon
     description: "Esplora tutti i componenti del design system",
-  },
-  {
-    id: "showcase",
-    label: "Showcase",
-    href: ROUTES.SHOWCASE,
-    icon: "showcase", // Usa Palette
-    description: "Showcase dei componenti UI disponibili",
   },
   {
     id: "settings",

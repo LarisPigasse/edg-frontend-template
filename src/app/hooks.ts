@@ -29,7 +29,7 @@ import {
   selectUserMenuOpen,
   selectSettingsMenuOpen,
   selectMobileMenuOpen,
-} from "../features/settings/uiSlice";
+} from "./slices";
 
 // Hooks tipizzati per Redux
 export const useAppDispatch = () => useDispatch<AppDispatch>();
