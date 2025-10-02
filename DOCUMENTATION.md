@@ -82,10 +82,11 @@ edg-frontend-template/
 |   │   │   |   |   ├── Table.showcase.tsx          # 🟢 Esempi d'uso del componente
 |   │   │   |   |   └── Table.tsx                   # 🟢 Componente Table
 |   |   |   |   | 
-|   |   |   |   └── table-link/                     # Folder per TableLink
-|   │   │   |       ├── TableLink.data.ts           # 🟢 Informazioni sul componente
-|   │   │   |       ├── TableLink.showcase.tsx      # 🟢 Esempi d'uso del componente
-|   │   │   |       └── TableLink.tsx               # 🟢 Componente TableLink
+|   |   |   |   ├── table-link/                     # Folder per TableLink
+|   │   │   |   |   ├── TableLink.data.ts           # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── TableLink.showcase.tsx      # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── TableLink.tsx               # 🟢 Componente TableLink
+|   |   |   |   └── index.ts                        # 🟢 Barrel file per componenti data
 |   |   |   |     
 |   │   │   ├── feedback                            # Folder per Componenti della categoria feedback
 |   |   |   |   ├── alert/                          # Folder per Alert
@@ -116,10 +117,11 @@ edg-frontend-template/
 |   │   │   |   |   ├── Toast.tsx                   # 🟢 Componente Toast
 |   │   │   |   |   └── useToast.hooks.ts           # 🟢 Hooks per utilizzare il comnponente
 |   |   |   |   |   
-|   |   |   |   └── tooltip/                        # Folder per Tooltip
-|   │   │   |       ├── Tooltip.data.ts             # 🟢 Informazioni sul componente
-|   │   │   |       ├── Tooltip.showcase.tsx        # 🟢 Esempi d'uso del componente
-|   │   │   |       └── Tooltip.tsx                 # 🟢 Componente Tooltip
+|   |   |   |   ├── tooltip/                        # Folder per Tooltip
+|   │   │   |   |   ├── Tooltip.data.ts             # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── Tooltip.showcase.tsx        # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── Tooltip.tsx                 # 🟢 Componente Tooltip
+|   |   |   |   └── index.ts                        # 🟢 Barrel file per componenti feedback
 |   |   |   |   
 |   │   │   ├── form                                # Folder dei Componenti per la gestione delle form
 |   |   |   |   ├── checkbox/                       # Folder per Checkbox
@@ -172,10 +174,11 @@ edg-frontend-template/
 |   │   │   |   |   ├── TextArea.showcase.tsx       # 🟢 Esempi d'uso del componente
 |   │   │   |   |   └── TextArea.tsx                # 🟢 Componente TextArea
 |   |   |   |   | 
-|   |   |   |   └── time-picker/                    # Folder per TimePicker
-|   │   │   |       ├── TimePicker.data.ts          # 🟢 Informazioni sul componente
-|   │   │   |       ├── TimePicker.showcase.tsx     # 🟢 Esempi d'uso del componente
-|   │   │   |       └── TimePicker.tsx              # 🟢 Componente TimePicker
+|   |   |   |   ├── time-picker/                    # Folder per TimePicker
+|   │   │   |   |   ├── TimePicker.data.ts          # 🟢 Informazioni sul componente
+|   │   │   |   |   ├── TimePicker.showcase.tsx     # 🟢 Esempi d'uso del componente
+|   │   │   |   |   └── TimePicker.tsx              # 🟢 Componente TimePicker
+|   |   |   |   └── index.ts                        # 🟢 Barrel file per componenti data
 |   |   |   | 
 |   │   │   ├── info                                # Folder dei Componenti utili secondari e informativi
 |   │   │   │   ├── index.ts                        # 🟢 Barrel file
